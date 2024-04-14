@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>기분 1</th> <th th:if="${data.moods.size() == 2}">기분 2</th> <th>가격</th> <th>시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:object="${data}">
+                <td th:text="${data.moods[0]}"></td>
+                <td th:if="${data.moods.size() == 2}" th:text="${data.moods[1]}"></td>
+                <td th:text="${data.time}"></td>
+                <td th:text="${data.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

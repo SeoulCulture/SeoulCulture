@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Signin Template · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    <!-- 폴리필 (구버젼 브라우저 지원) -->
+    <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap core CSS -->
+<!--    <link href="/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      body{
+        flex-direction: column;
+      }
+
+      #main-title{
+        margin : 0 auto;
+        align-items : center;
+        display : flex;
+      }
+
+      .form-control{
+        margin: 10px 0px;
+        height: 35px;
+        padding-top: 10px;
+      }
+
+      .tagify{
+        overflow: auto;
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="/css/sign.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<div id="main-title">
+    <h2>뭐하러 가지?</h2>
+</div>
+
+<main class="form-sign">
+    <form role="form" action="/culture/search" th:object="${cultureForm}" method="get">
+
+        <div class="form-floating2">
+            <input class="form-control2" id="moods" name="moods" th:field="*{moods}">
+            <label for="moods">기분</label>
+        </div>
+
+        <div class="form-floating2">
+            <input type="number" class="form-control2" id="time" placeholder="소요 시간을 입력해주세요" th:field="*{time}">
+            <label for="time">소요 시간 (분)</label>
+        </div>
+
+        <div class="form-floating2">
+            <input type="number" class="form-control2" id="price" placeholder="비용을 입력해주세요" th:field="*{price}">
+            <label for="price">비용 (원)</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">고!!</button>
+    </form>
+</main>
+
+
+<script>
+// API 요청을 보낼 URL
+const apiUrl = '/moods';
+
+// API 요청 보내기
+fetch(apiUrl)
+  .then(response => {
+    // 응답을 JSON 형식으로 파싱
+    return response.json();
+  })
+  .then(data => {
+    // 응답 데이터(data)를 처리하여 변수에 저장
+    const moodList = data.mood; // 여기서 data는 List<String>으로 가정합니다.
+
+    initializeTagify(moodList);
+})
+.catch(error => {
+// 오류 처리
+console.error('Error fetching moods:', error);
+});
+
+function initializeTagify(moodList) {
+  const input = document.querySelector('input[name=moods]');
+
+  console.log('Received mood list:', moodList);
+
+  let tagify = new Tagify(input, {
+    whitelist: moodList,
+    userInput: false // 입력 제한
+  });
+}
+
+</script>
+</body>
+</html>
