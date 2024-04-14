@@ -1,5 +1,4 @@
-html,
-body {
+html,body {
   height: 100%;
 }
 
@@ -13,7 +12,7 @@ body {
 
 .form-sign {
   width: 100%;
-  max-width: 330px;
+  max-width: 530px;
   padding: 15px;
   margin: auto;
 }
@@ -26,14 +25,60 @@ body {
   z-index: 2;
 }
 
-.form-sign input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.tagify__tag-text, .tagify__input {
+	white-space: nowrap !important;
 }
 
-.form-sign input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.bd-placeholder-img {
+font-size: 1.125rem;
+text-anchor: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+
+@media (min-width: 768px) {
+.bd-placeholder-img-lg {
+  font-size: 3.5rem;
+}
+}
+
+body{
+flex-direction: column;
+}
+
+#main-title{
+margin : auto;
+align-items : center;
+display : flex;
+}
+
+.form-control{
+margin: 10px 0px;
+padding-top: 10px;
+}
+
+.tagify{
+overflow: auto;
+flex-wrap:nowrap;
+max-width:200px;
+min-width:200px;
+}
+
+table{
+    margin: auto
+}
+
+#submit-button{
+    text-align: center
+}
+
+tags{
+overflow: auto;
+}
+
+.table-head{
+    width:100px;
+    max-width:100px;
+    min-width:100px;
 }
