@@ -1,5 +1,5 @@
 package seoul.culture.demo.domain;
 
 public enum Category {
-    THEATER
+    공연, 전시, 산책, 체험
 }

@@ -13,7 +13,7 @@ public class MoodResponseDto {
     private List<String> mood;
     public MoodResponseDto(List<Mood> moods){
         this.mood = moods.stream()
-                        .map(Mood::getMood)
+                        .map(mood -> mood.getMood().toString())
                         .collect(Collectors.toList());
     }
 }
