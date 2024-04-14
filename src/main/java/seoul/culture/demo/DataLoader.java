@@ -7,6 +7,8 @@ import seoul.culture.demo.domain.Mood;
 import seoul.culture.demo.domain.MoodType;
 import seoul.culture.demo.repository.MoodRepository;
 
+import java.util.Arrays;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -19,9 +21,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args){
-        for (MoodType moodType : MoodType.values()) {
-            Mood mood =  new Mood(moodType);
-            moodRepository.save(mood);
-        }
+        Arrays.stream(MoodType.values())
+                .filter(moodType -> !moodRepository.existsByMood(moodType))
+                .map(Mood::new)
+                .forEach(moodRepository::save);
     }
 }
