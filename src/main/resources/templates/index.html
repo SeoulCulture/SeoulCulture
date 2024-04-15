@@ -3,39 +3,39 @@
 <head th:replace="fragments/index-header :: header"/>
 <body class="text-center">
 
-<div id="main-title">
-    <h2>뭐하러 가지?</h2>
-</div>
+    <div id="main-title">
+        <h2>뭐하러 가지?</h2>
+    </div>
 
-<main class="form-sign">
-    <form role="form" action="/culture/search" th:object="${cultureForm}" method="get">
-        <table>
-            <div>
-                <tr>
-                    <td class="table-head"><label for="moods">기분</label></td>
-                    <td><input id="moods" name="moods" th:field="*{moods}"></td>
-                </tr>
-            </div>
+    <main class="form-sign">
+        <form id ="form" role="form" action="/culture/search" th:object="${cultureForm}" method="get">
+            <table>
+                <div>
+                    <tr>
+                        <td class="table-head"><label for="moods">기분</label></td>
+                        <td><input id="moods" name="moods" th:field="*{moods}"></td>
+                    </tr>
+                </div>
 
-            <div class="form-floating">
-                <tr>
-                <td class="table-head"><label for="time">소요 시간 (분)</label></td>
-                <td><input type="number" class="form-control" id="time" placeholder="소요 시간을 입력해주세요" th:field="*{time}"></td>
-                </tr>
-            </div>
+                <div class="form-floating">
+                    <tr>
+                    <td class="table-head"><label for="time">소요 시간 (분)</label></td>
+                    <td><input type="number" class="form-control" id="time" placeholder="소요 시간을 입력해주세요" th:field="*{time}"></td>
+                    </tr>
+                </div>
 
-            <div class="form-floating">
-                <tr>
-                <td class="table-head"><label for="price">비용 (원)</label></td>
-                <td><input type="number" class="form-control" id="price" placeholder="비용을 입력해주세요" th:field="*{price}"></td>
-                </tr>
+                <div class="form-floating">
+                    <tr>
+                    <td class="table-head"><label for="price">비용 (원)</label></td>
+                    <td><input type="number" class="form-control" id="price" placeholder="비용을 입력해주세요" th:field="*{price}"></td>
+                    </tr>
+                </div>
+            </table>
+            <div id="submit-button">
+                <button id = "submitBtn" class="btn btn-primary">고!!</button>
             </div>
-        </table>
-        <div id="submit-button">
-            <button class="btn btn-primary" type="submit">고!!</button>
-        </div>
-    </form>
-</main>
-<script src="/js/sign.js"></script>
+        </form>
+        <div id="searchStatus" style="display: none;">검색 중입니다...</div>
+    </main>
 </body>
 </html>

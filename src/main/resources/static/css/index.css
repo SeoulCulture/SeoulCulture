@@ -1,0 +1,33 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+}
+
+body{
+    flex-direction: column;
+}
+
+#main-title{
+    margin : 0 auto;
+    align-items : center;
+    display : flex;
+}
+
+.form-control{
+    margin: 10px 0px;
+    height: 35px;
+    padding-top: 10px;
+}
+
+.tagify{
+    overflow: auto;
+}

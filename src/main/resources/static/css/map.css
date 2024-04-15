@@ -1,0 +1,103 @@
+#header {
+    text-align: center;
+}
+
+#contents {
+    margin: 0;
+    padding: 0;
+    display: flex; /* body를 Flexbox로 설정하여 하위 요소를 좌우로 배치 */
+}
+
+#leftContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* 상하로 배치 */
+}
+#rightContainer {
+    margin-left: 10px;
+    background-color: aquamarine;
+}
+#map {
+    height: 400px;
+    width: 100%;
+}
+@media only screen and (max-width: 700px) {
+    #rightContainer {
+        display: none;
+    }
+}
+@media only screen and (min-width: 701px) {
+    #leftContainer {
+        flex: 1;
+    }
+    #rightContainer {
+        flex: 1;
+    }
+}
+
+/* ================== 목록 컨테이너 ==================*/
+#markerContainer {
+    display: flex;
+    max-width: 100%;
+    align-items: stretch; /* 아이템의 높이를 동일하게 설정 */
+    margin-top: 10px;
+}
+/* =================== [1] 마커리스트 */
+#markerList {
+    flex: 1;
+    list-style-type: none;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* 목록 아이템 스타일 */
+#markerList li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+}
+/* 마지막 목록 아이템의 하단 border 제거 */
+#markerList li:last-child {
+    border-bottom: none;
+}
+/* 목록 아이템 호버 효과 */
+#markerList li:hover {
+    background-color: #f0f0f0;
+}
+/* =============== [2] 마커 정보 */
+#markerContents {
+    flex: 1;
+    padding-left: 20px; /* 좌측 여백 추가 */
+}
+/* 마커 이름 스타일 */
+#markerName {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+/* 마커 가격 스타일 */
+#markerPrice {
+    font-size: 16px;
+}
+
+
+/* ============== 마커 디자인 ================ */
+.marker_category {
+    font-weight: bold;
+    font-family: 'Noto Sans KR', 'sans-serif';
+    color: black;
+    text-shadow: 0 0 2px white;
+    background: linear-gradient(to bottom, #ffffff, #bababa);
+    border-radius: 20px;
+    padding: 6px 13px;
+}
+
+.marker_home {
+    position: relative;
+    font-size: 33px;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', 'sans-serif';
+    text-shadow: -3px -3px 0 #ffffff, 3px -3px 0 #ffffff, -3px 3px 0 #cdcdcd, 3px 3px 0 #ffffff;
+}
