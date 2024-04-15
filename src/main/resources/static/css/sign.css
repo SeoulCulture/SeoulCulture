@@ -82,9 +82,3 @@ overflow: auto;
     max-width:100px;
     min-width:100px;
 }
-
-#searchStatus {
-    font-size: 24px;
-    font-weight: bold;
-    color: red;
-}
