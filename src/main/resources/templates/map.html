@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="header">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>츄츄</title>
+
     <!-- 참고: api key 노출돼도 큰 문제 없다고 함. kakao dev에서 이 key를 사용할 플랫폼 등록하는 구조기 떄문.-->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2878141664ba508ffc07eaf2a35a9ac"></script>
     <link rel="stylesheet" href="/css/map.css">

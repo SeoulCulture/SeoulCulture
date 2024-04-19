@@ -1,31 +1,32 @@
 package seoul.culture.demo.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import seoul.culture.demo.controller.dto.MarkerInfo;
-import seoul.culture.demo.domain.CultureForm;
+import org.springframework.web.bind.annotation.*;
+import seoul.culture.demo.domain.CultureSearchForm;
 import seoul.culture.demo.service.SearchService;
+import seoul.culture.demo.service.vo.Markable;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class CultureController {
-    private final SearchService searchServie;
+    private final SearchService searchService;
 
     @GetMapping("/")
     public String createCultureForm(Model model){
-        model.addAttribute("cultureForm", new CultureForm());
+        model.addAttribute("cultureForm", new CultureSearchForm());
         return "index";
     }
 
     @GetMapping("/culture/search")
-    public String showInfo(CultureForm cultureForm, Model model) throws InterruptedException {
-        model.addAttribute("data", cultureForm);
-        // 서비스로 넘긴다.
-        List<MarkerInfo> markerInfo = searchServie.search(cultureForm);
+    public String showInfo(CultureSearchForm formData, Model model) {
+        List<Markable> markerInfo = searchService.search(formData);
+
         model.addAttribute("markerInfo", markerInfo);
         return "map";
     }

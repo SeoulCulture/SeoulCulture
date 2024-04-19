@@ -8,7 +8,8 @@
     </div>
 
     <main class="form-sign">
-        <form id ="form" role="form" action="/culture/search" th:object="${cultureForm}" method="get">
+<!--        어.. action을 꼭 지정해야 렌더링이 되네 왜그러지..-->
+        <form id ="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
             <table>
                 <div>
                     <tr>
@@ -20,14 +21,14 @@
                 <div class="form-floating">
                     <tr>
                     <td class="table-head"><label for="time">소요 시간 (분)</label></td>
-                    <td><input type="number" class="form-control" id="time" placeholder="소요 시간을 입력해주세요" th:field="*{time}"></td>
+                    <td><input type="number" class="form-control" id="time" name="time", placeholder="소요 시간을 입력해주세요" th:field="*{time}"></td>
                     </tr>
                 </div>
 
                 <div class="form-floating">
                     <tr>
                     <td class="table-head"><label for="price">비용 (원)</label></td>
-                    <td><input type="number" class="form-control" id="price" placeholder="비용을 입력해주세요" th:field="*{price}"></td>
+                    <td><input type="number" class="form-control" id="price" name="price", placeholder="비용을 입력해주세요" th:field="*{price}"></td>
                     </tr>
                 </div>
             </table>
