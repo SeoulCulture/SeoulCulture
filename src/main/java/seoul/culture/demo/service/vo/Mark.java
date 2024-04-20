@@ -15,6 +15,7 @@ public final class Mark implements Markable {
     String longitude;
     String contents;
     String address;
+    String imgUrl;
     String detailUrl;
     String contact;
     int price;
@@ -45,6 +46,10 @@ public final class Mark implements Markable {
     @Override
     public String getAddress() {
         return this.address;
+    }
+    @Override
+    public String getImgUrl() {
+        return this.imgUrl;
     }
 
     @Override

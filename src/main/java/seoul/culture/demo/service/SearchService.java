@@ -20,6 +20,9 @@ public class SearchService {
                 .longitude("127.533678")
                 .title("마카롱 카페")
                 .price(5000)
+                .contents("마카롱을 정말 맛있게 만들 수 있는 곳이요")
+                .imgUrl("https://cafe24.poxo.com/ec01/joinandjoin3/YepDBcpQi6F1EGuL9rzRwSOX6iBaegInadJOBqJjBl8mIPOKixffqoe/SEB3Y+EmfOLxV9OtXy9ki4TqHva87Q==/_/web/product/big/202208/efb8871f1a21b518e1e797acaf8d3c21.png")
+                .detailUrl("www.naver.com")
                 .build();
 
         Markable marker2 = Mark.builder()
@@ -28,6 +31,9 @@ public class SearchService {
                 .longitude("127.876335")
                 .title("피자파티 공연")
                 .price(15000)
+                .contents("피자파티가열린다야호@!")
+                .imgUrl("https://cdn.dominos.co.kr/admin/upload/goods/20200311_x8StB1t3.jpg")
+                .detailUrl("www.naver.com")
                 .build();
 
         // MarkerInfo 객체를 담는 List 생성
