@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="header">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>츄츄</title>
+    <script th:inline="javascript" >
+        const markerInfo = /*[[${markerInfo}]]*/ null;
+    </script>
     <!-- 참고: api key 노출돼도 큰 문제 없다고 함. kakao dev에서 이 key를 사용할 플랫폼 등록하는 구조기 떄문.-->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2878141664ba508ffc07eaf2a35a9ac"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/map_contents.css">
 </head>
 <body>
 <div id="header">
-    <h2>지금 뭐 하 러 갈 까?</h2>
+    <div id="map-title">SEOUL CULTURE MEDIC</div>
 </div>
 
-<div id="contents">
+<div id="pageContents">
     <div id="leftContainer">
         <div id="map"></div>
-        <div id="markerContainer">
-            <div id="markerList"></div>
-            <div id="markerContents">
-                <div id="markerName"></div>
-                <div id="markerPrice"></div>
-            </div>
-        </div>
+<!--        목록을 띄워주는 곳-->
+<!--        <div id="markerContainer">-->
+<!--            <div id="markerList"></div>-->
+<!--            <div id="markerContents">-->
+<!--                <div id="markerName"></div>-->
+<!--                <div id="markerPrice"></div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <div id="rightContainer">
-        <p>모달 띄울 곳</p>
+        <div id="rightContainerContent" th:include="rightContainer.html"/>
+        <div id="rightContainerEmpty" th:include="rightContainerEmpty.html"/>
     </div>
 </div>
-<script th:inline="javascript" >
-    const markerInfo = /*[[${markerInfo}]]*/ null;
-</script>
-<script type="text/javascript" src="/js/map_marker.js"></script>
+<div th:include="modal"/>
+<script type="text/javascript" src="/js/map_contents.js"></script>
+<script type="text/javascript" src="/js/map_ui.js"></script>
 </body>
 </html>

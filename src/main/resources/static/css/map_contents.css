@@ -1,0 +1,65 @@
+/*컨텐츠 공통 (모달, 오른쪽 모두)*/
+.place-img {
+    width: 100%;
+    height: auto;
+    margin: 10px 0px;
+}
+.place-img img {
+    max-height: 400px;
+    width: fit-content;
+}
+
+.place-category {
+    font-size: 15px;
+    background-color: rgba(var(--skycolar), var(--alpha08));
+    width: fit-content;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+
+/*모달 전용*/
+.modal-header{
+    align-items: center;
+}
+.modal-body{
+    text-align: -webkit-center;
+}
+
+.modal-header .place-title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: -webkit-center;
+    margin-bottom: 0px;
+    border-bottom: 0px;
+}
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    -ms-flex-pack: justify;
+    align-self: center;
+    padding: 15px;
+}
+
+
+
+/*오른쪽 컨테이너 전용*/
+#rightContainer {
+    padding: 20px;
+    text-align: -webkit-center;
+    background-color: rgba(var(--white), var(--alpha08));
+}
+
+.right-container-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-container-header .place-title {
+    font-size: 33px;
+    font-weight: bold;
+}
