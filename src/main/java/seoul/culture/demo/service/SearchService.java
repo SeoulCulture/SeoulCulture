@@ -3,7 +3,7 @@ package seoul.culture.demo.service;
 import org.springframework.stereotype.Service;
 import seoul.culture.demo.domain.Category;
 import seoul.culture.demo.domain.CultureSearchForm;
-import seoul.culture.demo.service.vo.Mark;
+import seoul.culture.demo.service.vo.MarkDto;
 import seoul.culture.demo.service.vo.Markable;
 
 import java.util.ArrayList;
@@ -13,11 +13,19 @@ import java.util.List;
 public class SearchService {
 
     public List<Markable> search(CultureSearchForm cultureSearchForm) {
+
+//        private List<String> moods = new ArrayList<>();
+//        private Integer time;
+//        private Integer price;
+//        private String latitude;
+//        private String longitude;
+
+        // TODO: 넘어온 현위치(lat, lon) 기준으로 Culture 데이터 서치
         // 임시 데이터
-        Markable marker1 = Mark.builder()
+        Markable marker1 = MarkDto.builder()
                 .category(Category.체험.toString())
-                .latitude("37.123422")
-                .longitude("127.533678")
+                .latitude(37.123422)
+                .longitude(127.533678)
                 .title("마카롱 카페")
                 .price(5000)
                 .contents("마카롱을 정말 맛있게 만들 수 있는 곳이요")
@@ -25,10 +33,10 @@ public class SearchService {
                 .detailUrl("www.naver.com")
                 .build();
 
-        Markable marker2 = Mark.builder()
+        Markable marker2 = MarkDto.builder()
                 .category(Category.공연.toString())
-                .latitude("37.433321")
-                .longitude("127.876335")
+                .latitude(37.433321)
+                .longitude(127.876335)
                 .title("피자파티 공연")
                 .price(15000)
                 .contents("피자파티가열린다야호@!")
