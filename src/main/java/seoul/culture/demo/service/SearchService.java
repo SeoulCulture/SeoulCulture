@@ -13,6 +13,14 @@ import java.util.List;
 public class SearchService {
 
     public List<Markable> search(CultureSearchForm cultureSearchForm) {
+
+//        private List<String> moods = new ArrayList<>();
+//        private Integer time;
+//        private Integer price;
+//        private String latitude;
+//        private String longitude;
+
+        // TODO: 넘어온 현위치(lat, lon) 기준으로 Culture 데이터 서치
         // 임시 데이터
         Markable marker1 = MarkDto.builder()
                 .category(Category.체험.toString())
