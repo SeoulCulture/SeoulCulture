@@ -1,24 +1,28 @@
 package seoul.culture.demo.service.vo;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 @Builder
 @Getter
-public final class Mark implements Markable {
+public final class MarkDto implements Markable {
     String category;
     String title;
-    String latitude;
-    String longitude;
+    double latitude;
+    double longitude;
     String contents;
     String address;
     String imgUrl;
     String detailUrl;
     String contact;
     int price;
+    LocalDate startDate;
+    LocalDate endDate;
 
     @Override
     public String getMarkCategory() {
@@ -31,8 +35,8 @@ public final class Mark implements Markable {
     }
 
     @Override
-    public Map<String, String> getLocation() {
-        Map<String, String> map = new HashMap<>();
+    public Map<String, Double> getLocation() {
+        Map<String, Double> map = new HashMap<>();
         map.put("latitude", this.latitude);
         map.put("longitude", this.longitude);
         return map;
