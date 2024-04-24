@@ -15,18 +15,29 @@ import static seoul.culture.demo.JsonUtil.getResponseJson;
 @Slf4j
 public final class GooglePathFinder implements PathFinder {
     private final GoogleConfig googleConfig;
+    private final ReverseGeocoding reverseGeocoding;
     private int distanceKm;
     private int durationMin;
+    private double srcLat;
+    private double dstLat;
+    private double srcLon;
+    private double dstLon;
 
-    public GooglePathFinder(GoogleConfig googleConfig) {
+    public GooglePathFinder(GoogleConfig googleConfig, ReverseGeocoding reverseGeocoding) {
         this.googleConfig = googleConfig;
+        this.reverseGeocoding = reverseGeocoding;
     }
 
     @Override
-    public void loadPathInfo(double lat1, double lon1, double lat2, double lon2, HowToGo howToGo) throws IOException {
+    public void setPathInfo(double lat1, double lon1, double lat2, double lon2, HowToGo howToGo) throws IOException {
         String mode = "";
         if (howToGo == HowToGo.TRANSIT)  // 한국에서는 transit밖에 안된다는 것 같다. waling이나 driving, bicycling 지원하지 않는 듯
             mode = "transit";
+
+        this.srcLat = lat1;
+        this.srcLon = lon1;
+        this.dstLat = lat2;
+        this.dstLon = lon2;
 
         String api = String.format("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&language=ko&mode=%s&origins=" +
                 "%f,%f&destinations=" +
@@ -44,7 +55,7 @@ public final class GooglePathFinder implements PathFinder {
         if (elementsNode.has("status")) {
             if (elementsNode.get("status").asText().equals("ZERO_RESULTS"))
                 log.debug("ZERO_RESULTS!");
-                return;
+            return;
         }
 
         // 각 필드에서 필요한 데이터 추출
@@ -60,5 +71,15 @@ public final class GooglePathFinder implements PathFinder {
     @Override
     public int getDistance() {
         return this.distanceKm;
+    }
+
+    @Override
+    public Map<String, String> getSrcAddress() throws IOException {
+        return reverseGeocoding.getAddress(srcLat, srcLon);
+    }
+
+    @Override
+    public Map<String, String> getDstAddress() throws IOException {
+        return reverseGeocoding.getAddress(dstLat, dstLon);
     }
 }
