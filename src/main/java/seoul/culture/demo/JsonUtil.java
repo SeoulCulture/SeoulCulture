@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
 public class JsonUtil {
     public static JsonNode parse(String jsonString) {
@@ -21,11 +22,15 @@ public class JsonUtil {
         return jsonNode;
     }
 
-    public static JsonNode getResponseJson(URL url) throws IOException {
+    public static JsonNode getResponseJson(URL url, Map<String, String> headerInfo) throws IOException {
         // CONNECTION
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
+        if (!headerInfo.isEmpty()){
+            for (Map.Entry<String, String> entry : headerInfo.entrySet()) {
+                conn.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
         BufferedReader rd;
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
