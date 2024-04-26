@@ -31,12 +31,11 @@ function setInformation(marker) {
     placeImg.forEach(function(img) {
         img.src = marker.imgUrl;
     });
-    $(".place-contents").text("내용: " + marker.contents);
-    $(".place-price").text("가격: " + marker.price);
+    $(".place-contents").html(marker.contents);
+    $(".place-price").html("가격: " + marker.price);
     const placeDetail = document.querySelectorAll('.place-detail');
     placeDetail.forEach(function(button) {
-        // http 붙어서 데이터 들어올 수도 있으니까 처리해야 함
-        button.setAttribute('onclick', `window.open('http://${marker.detailUrl}')`);
+        button.setAttribute('onclick', `window.open('${marker.detailUrl}')`);
     });
 
 }

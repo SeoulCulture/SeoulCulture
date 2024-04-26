@@ -6,4 +6,6 @@ import seoul.culture.demo.domain.Location;
 
 public interface CultureRepository extends JpaRepository<Culture, Long> {
     boolean existsByTitleAndLocation(String title, Location location);
+
+    boolean existsByLocation(Location location);
 }

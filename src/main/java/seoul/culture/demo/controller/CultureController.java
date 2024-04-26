@@ -9,6 +9,7 @@ import seoul.culture.demo.domain.CultureSearchForm;
 import seoul.culture.demo.service.SearchService;
 import seoul.culture.demo.service.vo.Markable;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -23,8 +24,12 @@ public class CultureController {
         return "index";
     }
 
-    @GetMapping("/culture/search")
-    public String showInfo(CultureSearchForm formData, Model model) {
+    @RequestMapping(value = "/culture/search")
+    // get, post 둘다 받아야 한다. post로 첫 요청 받아도, 렌더링하려면 get 을 날리는 듯?
+    public String showInfo(CultureSearchForm formData, Model model) throws IOException {
+        if (formData.getLatitude() == null || formData.getLongitude() == null) {
+            throw new IllegalArgumentException("위경도정보없음");
+        }
         List<Markable> markerInfo = searchService.search(formData);
 
         model.addAttribute("markerInfo", markerInfo);

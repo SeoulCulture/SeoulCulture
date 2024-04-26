@@ -40,8 +40,8 @@ public class Culture {
     private Location location;
 
     public static Culture of(JsonNode json) {
-        double lat = Formatter.latOrLon(json.get("LAT").toString());
-        double lon = Formatter.latOrLon(json.get("LOT").toString());
+        double lat = Formatter.latOrLon(json.get("LOT").toString());  // API문제점: LOT, LAT이 반대로 되어있음.
+        double lon = Formatter.latOrLon(json.get("LAT").toString());
         int price = 0;
         try {
             price = Formatter.price(json.get("IS_FREE").toString());
@@ -77,21 +77,23 @@ public class Culture {
         Category category = null;
         try {
             category = Category.getCategoryByName(Formatter.stringWithNoQuotes(json.get("CODENAME").toString()));
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+            category = Category.몰라;
+        }
 
         String title = "제목 없음";
         try {
-            title = Formatter.string(json.get("TITLE").toString());
+            title = Formatter.stringWithNoQuotes(json.get("TITLE").toString());
         } catch (NullPointerException e) {}
 
         String imgUrl = "";
         try {
-            imgUrl = Formatter.string(json.get("MAIN_IMG").toString());
+            imgUrl = Formatter.stringWithNoQuotes(json.get("MAIN_IMG").toString());
         } catch (NullPointerException e) {}
 
         String detailUrl = "";
         try {
-            detailUrl = Formatter.string(json.get("HMPG_ADDR").toString());
+            detailUrl = Formatter.stringWithNoQuotes(json.get("HMPG_ADDR").toString());
         } catch (NullPointerException e) {}
 
         return Culture.builder()
@@ -109,7 +111,7 @@ public class Culture {
 
 
     @Builder
-    private Culture(Long id, Category category, String title, String imgUrl, String detailUrl, String contents, String address, int price, String contact, LocalDate startDate, LocalDate endDate, Location location) {
+    private Culture(Long id, Category category, String title, String imgUrl, String detailUrl, String contents, int price, String contact, LocalDate startDate, LocalDate endDate, Location location) {
         this.id = id;
         this.category = category;
         this.title = title;

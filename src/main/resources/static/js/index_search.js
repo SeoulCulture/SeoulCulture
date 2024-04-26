@@ -9,43 +9,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) {
         submitBtn.addEventListener('click', function() {
-            showSearchingStatus();
 
-            if(navigator.geolocation) {// geolocation 을 지원한다면 위치를 요청한다.
-                navigator.geolocation.getCurrentPosition(success, error);
-            }
-            else
-                console.log("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
+            // submitBtn 클릭 시에는 이미 formData에 위도와 경도 값이 설정되어 있음
+            sendSearchRequest();
         });
     }
 
-    function success(position) {
-        const currentLatitude = position.coords.latitude.toString();
-        const currentLongitude = position.coords.longitude.toString();
-        console.log(currentLatitude, currentLongitude);
-        localStorage.setItem("currentLatitude", currentLatitude);
-        localStorage.setItem("currentLongitude", currentLongitude);
-
+    function sendSearchRequest() {
+        showSearchingStatus();
         let formData = new FormData(document.getElementById('form'));
-        formData.append("latitude", currentLatitude);
-        formData.append("longitude", currentLongitude);
 
+        // 위치 정보를 포함한 formData를 서버에 전송
         fetch('/culture/search', {
-            method: 'GET',
+            method: 'POST',
             body: formData
+        })
+        .then(response => {
         })
         .catch(error => {
             console.error('Error searching:', error);
         });
-    }
-
-    function error(e) {
-        // 오류 객체에는 수치 코드와 텍스트 메시지가 존재한다.
-        // 코드 값은 다음과 같다.
-        // 1: 사용자가 위치 정보를 공유 권한을 제공하지 않음.
-        // 2: 브라우저가 위치를 가져올 수 없음.
-        // 3: 타임아웃이 발생됨.
-        alert("Geolocation 오류 " + e.code + ": " + e.message);
     }
 
     function showSearchingStatus() {
@@ -60,5 +43,31 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchStatus) {
             searchStatus.style.display = 'none';
         }
+    }
+
+    // 페이지 로드 시에 formData에 위도와 경도 값을 설정
+    window.addEventListener('load', function() {
+        if (navigator.geolocation) {
+            // geolocation을 지원하면 위치를 요청
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            console.log("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
+        }
+    });
+
+    function success(position) {
+        const currentLatitude = position.coords.latitude.toString();
+        const currentLongitude = position.coords.longitude.toString();
+        console.log(currentLatitude, currentLongitude);
+
+        // 기존 form 요소에 직접 접근하여 위도와 경도를 추가
+        let form = document.getElementById('form');
+        form.innerHTML += `<input type="hidden" name="latitude" value="${currentLatitude}">`;
+        form.innerHTML += `<input type="hidden" name="longitude" value="${currentLongitude}">`;
+    }
+
+    function error(e) {
+        // 위치 정보를 가져오는 데 실패한 경우
+        alert("Geolocation 오류 " + e.code + ": " + e.message);
     }
 });
