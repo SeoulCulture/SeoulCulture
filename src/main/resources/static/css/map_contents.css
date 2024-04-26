@@ -27,6 +27,13 @@
     text-align: -webkit-center;
 }
 
+.modal-body .place-contents {
+    background-color: rgba(var(--skycolar), var(--alpha01));
+    max-width: fit-content;
+    padding: 10px 20px;
+    border-radius: 1000px;
+}
+
 .modal-header .place-title {
     font-size: 30px;
     font-weight: bold;
@@ -62,4 +69,11 @@
 .right-container-header .place-title {
     font-size: 33px;
     font-weight: bold;
+}
+
+right-container-body .place-contents {
+    background-color: rgba(255,255,255,40%);
+    max-width: fit-content;
+    padding: 10px 20px;
+    border-radius: 1000px;
 }

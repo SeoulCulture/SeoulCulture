@@ -1,53 +1,84 @@
 package seoul.culture.demo.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import seoul.culture.demo.domain.Category;
+import seoul.culture.demo.domain.Culture;
 import seoul.culture.demo.domain.CultureSearchForm;
+import seoul.culture.demo.domain.Location;
+import seoul.culture.demo.repository.CultureRepository;
+import seoul.culture.demo.service.distance.HowToGo;
+import seoul.culture.demo.service.distance.PathFinder;
 import seoul.culture.demo.service.vo.MarkDto;
 import seoul.culture.demo.service.vo.Markable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SearchService {
+public class SearchService {   // 문제점: 속도.. 현재 꽤나 지루하게 오래걸림 : 1시간 거리 검색은 결과 보기 불가능할 정도 & 30분 거리도 기다리기 지루함
+    private final CultureRepository cultureRepository;
+    private List<Culture> cultures;
+    private final PathFinder pathFinder;
 
-    public List<Markable> search(CultureSearchForm cultureSearchForm) {
+    public SearchService(CultureRepository cultureRepository, @Qualifier("naverPathFinder") PathFinder pathFinder) {
+        this.cultureRepository = cultureRepository;
+        this.pathFinder = pathFinder;
+    }
 
-//        private List<String> moods = new ArrayList<>();
-//        private Integer time;
-//        private Integer price;
-//        private String latitude;
-//        private String longitude;
+    public List<Markable> search(CultureSearchForm cultureSearchForm) throws IOException {
+        if (cultureSearchForm.getLongitude() == null || cultureSearchForm.getLatitude() == null) {
+            return null;
+        }
+        if (cultures == null || cultures.size() == 0) {
+            this.cultures = cultureRepository.findAll();
+        }
 
-        // TODO: 넘어온 현위치(lat, lon) 기준으로 Culture 데이터 서치
-        // 임시 데이터
-        Markable marker1 = MarkDto.builder()
-                .category(Category.체험.toString())
-                .latitude(37.123422)
-                .longitude(127.533678)
-                .title("마카롱 카페")
-                .price(5000)
-                .contents("마카롱을 정말 맛있게 만들 수 있는 곳이요")
-                .imgUrl("https://cafe24.poxo.com/ec01/joinandjoin3/YepDBcpQi6F1EGuL9rzRwSOX6iBaegInadJOBqJjBl8mIPOKixffqoe/SEB3Y+EmfOLxV9OtXy9ki4TqHva87Q==/_/web/product/big/202208/efb8871f1a21b518e1e797acaf8d3c21.png")
-                .detailUrl("www.naver.com")
-                .build();
+        // step1: 위경도 수치 & 시간 인풋 기반 필터링
+        int time = cultureSearchForm.getTime();
+        double currentLat = Double.parseDouble(cultureSearchForm.getLatitude());
+        double currentLon = Double.parseDouble(cultureSearchForm.getLongitude());
 
-        Markable marker2 = MarkDto.builder()
-                .category(Category.공연.toString())
-                .latitude(37.433321)
-                .longitude(127.876335)
-                .title("피자파티 공연")
-                .price(15000)
-                .contents("피자파티가열린다야호@!")
-                .imgUrl("https://cdn.dominos.co.kr/admin/upload/goods/20200311_x8StB1t3.jpg")
-                .detailUrl("www.naver.com")
-                .build();
+        // 검색속도 향상을 위해서는, 여기서 정확하게 많이 추려내는 것이 관건이다.
+        List<Culture> rawTargets = new ArrayList<>();
+        for (Culture culture : cultures) {
+            Location location = culture.getLocation();
+            double lat = location.getLatitude();
+            double lon = location.getLongitude();
+            double distanceKm = DistanceCalculator.calculateDistance(currentLat, currentLon, lat, lon);
+            // 대략적으로, distanceKm를 통해 차량을 기준으로 걸리는 소요시간을 필터링한다.
+            double predictionTime = DrivingTimeCalculator.calculateDrivingTime(distanceKm);
+            if (predictionTime < time) {
+                rawTargets.add(culture);
+            }
+        }
 
-        // MarkerInfo 객체를 담는 List 생성
-        List<Markable> testList = new ArrayList<>();
-        testList.add(marker1);
-        testList.add(marker2);
-        return testList;
+        // step2: pathFinder 기반 구체적 필터링
+        List<Culture> targets = new ArrayList<>();
+        for (Culture culture : rawTargets) {
+            Location location = culture.getLocation();
+            pathFinder.setPathInfo(currentLat, currentLon, location.getLatitude(), location.getLongitude(), HowToGo.DRIVING);
+
+            int durationMinute = pathFinder.getDuration();
+            if (durationMinute < time) {
+                targets.add(culture);
+            }
+        }
+
+        // MarkDto로 변경
+        List<Markable> dtos = new ArrayList<>();
+        for (Culture culture : targets) {
+            dtos.add(MarkDto.builder()
+                    .category(culture.getCategory().toString())
+                    .latitude(culture.getLocation().getLatitude())
+                    .longitude(culture.getLocation().getLongitude())
+                    .title(culture.getTitle())
+                    .price(culture.getPrice())
+                    .contents(culture.getContents())
+                    .imgUrl(culture.getImgUrl())
+                    .detailUrl(culture.getDetailUrl())
+                    .build());
+        }
+        return dtos;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class Formatter {
 
     public static String stringWithNoQuotes(String str) {
-        return str.trim().replaceAll("^\"|\"$", "");
+        return str.trim().replaceAll("^\"|\"$", "").replace("\'", "＇").replace("\"", "\\\"");
     }
 
     public static String string(String str) {
@@ -37,7 +37,7 @@ public class Formatter {
         }
         StringBuilder sb = new StringBuilder();
         for (String info : variousInfo) {
-            sb.append(info).append("\n");
+            sb.append(info).append("<br>");
         }
         return sb.toString();
     }

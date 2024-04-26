@@ -6,13 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import seoul.culture.demo.domain.Culture;
-import seoul.culture.demo.domain.Location;
 import seoul.culture.demo.repository.CultureRepository;
 import seoul.culture.demo.domain.Mood;
 import seoul.culture.demo.domain.MoodType;
 import seoul.culture.demo.repository.MoodRepository;
 import seoul.culture.demo.service.api.APIReader;
-import seoul.culture.demo.service.vo.MarkDto;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -52,8 +50,9 @@ public class DataLoader implements CommandLineRunner {
                     return Culture.of(json);
                 })
                 .collect(Collectors.toList());
-        cultures.stream().filter(culture -> !cultureRepository.existsByTitleAndLocation(
-                culture.getTitle(),
+//        cultures.stream().filter(culture -> !cultureRepository.existsByTitleAndLocation(
+        // TODO: location이 동일하고, title이 다른 경우는.. 지도상에 겹치는데 그거 클릭 가능하게 처리하려면? (붙어있는 경우도 마찬가지긴 함)
+        cultures.stream().filter(culture -> !cultureRepository.existsByLocation(
                 culture.getLocation()
         )).forEach(cultureRepository::save);
     }
