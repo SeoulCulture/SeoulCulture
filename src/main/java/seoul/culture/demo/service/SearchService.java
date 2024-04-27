@@ -2,21 +2,21 @@ package seoul.culture.demo.service;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import seoul.culture.demo.domain.Culture;
-import seoul.culture.demo.domain.CultureSearchForm;
-import seoul.culture.demo.domain.Location;
+import seoul.culture.demo.entity.Culture;
+import seoul.culture.demo.dto.CultureSearchForm;
+import seoul.culture.demo.entity.Location;
 import seoul.culture.demo.repository.CultureRepository;
-import seoul.culture.demo.service.distance.HowToGo;
-import seoul.culture.demo.service.distance.PathFinder;
-import seoul.culture.demo.service.vo.MarkDto;
-import seoul.culture.demo.service.vo.Markable;
+import seoul.culture.demo.pathfinder.HowToGo;
+import seoul.culture.demo.pathfinder.PathFinder;
+import seoul.culture.demo.dto.MarkDto;
+import seoul.culture.demo.dto.Markable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SearchService {   // 문제점: 속도.. 현재 꽤나 지루하게 오래걸림 : 1시간 거리 검색은 결과 보기 불가능할 정도 & 30분 거리도 기다리기 지루함
+public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루하게 오래걸림 : 1시간 거리 검색은 결과 보기 불가능할 정도 & 30분 거리도 기다리기 지루함
     private final CultureRepository cultureRepository;
     private List<Culture> cultures;
     private final PathFinder pathFinder;

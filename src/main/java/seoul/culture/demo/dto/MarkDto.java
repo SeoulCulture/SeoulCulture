@@ -1,6 +1,5 @@
-package seoul.culture.demo.service.vo;
+package seoul.culture.demo.dto;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Builder;
 import lombok.Getter;
 

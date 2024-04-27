@@ -1,4 +1,4 @@
-package seoul.culture.demo.service.api;
+package seoul.culture.demo.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import seoul.culture.demo.domain.CultureSearchForm;
+import seoul.culture.demo.dto.CultureSearchForm;
 import seoul.culture.demo.service.SearchService;
-import seoul.culture.demo.service.vo.Markable;
+import seoul.culture.demo.dto.Markable;
 
 import java.io.IOException;
 import java.util.List;

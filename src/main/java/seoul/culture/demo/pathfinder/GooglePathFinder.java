@@ -1,15 +1,16 @@
-package seoul.culture.demo.service.distance;
+package seoul.culture.demo.pathfinder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import seoul.culture.demo.config.GoogleConfig;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static seoul.culture.demo.JsonUtil.getResponseJson;
+import static seoul.culture.demo.util.JsonUtil.getResponseJson;
 
 @Component
 @Slf4j

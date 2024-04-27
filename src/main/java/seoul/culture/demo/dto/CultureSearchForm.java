@@ -1,4 +1,4 @@
-package seoul.culture.demo.domain;
+package seoul.culture.demo.dto;
 
 import lombok.Getter;
 import lombok.Setter;

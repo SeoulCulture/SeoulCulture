@@ -1,14 +1,15 @@
-package seoul.culture.demo.service.distance;
+package seoul.culture.demo.pathfinder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Component;
+import seoul.culture.demo.config.NaverConfig;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import static seoul.culture.demo.JsonUtil.getResponseJson;
+import static seoul.culture.demo.util.JsonUtil.getResponseJson;
 
 @Component
 public class ReverseGeocoding { // 좌표정보를 주소로 바꾸는 네이버의 api 이름입니다

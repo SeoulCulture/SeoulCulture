@@ -1,4 +1,4 @@
-package seoul.culture.demo.service.distance;
+package seoul.culture.demo.config;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,8 +1,6 @@
-package seoul.culture.demo.controller.dto;
+package seoul.culture.demo.dto;
 
 import lombok.Getter;
-import seoul.culture.demo.domain.LocationDto;
-import seoul.culture.demo.service.vo.MarkDto;
 
 import java.util.List;
 

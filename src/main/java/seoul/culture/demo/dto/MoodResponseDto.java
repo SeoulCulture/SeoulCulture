@@ -1,8 +1,8 @@
-package seoul.culture.demo.controller.dto;
+package seoul.culture.demo.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import seoul.culture.demo.domain.Mood;
+import seoul.culture.demo.entity.Mood;
 
 import java.util.List;
 import java.util.stream.Collectors;

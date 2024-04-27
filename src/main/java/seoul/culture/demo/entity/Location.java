@@ -1,16 +1,13 @@
-package seoul.culture.demo.domain;
+package seoul.culture.demo.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Embeddable
 @Getter
 @NoArgsConstructor
 public class Location {
-
     private Location(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;

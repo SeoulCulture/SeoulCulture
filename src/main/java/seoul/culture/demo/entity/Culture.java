@@ -1,4 +1,4 @@
-package seoul.culture.demo.domain;
+package seoul.culture.demo.entity;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
@@ -6,13 +6,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import seoul.culture.demo.service.api.Formatter;
+import seoul.culture.demo.util.Formatter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Entity
@@ -39,7 +37,18 @@ public class Culture {
     @Embedded
     private Location location;
 
-    public static Culture of(JsonNode json) {
+    private String address;
+
+
+    // TODO: 경준 - json파일 읽어서 Culture로 저장하기
+    // 아래의 forSeoulEvent와 달리 address정보를 저장해야 한다.
+    // 참고: (아래의 forSeoulEvent는 주소정보가 없에서 위경도를 통해 주소를 별도로 찾을 것이며,
+    //       현재 구현되어있는 ReverseGeocoding을 통해 가능)
+    public static Culture forSeoulPlace(JsonNode json) {
+        return null;
+    }
+
+    public static Culture forSeoulEvent(JsonNode json) {
         double lat = Formatter.latOrLon(json.get("LOT").toString());  // API문제점: LOT, LAT이 반대로 되어있음.
         double lon = Formatter.latOrLon(json.get("LAT").toString());
         int price = 0;

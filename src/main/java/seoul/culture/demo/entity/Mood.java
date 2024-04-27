@@ -1,8 +1,7 @@
-package seoul.culture.demo.domain;
+package seoul.culture.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

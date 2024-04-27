@@ -1,4 +1,4 @@
-package seoul.culture.demo.service.vo;
+package seoul.culture.demo.dto;
 
 import java.util.Map;
 

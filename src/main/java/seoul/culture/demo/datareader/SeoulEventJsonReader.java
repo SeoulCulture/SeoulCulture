@@ -1,4 +1,4 @@
-package seoul.culture.demo.service.api;
+package seoul.culture.demo.datareader;
 
 
 import java.io.InputStreamReader;
@@ -20,7 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import seoul.culture.demo.JsonUtil;
+import seoul.culture.demo.util.JsonUtil;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
@@ -28,7 +28,7 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 @ConfigurationProperties(prefix = "seoul")  // 스프링 컨테이너가 yml 정보를 통해서 bean을 등록할 때 필요
 @NoArgsConstructor @Setter  // Config 에 의한 Bean 생성을 위해 두가지가 필요
 @Getter
-public final class SeoulEventAPIReader implements APIReader {
+public final class SeoulEventJsonReader implements JsonReader {
     private String key;
     private List<JsonNode> results = new ArrayList<>();
     private final LocalDate now = LocalDate.now();

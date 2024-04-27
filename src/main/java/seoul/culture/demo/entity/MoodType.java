@@ -1,4 +1,4 @@
-package seoul.culture.demo.domain;
+package seoul.culture.demo.entity;
 
 public enum MoodType {
     활기찬,

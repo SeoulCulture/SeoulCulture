@@ -1,4 +1,4 @@
-package seoul.culture.demo.domain;
+package seoul.culture.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

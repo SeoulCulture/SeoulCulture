@@ -1,4 +1,4 @@
-package seoul.culture.demo.service.distance;
+package seoul.culture.demo.pathfinder;
 
 import java.io.IOException;
 import java.util.Map;
