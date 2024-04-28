@@ -39,6 +39,10 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
         double currentLat = Double.parseDouble(cultureSearchForm.getLatitude());
         double currentLon = Double.parseDouble(cultureSearchForm.getLongitude());
 
+        /**
+         * 여기서부터는 howToGo에 따라서 변동됨
+         */
+        HowToGo howToGo = HowToGo.valueOf(cultureSearchForm.getHowToGo());  // 도보
         // 검색속도 향상을 위해서는, 여기서 정확하게 많이 추려내는 것이 관건이다.
         List<Culture> rawTargets = new ArrayList<>();
         for (Culture culture : cultures) {
@@ -46,8 +50,12 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
             double lat = location.getLatitude();
             double lon = location.getLongitude();
             double distanceKm = DistanceCalculator.calculateDistance(currentLat, currentLon, lat, lon);
-            // 대략적으로, distanceKm를 통해 차량을 기준으로 걸리는 소요시간을 필터링한다.
-            double predictionTime = DrivingTimeCalculator.calculateDrivingTime(distanceKm);
+            double predictionTime = 0.0;
+            if (howToGo == HowToGo.DRIVING)
+                predictionTime = DrivingTimeCalculator.calculateTime(distanceKm);
+            if (howToGo == HowToGo.WALKING) {
+                predictionTime = WalkingTimeCalculator.calculateTime(distanceKm);
+            }
             if (predictionTime < time) {
                 rawTargets.add(culture);
             }
@@ -59,7 +67,14 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
             Location location = culture.getLocation();
             pathFinder.setPathInfo(currentLat, currentLon, location.getLatitude(), location.getLongitude(), HowToGo.DRIVING);
 
-            int durationMinute = pathFinder.getDuration();
+            int durationMinute = 0;
+            if (howToGo == HowToGo.DRIVING) {
+                durationMinute = pathFinder.getDuration();
+            }
+            if (howToGo == HowToGo.WALKING) {
+                int distance = pathFinder.getDistance();
+                durationMinute = (int) (distance / 4.8 * 60);  // 시속 4.8km/h로 걷는다고 가정
+            }
             if (durationMinute < time) {
                 targets.add(culture);
             }
