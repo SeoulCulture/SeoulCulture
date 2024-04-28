@@ -25,6 +25,19 @@
                     </tr>
                 </div>
 
+                <!-- 도보 라디오 버튼 -->
+                <div class="form-floating">
+                    <tr>
+                    <td class="table-head">이동 수단</td>
+                    <td>
+                        <input type="radio" id="walking" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
+                        <label for="walking">도보</label>
+                        <input type="radio" id="driving" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
+                        <label for="driving">차량</label>
+                    </td>
+                    </tr>
+                </div>
+
                 <div class="form-floating">
                     <tr>
                     <td class="table-head"><label for="price">비용 (원)</label></td>

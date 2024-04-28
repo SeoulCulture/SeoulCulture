@@ -1,4 +1,12 @@
 /*컨텐츠 공통 (모달, 오른쪽 모두)*/
+.place-title {
+    word-break: keep-all;
+}
+
+.place-contents {
+    word-break: keep-all;
+}
+
 .place-img {
     width: 100%;
     height: auto;
@@ -7,6 +15,7 @@
 .place-img img {
     max-height: 400px;
     width: fit-content;
+    border-radius: 10px;
 }
 
 .place-category {
@@ -17,6 +26,7 @@
     padding: 5px 10px;
     margin-right: 10px;
     margin-bottom: 0px;
+    word-break: keep-all;
 }
 
 /*모달 전용*/
@@ -33,7 +43,6 @@
     padding: 10px 20px;
     border-radius: 1000px;
 }
-
 .modal-header .place-title {
     font-size: 30px;
     font-weight: bold;
