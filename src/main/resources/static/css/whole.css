@@ -1,0 +1,16 @@
+html {
+
+}
+
+body {
+    min-height: 100vh;
+    background-size: cover;
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.2)
+    ), url('/img/sample_body_img.png');
+}
+
+* {
+    font-family: "Noto Sans KR" !important;
+}

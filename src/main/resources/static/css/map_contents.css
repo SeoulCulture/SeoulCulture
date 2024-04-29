@@ -24,27 +24,44 @@
     width: fit-content;
     border-radius: 15px;
     padding: 5px 10px;
-    margin-right: 10px;
-    margin-bottom: 0px;
+    margin-right: 1%;
     word-break: keep-all;
+    color: honeydew;
+    text-shadow: 1px 1px firebrick;
 }
 
 /*모달 전용*/
 .modal-header{
     align-items: center;
+    padding: 4% 5% 1% 5%;
 }
 .modal-body{
     text-align: -webkit-center;
+    padding: 0% 5%;
+}
+
+.modal-content {
+    background-color: rgba(var(--white), var(--alpha08));
 }
 
 .modal-body .place-contents {
-    background-color: rgba(var(--skycolar), var(--alpha01));
+    background-color: rgba(var(--skycolar), var(--alpha02));
+    padding: 5px 25px;
+    border-radius: 16px;
+    border: ridge;
     max-width: fit-content;
-    padding: 10px 20px;
-    border-radius: 1000px;
 }
+
+.modal-body .place-img img {
+    max-width: -webkit-fill-available;
+    width: fit-content;
+    border-style: ridge;
+    border-radius: 10px;
+    margin: 0% 14%;
+}
+
 .modal-header .place-title {
-    font-size: 30px;
+    font-size: larger;
     font-weight: bold;
     text-align: -webkit-center;
     margin-bottom: 0px;
@@ -60,13 +77,20 @@
     padding: 15px;
 }
 
-
-
 /*오른쪽 컨테이너 전용*/
 #rightContainer {
     padding: 20px;
     text-align: -webkit-center;
-    background-color: rgba(var(--white), var(--alpha08));
+    background-color: rgba(var(--white), var(--alpha04));
+    overflow-y: scroll;
+}
+
+#rightContainer .place-contents {
+    background-color: rgba(var(--skycolar), var(--alpha02));
+    padding: 5px 25px;
+    border-radius: 16px;
+    border: ridge;
+    max-width: fit-content;
 }
 
 .right-container-header {
@@ -75,14 +99,23 @@
     align-items: center;
 }
 
-.right-container-header .place-title {
-    font-size: 33px;
-    font-weight: bold;
+#rightContainer .place-title {
+    font-size: larger;
+    font-weight: 600;
 }
 
-right-container-body .place-contents {
-    background-color: rgba(255,255,255,40%);
-    max-width: fit-content;
-    padding: 10px 20px;
-    border-radius: 1000px;
+/*초기 오른쪽 컨테이너 설정 전용*/
+#initialRightContainerTitle h3 {
+    color: black;
+    margin: 0;
+    text-shadow: 0 0 7px #fff, 0 0 10px #ffcfcf, 0 0 21px #fff, 0 0 42px rgb(255 202 202), 0 0 82px rgb(255 255 255), 0 0 92px rgb(255 255 255), 0 0 102px rgb(255 255 255), 0 0 151px #ffffff;
+}
+
+#initialRightContainerTitle span {
+    color: #c60000;
+}
+
+/*왼쪽 컨테이너 (지도)*/
+#leftContainer {
+    box-shadow: 0 0 20px white;
 }

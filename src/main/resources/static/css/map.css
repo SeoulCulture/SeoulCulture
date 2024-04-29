@@ -4,18 +4,12 @@
     --alpha1: 1;
     --alpha08: 0.8;
     --alpha05: 0.5;
+    --alpha04: 0.4;
+    --alpha03: 0.3;
     --alpha02: 0.2;
     --alpha01: 0.1;
     --alpha005: 0.05;
 
-}
-
-body {
-    background-size: cover;
-    background-image: linear-gradient(
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.2)
-    ), url('/img/sample_body_img.png');
 }
 
 #header {
@@ -23,7 +17,7 @@ body {
 }
 
 #header #map-title {
-    font-size: 40px;
+    font-size: 31px;
     padding: 20px;
     font-weight: bold;
 }
@@ -31,8 +25,8 @@ body {
 #pageContents {
     margin: 0;
     padding: 0;
-    height: 700px;
     display: flex; /* body를 Flexbox로 설정하여 하위 요소를 좌우로 배치 */
+    height: 80vh;
 }
 
 #leftContainer {
@@ -72,11 +66,16 @@ body {
 .marker_category {
     font-weight: bold;
     font-family: 'Noto Sans KR', 'sans-serif';
-    color: black;
+    color: black !important;
     text-shadow: 0 0 2px white;
     background: linear-gradient(to bottom, #ffffff, #bababa);
     border-radius: 20px;
     padding: 6px 13px;
+}
+
+.marker_category:hover {
+    color: black !important;
+    text-decoration: none;
 }
 
 .marker_home {
