@@ -25,7 +25,6 @@
                     </tr>
                 </div>
 
-                <!-- 도보 라디오 버튼 -->
                 <div class="form-floating">
                     <tr>
                     <td class="table-head">이동 수단</td>
@@ -41,7 +40,18 @@
                 <div class="form-floating">
                     <tr>
                     <td class="table-head"><label for="price">비용 (원)</label></td>
-                    <td><input type="number" class="form-control" id="price" name="price", placeholder="비용을 입력해주세요" th:field="*{price}"></td>
+                    <td>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="비용을 입력해주세요" th:field="*{price}">
+                    </td>
+                    </tr>
+                </div>
+
+                <div class="form-floating">
+                    <tr>
+                    <td class="table-head">무료</td>
+                    <td>
+                        <input type="checkbox" id="free" name="free" th:checked="${cultureForm.price == 0}">
+                    </td>
                     </tr>
                 </div>
             </table>
