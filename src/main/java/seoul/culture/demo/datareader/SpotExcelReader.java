@@ -27,6 +27,8 @@ public class SpotExcelReader implements ExcelReader {
 
     @Override
     public List<SpotDto> getResult(String path) {
+        List<Spot> dbData = spotRepository.findAll();
+        if (dbData.size() > 800) return dbData.stream().map(Spot::toDto).toList();
         try {
             File excelFile = new File(path);
             FileInputStream inputStream = new FileInputStream(excelFile);
@@ -47,6 +49,7 @@ public class SpotExcelReader implements ExcelReader {
                 }
                 String sido = SpotFormatter.parseSido(row.getCell(0).toString());
                 String spotName = SpotFormatter.parseSpotName(spotInfo);
+                if (spotName.length() == 0) continue;
                 if (row.getCell(5) == null || row.getCell(6) == null) continue;
                 double latitude = SpotFormatter.parseLocationPoint(row.getCell(5).toString());
                 double longitude = SpotFormatter.parseLocationPoint(row.getCell(6).toString());

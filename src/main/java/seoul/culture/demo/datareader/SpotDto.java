@@ -1,10 +1,11 @@
 package seoul.culture.demo.datareader;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import seoul.culture.demo.entity.Spot;
 
-@Builder
+@Builder @Getter
 @NoArgsConstructor
 public class SpotDto {
     String spotName;
