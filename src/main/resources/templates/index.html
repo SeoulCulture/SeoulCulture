@@ -59,7 +59,52 @@
                 <button id = "submitBtn" class="btn btn-primary">고!!</button>
             </div>
         </form>
+        <div>
+            <p>장소 지정하기</p>
+            <input type="text" id="searchInput" name="spot">
+            <div id="searchResults"></div>
+        </div>
+
+
         <div id="searchStatus" style="display: none;">검색 중입니다...</div>
     </main>
 </body>
+
+<script>
+    $( document ).ready( function() {
+        $( '#searchInput' ).on("propertychange change keyup paste input", function() {
+            console.log("인풋 발생");
+            const input = searchInput.value;
+            const matches = findMatchingStrings(input, spotDtos);
+
+            const resultsContainer = document.getElementById("searchResults");
+            if (resultsContainer){
+                resultsContainer.innerHTML = "";
+                if (matches.length > 0) {
+                    const resultList = document.createElement("ul");
+                    matches.forEach(function (match) {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = match;
+                        resultList.appendChild(listItem);
+                    });
+                    resultsContainer.appendChild(resultList);
+                } else {
+                    resultsContainer.textContent = "선택 가능한 항목이 없습니다.";
+                }
+            }
+        });
+    });
+
+    function findMatchingStrings(input, spotDtos) {
+        const matches = [];
+
+        spotDtos.forEach(function(spotDto) {
+            if (spotDto.spotName.includes(input)) {
+                matches.push(spotDto.spotName);
+            }
+        });
+
+        return matches;
+    }
+</script>
 </html>

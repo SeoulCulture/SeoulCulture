@@ -16,7 +16,7 @@ public class SpotController {
         this.spotDtos = spotDtos;
     }
 
-    @GetMapping("/spot")
+    @GetMapping("/spots")
     public List<SpotDto> getSpots() {
         return spotDtos;
     }
