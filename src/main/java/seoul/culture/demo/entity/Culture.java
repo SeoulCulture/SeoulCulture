@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import seoul.culture.demo.dto.CultureInfoDto;
 import seoul.culture.demo.util.Formatter;
 
 import java.time.LocalDate;
@@ -44,8 +45,17 @@ public class Culture {
     // 아래의 forSeoulEvent와 달리 address정보를 저장해야 한다.
     // 참고: (아래의 forSeoulEvent는 주소정보가 없에서 위경도를 통해 주소를 별도로 찾을 것이며,
     //       현재 구현되어있는 ReverseGeocoding을 통해 가능)
-    public static Culture forSeoulPlace(JsonNode json) {
-        return null;
+    public Culture(CultureInfoDto dto){
+        this.category = dto.getCategory();
+        this.title = dto.getTitle();
+        this.imgUrl = dto.getImgUrl();
+        this.detailUrl = dto.getDetailUrl();
+        this.contents = dto.getContents();
+        this.price = dto.getPrice();
+        this.contact = dto.getContact();
+        // startDate랑 endDate는 어카지...??
+        this.location = dto.getLocation();
+        this.address = dto.getAddress();
     }
 
     public static Culture forSeoulEvent(JsonNode json) {
