@@ -16,7 +16,7 @@ public enum Category {
 
     public static Category getCategoryByName(String name) {
         for (Category category : Category.values()) {
-            if (category.getName().equals(name)) {
+            if (category.getName().contains(name) || name.contains(category.getName())) {
                 return category;
             }
         }
