@@ -2,13 +2,14 @@
 <html lang="ko"  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/index-header :: header"/>
 <body class="text-center">
-
+    <div id="loading" style="display: none;">
+        <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
+    </div>
     <div id="main-title">
         <h2>뭐하러 가지?</h2>
     </div>
 
     <main class="form-sign">
-<!--        어.. action을 꼭 지정해야 렌더링이 되네 왜그러지..-->
         <form id ="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
             <table>
                 <div>
@@ -59,7 +60,7 @@
                 <button id = "submitBtn" class="btn btn-primary">고!!</button>
             </div>
         </form>
-        <div id="searchStatus" style="display: none;">검색 중입니다...</div>
     </main>
+    <script src="/js/index_search.js"></script>
 </body>
 </html>
