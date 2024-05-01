@@ -4,9 +4,11 @@
 <body class="text-center">
 
 <div id="main-title">
-    <h2>뭐하러 가지?</h2>
+    <h2>서울 지금 여기</h2>
+    <h3>Seoul</h3>
 </div>
 
+<div id="indexContents">
 <main class="form-sign">
     <!--        어.. action을 꼭 지정해야 렌더링이 되네 왜그러지..-->
     <form id ="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
@@ -56,18 +58,20 @@
             </div>
         </table>
         <div id="submit-button">
-            <button id = "submitBtn" class="btn btn-primary">고!!</button>
+            <button id = "submitBtn" class="btn btn-primary">고!!</button>`
         </div>
     </form>
-    <div>
+
+    <div id="placeSearchBox">
         <p>장소 지정하기</p>
-        <input type="text" id="searchInput" name="spot">
+        <input type="text" id="searchInput" name="spot" autocomplete=off>
         <div id="searchResults"></div>
     </div>
 
-
     <div id="searchStatus" style="display: none;">검색 중입니다...</div>
 </main>
+</div>
+
 </body>
 </html>
 
@@ -120,13 +124,24 @@
     // 검색
     const $searchInput = document.querySelector("#searchInput");
     let nowIndex = 0;
+    const ignoreKey = [37, 38, 39, 40]
+    let preMatched;
+    let preInput;
     $( document ).ready( (event) => {
         $searchInput.onkeyup = (event) => {
-            const val = document.getElementById('searchInput').value.trim();
-
-            const matches = findMatchingStrings(event, val);
-
-            showSearchResult(matches, val);
+            let input;
+            let matches;
+            if (ignoreKey.includes(event.keyCode)) {
+                matches = preMatched;
+                input = preInput;
+            } else {
+                input = document.getElementById('searchInput').value.trim();
+                matches = findMatchingStrings(event, input);
+                preMatched = matches;
+                preInput = input;
+            }
+            handleUpDownIndex(event, matches);
+            showSearchResult(matches, input);
         };
     });
 
@@ -137,7 +152,10 @@
                 matches.push(spotDto.spotName);
             }
         });
+        return matches;
+    }
 
+    function handleUpDownIndex(event, matches) {
         switch (event.keyCode) {
             // UP KEY
             case 38:
@@ -159,7 +177,6 @@
                 nowIndex = 0;
                 break;
         }
-        return matches;
     }
 
     const showSearchResult = (matches, input) => {
@@ -173,18 +190,63 @@
           ${label.replace(regex, "<mark>$1</mark>")}
         </div>`).join("");
     };
+    //
+    //
+    // // 전역에서 키보드 이벤트를 감지합니다.
+    // document.addEventListener("keydown", function(event) {
+    //     // 눌러진 키의 keyCode를 가져옵니다.
+    //     var keyCode = event.keyCode;
+    //
+    //     // #searchInput 아이디를 가진 요소를 선택합니다.
+    //     var searchInput = document.querySelector("#searchInput");
+    //
+    //     // #searchInput이 활성화되어 있는 경우에만 실행합니다.
+    //     if (searchInput) {
+    //         if (keyCode === 38 || keyCode === 40) {    // 키보드 up, down 키
+    //             activeEffect();
+    //         }
+    //     }
+    // });
+
+
+    // active인 요소에 대한 효과1 : input 칸에 value로 넣기
+    function activeEffect() {
+        var innerDiv = document.getElementById("searchResults").querySelector("div");
+        if (innerDiv && innerDiv.classList.contains("active")) {
+            var searchText = innerDiv.textContent;
+            var searchInput = document.getElementById("searchInput");
+            if (searchInput) {
+                searchInput.value = searchText.trim();
+            }
+        }
+    }
 </script>
 
 <style>
-    /* active 클래스를 가진 요소에 대해 */
     #searchResults > div.active {
-        font-weight: bolder;
-        font-size: large;
+        font-size: larger;
+        padding: 3px 0px;
     }
 
     .mark, mark {
-        padding: 0px !important;
-        background-color: #ffb9b9 !important;
-        box-shadow: 0px 0px 0px 0px #ffb9b9;
+        font-weight: bold;
+        background-color: transparent !important;
+        padding: 0px;
+    }
+
+    #placeSearchBox {
+        position: relative;
+        max-width: fit-content;
+    }
+
+    #searchResults {
+        position: absolute;
+        overflow-y: clip;
+        max-height: 110px;
+        top: 100%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+        z-index: 1;
+        border-radius: 0px 0px 20px 20px;
     }
 </style>

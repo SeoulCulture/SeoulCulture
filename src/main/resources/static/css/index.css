@@ -16,10 +16,16 @@ body{
     flex-direction: column;
 }
 
+
 #main-title{
     margin : 0 auto;
     align-items : center;
     display : flex;
+}
+
+#indexContents {
+    text-align: -webkit-center;
+    justify-content: center;
 }
 
 .form-control{
