@@ -2,47 +2,49 @@ document.addEventListener('DOMContentLoaded', function() {
     // 뒤로가기시 display none 요소로 원상복구
     window.onpageshow = function(event) {
         if (event.persisted || window.performance.navigation.type === 2) {
-            hideSearchingStatus();
+            closeLoadingWithMask();
         }
     }
 
-    const submitBtn = document.getElementById('submitBtn');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function() {
+    function closeLoadingWithMask() {
+        $('#mask, #loadingImg').hide();
+        $('#mask, #loadingImg').empty();
+     }
 
-            // submitBtn 클릭 시에는 이미 formData에 위도와 경도 값이 설정되어 있음
-            sendSearchRequest();
+    const form = document.getElementById('form');
+    form.onsubmit = function (event) {
+        //화면의 높이와 너비를 구합니다.
+        var maskHeight = $(document).height();
+        var maskWidth = window.document.body.clientWidth;
+
+//        화면에 출력할 마스크를 설정해줍니다.
+        var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+        var loadingImg = " <img id='loadingImg' src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: absolute; display: block; margin: 0px auto;'/>";
+
+//        화면에 레이어 추가
+        $('body')
+            .append(mask);
+
+        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+        $('#mask').css({
+            'width' : maskWidth,
+            'height': maskHeight,
+            'opacity' : '0.7',
+            'display' : 'flex',
+            'justify-content' : 'center',
+            'align-items' : 'center'
         });
+
+        //마스크 표시
+        $('#mask').show();
+
+        //로딩중 이미지 표시
+        $('#mask').append(loadingImg);
+        $('#loadingImg').show();
     }
 
-    function sendSearchRequest() {
-        showSearchingStatus();
-        let formData = new FormData(document.getElementById('form'));
+    function LoadingWithMask(gif) {
 
-        // 위치 정보를 포함한 formData를 서버에 전송
-        fetch('/culture/search', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-        })
-        .catch(error => {
-            console.error('Error searching:', error);
-        });
-    }
-
-    function showSearchingStatus() {
-        var searchStatus = document.getElementById('searchStatus');
-        if (searchStatus) {
-            searchStatus.style.display = 'block';
-        }
-    }
-
-    function hideSearchingStatus() {
-        var searchStatus = document.getElementById('searchStatus');
-        if (searchStatus) {
-            searchStatus.style.display = 'none';
-        }
     }
 
     // 페이지 로드 시에 formData에 위도와 경도 값을 설정
