@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import seoul.culture.demo.entity.Category;
 import seoul.culture.demo.entity.Location;
+import seoul.culture.demo.util.Formatter;
 
 import java.math.BigDecimal;
 
@@ -38,7 +39,7 @@ public class CultureInfoDto {
         this.title = title;
         this.imgUrl = imgUrl;
         this.price = price == null ? -1 : price;
-        this.contents = contents;
+        this.contents = contents != null ? Formatter.stringWithNoQuotes(contents) : null;
         this.address = address;
         this.detailUrl = detailUrl;
         this.contact = contact;
