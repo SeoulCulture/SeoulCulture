@@ -14,7 +14,9 @@
 }
 .place-img img {
     max-height: 400px;
-    width: fit-content;
+    /* width: fit-content; */
+    width: 200px;
+    height : fit-content
     border-radius: 10px;
 }
 
@@ -118,4 +120,9 @@
 /*왼쪽 컨테이너 (지도)*/
 #leftContainer {
     box-shadow: 0 0 20px white;
+}
+
+#right-container-close{
+    position: absolute;
+    right: 20px;
 }

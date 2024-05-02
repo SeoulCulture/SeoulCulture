@@ -75,6 +75,11 @@ function createMarker(marker, customHtmlContents = undefined) {
     bounds.extend(markerPosition);
 }
 
+function findMarkerAndOpen(id){
+    let findMarker = document.getElementById(id).getAttribute('marker');
+    openModal(JSON.parse(findMarker))
+}
+
 const widthThreshold = 700;
 function openModal(marker) {
     if (window.innerWidth > widthThreshold) {
