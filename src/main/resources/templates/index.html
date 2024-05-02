@@ -1,65 +1,64 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/index-header :: header"/>
-
 <body>
-<div id="main-title">
-    <!-- <h2>서울 지금 여기</h2> -->
-    <h3>Seoul</h3>
-</div>
-
-<main class="mainContents">
-    <div id="inputContainer">
-        <form id="form" role="form" action="/culture/search" th:object="${cultureForm}" method="get">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="table-head"><label for="moods">기분</label></td>
-                    <td><input id="moods" class="mainInput" name="moods" th:field="*{moods}"></td>
-                </tr>
-
-                <tr>
-                    <td class="table-head"><label for="time">소요시간</label></td>
-                    <td><input type="number" class="form-control mainInput" id="time" name="time" placeholder="" th:field="*{time}"></td>
-                </tr>
-
-                <tr>
-                    <td class="table-head">이동수단</td>
-                    <td>
-                        <input type="radio" id="walking" class="mainInput" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
-                        <label for="walking">도보</label>
-                        <input type="radio" id="driving" class="mainInput" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
-                        <label for="driving">차량</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="table-head"><label for="price">비용</label></td>
-                    <td><input type="number" class="form-control mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
-                </tr>
-
-                <tr>
-                    <td class="table-head">무료</td>
-                    <td><input type="checkbox" id="free" class="mainInput" name="free" th:checked="${cultureForm.price == 0}"></td>
-                </tr>
-                </tbody>
-            </table>
-
-
-            <div id="submit-button">
-                <button id="submitBtn" class="btn btn-primary">고!!</button>
-            </div>
-
-        </form>
-
-        <div id="spotInputBox">
-            <div>장소 지정하기</div>
-            <input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off">
-            <div id="searchResults"></div>
-        </div>
+    <div id="loading" style="display: none;">
+        <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
     </div>
-</main>
+    <div id="main-title">
+        <!-- <h2>서울 지금 여기</h2> -->
+        <h3>Seoul</h3>
+    </div>
 
+    <main class="mainContents">
+        <div id="inputContainer">
+            <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
+
+                <table>
+                    <tbody>
+                    <tr>
+                        <td class="table-head"><label for="moods">기분</label></td>
+                        <td><input id="moods" class="mainInput" name="moods" th:field="*{moods}"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-head"><label for="time">소요시간</label></td>
+                        <td><input type="number" class="form-control mainInput" id="time" name="time" placeholder="" th:field="*{time}"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-head">이동수단</td>
+                        <td>
+                            <input type="radio" id="walking" class="mainInput" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
+                            <label for="walking">도보</label>
+                            <input type="radio" id="driving" class="mainInput" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
+                            <label for="driving">차량</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-head"><label for="price">비용</label></td>
+                        <td><input type="number" class="form-control mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-head">무료</td>
+                        <td><input type="checkbox" id="free" class="mainInput" name="free" th:checked="${cultureForm.price == 0}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div id="submit-button">
+                    <button id="submitBtn" class="btn btn-primary">고!!</button>
+                </div>
+            </form>
+
+            <div id="spotInputBox">
+                <div>장소 지정하기</div>
+                <input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off">
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </main>
 <div id="searchStatus" style="display: none;">검색 중입니다...</div>
 </body>
 </html>

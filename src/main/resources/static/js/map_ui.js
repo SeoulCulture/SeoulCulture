@@ -57,7 +57,7 @@ function createMarker(marker, customHtmlContents = undefined) {
     const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
 
     let content;
-    if (customHtmlContents == undefined) {
+    if (customHtmlContents === undefined) {
         const strMarker = JSON.stringify(marker);
         content = `<div type="button"`
                  + `id='${marker.id}' class='marker_category modal-link' marker='${strMarker}'>` +
@@ -73,6 +73,11 @@ function createMarker(marker, customHtmlContents = undefined) {
 
     customOverlay.setMap(map);
     bounds.extend(markerPosition);
+}
+
+function findMarkerAndOpen(id){
+    let findMarker = document.getElementById(id).getAttribute('marker');
+    openModal(JSON.parse(findMarker))
 }
 
 const widthThreshold = 700;
