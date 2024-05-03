@@ -95,3 +95,23 @@
     font-family: 'Noto Sans KR', 'sans-serif';
     text-shadow: -3px -3px 0 #ffffff, 3px -3px 0 #ffffff, -3px 3px 0 #cdcdcd, 3px 3px 0 #ffffff;
 }
+
+#map-title a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#map-title a:before {
+  color: #fff;
+  content: attr(data-hover);
+  position: absolute;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+#map-title a:hover:before, #map-title a:focus:before {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  transform: scale(0.9);
+  opacity: 0;
+}
