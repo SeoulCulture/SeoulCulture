@@ -7,10 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import seoul.culture.demo.dto.CultureSearchForm;
 import seoul.culture.demo.service.SearchService;
-import seoul.culture.demo.dto.Markable;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -30,9 +29,12 @@ public class CultureController {
         if (formData.getLatitude() == null || formData.getLongitude() == null) {
             throw new IllegalArgumentException("위경도정보없음");
         }
-        List<Markable> markerInfo = searchService.search(formData);
 
-        model.addAttribute("markerInfo", markerInfo);
+        Map<String, Object> map = searchService.search(formData);
+
+        model.addAttribute("markerInfo", map.get("marks"));
+        model.addAttribute("latitude", map.get("lat"));
+        model.addAttribute("longitude", map.get("lon"));
         return "map";
     }
 }

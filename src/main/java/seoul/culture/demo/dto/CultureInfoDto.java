@@ -1,14 +1,11 @@
 package seoul.culture.demo.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import seoul.culture.demo.entity.Category;
 import seoul.culture.demo.entity.Location;
 import seoul.culture.demo.util.Formatter;
-
-import java.math.BigDecimal;
 
 @Getter
 public class CultureInfoDto {

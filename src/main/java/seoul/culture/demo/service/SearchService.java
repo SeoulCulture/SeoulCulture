@@ -5,44 +5,58 @@ import org.springframework.stereotype.Service;
 import seoul.culture.demo.entity.Culture;
 import seoul.culture.demo.dto.CultureSearchForm;
 import seoul.culture.demo.entity.Location;
+import seoul.culture.demo.entity.Spot;
 import seoul.culture.demo.repository.CultureRepository;
 import seoul.culture.demo.pathfinder.HowToGo;
 import seoul.culture.demo.pathfinder.PathFinder;
 import seoul.culture.demo.dto.MarkDto;
 import seoul.culture.demo.dto.Markable;
+import seoul.culture.demo.repository.SpotRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루하게 오래걸림 : 1시간 거리 검색은 결과 보기 불가능할 정도 & 30분 거리도 기다리기 지루함
     private final CultureRepository cultureRepository;
+    private final SpotRepository spotRepository;
     private List<Culture> cultures;
+    private List<Culture> places;
     private final PathFinder pathFinder;
 
-    public SearchService(CultureRepository cultureRepository, @Qualifier("naverPathFinder") PathFinder pathFinder) {
+    public SearchService(CultureRepository cultureRepository, SpotRepository spotRepository, @Qualifier("naverPathFinder") PathFinder pathFinder) {
         this.cultureRepository = cultureRepository;
+        this.spotRepository = spotRepository;
         this.pathFinder = pathFinder;
     }
 
-    public List<Markable> search(CultureSearchForm cultureSearchForm) throws IOException {
-        if (cultureSearchForm.getLongitude() == null || cultureSearchForm.getLatitude() == null) {
+    public Map<String, Object> search(CultureSearchForm form) throws IOException {
+        if ((form.getLongitude() == null || form.getLatitude() == null)
+            && (form.getPlace() == null || form.getPlace().length() == 0)) {
             return null;
         }
         if (cultures == null || cultures.size() == 0) {
             this.cultures = cultureRepository.findAll();
         }
 
+        if (form.getPlace() != null && form.getPlace().length() != 0) {
+            Spot spot = spotRepository.findBySpotName(form.getPlace().trim());
+            form.setLongitude(String.valueOf(spot.getLongitude()));
+            form.setLatitude(String.valueOf(spot.getLatitude()));
+        }
+
         // step1: 위경도 수치 & 시간 인풋 기반 필터링
-        int time = cultureSearchForm.getTime();
-        double currentLat = Double.parseDouble(cultureSearchForm.getLatitude());
-        double currentLon = Double.parseDouble(cultureSearchForm.getLongitude());
+        int time = form.getTime();
+        double currentLat = Double.parseDouble(form.getLatitude());
+        double currentLon = Double.parseDouble(form.getLongitude());
 
         /**
          * 여기서부터는 howToGo에 따라서 변동됨
          */
-        HowToGo howToGo = HowToGo.valueOf(cultureSearchForm.getHowToGo());  // 도보
+        HowToGo howToGo = HowToGo.valueOf(form.getHowToGo());  // 도보
         // 검색속도 향상을 위해서는, 여기서 정확하게 많이 추려내는 것이 관건이다.
         List<Culture> rawTargets = new ArrayList<>();
         for (Culture culture : cultures) {
@@ -94,6 +108,12 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
                     .detailUrl(culture.getDetailUrl())
                     .build());
         }
-        return dtos;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("marks", dtos);
+        map.put("lat", form.getLatitude());
+        map.put("lon", form.getLongitude());
+
+        return map;
     }
 }

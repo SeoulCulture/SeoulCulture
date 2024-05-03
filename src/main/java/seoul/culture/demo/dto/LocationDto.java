@@ -2,6 +2,7 @@ package seoul.culture.demo.dto;
 
 import lombok.Getter;
 
+
 @Getter
 public class LocationDto {
     private final String latitude;

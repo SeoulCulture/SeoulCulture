@@ -1,66 +1,178 @@
-<!doctype html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/index-header :: header"/>
-<body class="text-center">
+<body>
     <div id="loading" style="display: none;">
         <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
     </div>
     <div id="main-title">
-        <h2>뭐하러 가지?</h2>
+        <!-- <h2>서울 지금 여기</h2> -->
+        <h3>Seoul</h3>
     </div>
 
-    <main class="form-sign">
-        <form id ="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
-            <table>
-                <div>
+    <main class="mainContents">
+        <div id="inputContainer">
+            <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
+                <table>
+                    <tbody>
                     <tr>
                         <td class="table-head"><label for="moods">기분</label></td>
-                        <td><input id="moods" name="moods" th:field="*{moods}"></td>
+                        <td><input id="moods" class="mainInput" name="moods" th:field="*{moods}"></td>
                     </tr>
-                </div>
 
-                <div class="form-floating">
                     <tr>
-                    <td class="table-head"><label for="time">소요 시간 (분)</label></td>
-                    <td><input type="number" class="form-control" id="time" name="time", placeholder="소요 시간을 입력해주세요" th:field="*{time}"></td>
+                        <td class="table-head"><label for="time">소요시간</label></td>
+                        <td><input type="number" class="form-control mainInput" id="time" name="time" placeholder="" th:field="*{time}"></td>
                     </tr>
-                </div>
 
-                <div class="form-floating">
                     <tr>
-                    <td class="table-head">이동 수단</td>
-                    <td>
-                        <input type="radio" id="walking" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
-                        <label for="walking">도보</label>
-                        <input type="radio" id="driving" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
-                        <label for="driving">차량</label>
-                    </td>
+                        <td class="table-head">이동수단</td>
+                        <td>
+                            <input type="radio" id="walking" class="mainInput" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
+                            <label for="walking">도보</label>
+                            <input type="radio" id="driving" class="mainInput" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
+                            <label for="driving">차량</label>
+                        </td>
                     </tr>
-                </div>
 
-                <div class="form-floating">
                     <tr>
-                    <td class="table-head"><label for="price">비용 (원)</label></td>
-                    <td>
-                        <input type="number" class="form-control" id="price" name="price" placeholder="비용을 입력해주세요" th:field="*{price}">
-                    </td>
+                        <td class="table-head"><label for="price">비용</label></td>
+                        <td><input type="number" class="form-control mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
                     </tr>
-                </div>
 
-                <div class="form-floating">
                     <tr>
-                    <td class="table-head">무료</td>
-                    <td>
-                        <input type="checkbox" id="free" name="free" th:checked="${cultureForm.price == 0}">
-                    </td>
+                        <td class="table-head">무료</td>
+                        <td><input type="checkbox" id="free" class="mainInput" th:checked="${cultureForm.price == 0}"></td>
                     </tr>
+                    </tbody>
+                </table>
+                <div id="submit-button">
+                    <button id="submitBtn" type="submit" class="btn btn-primary">고!!</button>
                 </div>
-            </table>
-            <div id="submit-button">
-                <button id = "submitBtn" class="btn btn-primary">고!!</button>
+            </form>
+
+            <div id="spotInputBox">
+                <div>장소 지정하기</div>
+                <input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off">
+                <div id="searchResults"></div>
             </div>
-        </form>
+        </div>
     </main>
-    <script src="/js/index_search.js"></script>
+<div id="searchStatus" style="display: none;">검색 중입니다...</div>
 </body>
 </html>
+
+
+<!--검색 자동완성-->
+<script>
+    // 초성검색 설정
+
+    // 초성검색 : https://gurtn.tistory.com/212
+    // 초성배열
+    const CHO_HANGUL = [
+        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ',
+        'ㄹ', 'ㅁ', 'ㅂ','ㅃ', 'ㅅ',
+        'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ',
+        'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ',
+    ];
+
+    // 한글 시작 유니코드
+    const HANGUL_START_CHARCODE = "가".charCodeAt();
+
+    // 초성, 종성 주기
+    const CHO_PERIOD = Math.floor("까".charCodeAt() - "가".charCodeAt());
+    const JUNG_PERIOD = Math.floor("개".charCodeAt() - "가".charCodeAt());
+
+    // 한글 결합 함수
+    function combine(cho, jung, jong) {
+        return String.fromCharCode(
+            HANGUL_START_CHARCODE + cho * CHO_PERIOD + jung * JUNG_PERIOD + jong
+        );
+    }
+    // 초성검색
+    function makeRegexByCho(search = "") {
+        const regex = CHO_HANGUL.reduce(
+            (acc, cho, index) =>
+                acc.replace(
+                    new RegExp(cho, "g"),
+                    `[${combine(index, 0, 0)}-${combine(index + 1, 0, -1)}]`
+                ),
+            search
+        );
+
+        return new RegExp(`(${regex})`, "g");
+    }
+    function includeByCho(search, targetWord) {
+        return makeRegexByCho(search).test(targetWord);
+    }
+
+    // 검색
+    const $searchInput = document.querySelector("#searchInput");
+    let nowIndex = 0;
+    const ignoreKey = [37, 38, 39, 40]
+    let preMatched;
+    let preInput;
+    $( document ).ready( (event) => {
+        $searchInput.onkeyup = (event) => {
+            let input;
+            let matches;
+            if (ignoreKey.includes(event.keyCode)) {
+                matches = preMatched;
+                input = preInput;
+            } else {
+                input = document.getElementById('searchInput').value.trim();
+                matches = findMatchingStrings(event, input);
+                preMatched = matches;
+                preInput = input;
+            }
+            handleUpDownIndex(event, matches);
+            showSearchResult(matches, input);
+        };
+    });
+
+    function findMatchingStrings(event, val) {
+        const matches = [];
+        spotDtos.forEach((spotDto) => {
+            if (includeByCho(val, spotDto.spotName)) {
+                matches.push(spotDto.spotName);
+            }
+        });
+        return matches;
+    }
+
+    function handleUpDownIndex(event, matches) {
+        switch (event.keyCode) {
+            // UP KEY
+            case 38:
+                nowIndex = Math.max(nowIndex - 1, 0);
+                break;
+            // DOWN KEY
+            case 40:
+                nowIndex = Math.min(nowIndex + 1, matches.length - 1);
+                break;
+            // ENTER KEY
+            case 13:
+                document.querySelector("#searchInput").value = matches[nowIndex] || "";
+                // 초기화
+                nowIndex = 0;
+                matches.length = 0;
+                break;
+            // 그외 다시 초기화
+            default:
+                nowIndex = 0;
+                break;
+        }
+    }
+
+    const showSearchResult = (matches, input) => {
+        const regex = makeRegexByCho(input);
+
+        const searchResults = document.getElementById("searchResults");
+        searchResults.innerHTML = matches
+            .map(
+                (label, index) => `
+        <div class='${nowIndex === index ? "active" : ""}'>
+          ${label.replace(regex, "<mark>$1</mark>")}
+        </div>`).join("");
+    };
+</script>

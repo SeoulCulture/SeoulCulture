@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    매퍼 클래스의 위치-->
+<mapper namespace="seoul.culture.demo.datareader.SpotExcelToDatabaseMapper">
+
+<!--    위 매퍼 클래스의 메서드명 및, 파라미터로 들어오는 매핑대상  Dto-->
+    <insert id="insert"  parameterType="seoul.culture.demo.datareader.SpotDto">
+        INSERT INTO Spot
+        (
+            spot_name,
+            sido,
+            latitude,
+            longitude
+        )
+        VALUES
+            (#{spotName}
+            ,#{sido}
+            ,#{latitude}
+            ,#{longitude}
+        )
+    </insert>
+</mapper>

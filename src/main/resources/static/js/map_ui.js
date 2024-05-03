@@ -1,8 +1,6 @@
 let map;
 let bounds;
 let mapElement = document.getElementById('map');
-const currentLatitude = localStorage.getItem("currentLatitude");
-const currentLongitude = localStorage.getItem("currentLongitude");
 console.log(currentLatitude, currentLongitude);
 const rightContainer = document.getElementById('rightContainer');
 const leftContainer = document.getElementById('leftContainer');
@@ -57,11 +55,14 @@ function createMarker(marker, customHtmlContents = undefined) {
     const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
 
     let content;
-    if (customHtmlContents == undefined) {
-        const strMarker = JSON.stringify(marker);
-        content = `<div type="button"`
-                 + `id='${marker.id}' class='marker_category modal-link' marker='${strMarker}'>` +
-                        `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
+    if (customHtmlContents === undefined) {
+        if (marker.title.endsWith("도서관") || marker.categoty === "도서관"){
+            content = makeEmojiMarker(marker, "&#128214");
+        } else if (marker.title.endsWith("공원")){
+            content = makeEmojiMarker(marker, "&#127795");
+        } else {
+            content = makeCategoryInMarker(marker);
+        }
     } else {
         content = customHtmlContents;
     }
@@ -73,6 +74,20 @@ function createMarker(marker, customHtmlContents = undefined) {
 
     customOverlay.setMap(map);
     bounds.extend(markerPosition);
+}
+
+function makeCategoryInMarker(marker) {
+    const strMarker = JSON.stringify(marker);
+    return `<div type="button"`
+        + `id='${marker.id}' class='marker_category modal-link' marker='${strMarker}'>` +
+        `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
+}
+
+function makeEmojiMarker(marker, emoji) {
+    const strMarker = JSON.stringify(marker);
+    return `<div type="button"`
+        + `id='${marker.id}' class='marker_emoji modal-link' marker='${strMarker}'>` +
+        `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${emoji}</a></div>`;
 }
 
 function findMarkerAndOpen(id){

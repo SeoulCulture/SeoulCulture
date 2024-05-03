@@ -41,9 +41,7 @@
     background-color:  rgba(var(--skycolar), var(--alpha01));
 }
 #map {
-    /*height: 400px;*/
     height: 100%;
-    /*height: 600px;*/
     width: 100%;
 }
 @media only screen and (max-width: 700px) {
@@ -88,4 +86,12 @@
 
 .marker_category {
     pointer-events: auto;
+}
+
+.marker_emoji {
+    position: relative;
+    font-size: 33px;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', 'sans-serif';
+    text-shadow: -3px -3px 0 #ffffff, 3px -3px 0 #ffffff, -3px 3px 0 #cdcdcd, 3px 3px 0 #ffffff;
 }

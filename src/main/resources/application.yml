@@ -14,6 +14,10 @@ spring:
       hibernate:
         format_sql: true
 
+#spring계층 안에 넣으면 안된다
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.orm.jdbc.bind: trace

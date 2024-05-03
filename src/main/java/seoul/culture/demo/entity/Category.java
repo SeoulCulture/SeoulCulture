@@ -1,6 +1,5 @@
 package seoul.culture.demo.entity;
 
-import java.util.Arrays;
 import java.util.List;
 
 public enum Category {
