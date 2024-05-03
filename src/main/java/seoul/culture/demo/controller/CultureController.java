@@ -30,6 +30,7 @@ public class CultureController {
         if (formData.getLatitude() == null || formData.getLongitude() == null) {
             throw new IllegalArgumentException("위경도정보없음");
         }
+
         List<Markable> markerInfo = searchService.search(formData);
 
         model.addAttribute("markerInfo", markerInfo);

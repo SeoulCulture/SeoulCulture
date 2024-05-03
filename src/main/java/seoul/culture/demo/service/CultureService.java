@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import seoul.culture.demo.controller.SpotController;
 import seoul.culture.demo.dto.CultureInfoDto;
 import seoul.culture.demo.entity.Culture;
 import seoul.culture.demo.repository.CultureRepository;

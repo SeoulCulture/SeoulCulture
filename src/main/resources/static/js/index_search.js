@@ -13,6 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const form = document.getElementById('form');
     form.onsubmit = function (event) {
+        // 장소지정 (place) 정보를 폼에 등록
+        const form = document.getElementById('form');
+        const existingPlaceInput = form.querySelector('input[name="place"]');
+        if (existingPlaceInput) {
+            existingPlaceInput.remove();
+        }
+        const newPlaceInput = document.createElement('input');
+        newPlaceInput.type = 'hidden';
+        newPlaceInput.name = 'place';
+        newPlaceInput.value = document.getElementById('searchInput').value; // searchInput에서 값을 가져옴
+        form.appendChild(newPlaceInput);
+
         //화면의 높이와 너비를 구합니다.
         var maskHeight = $(document).height();
         var maskWidth = window.document.body.clientWidth;
@@ -51,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         if (navigator.geolocation) {
             // geolocation을 지원하면 위치를 요청
+            console.log("위치 요청 시작");
             navigator.geolocation.getCurrentPosition(success, error);
         } else {
             console.log("이 브라우저에서는 Geolocation이 지원되지 않습니다.");

@@ -17,4 +17,5 @@ public class CultureSearchForm {
     private String latitude;
     private String longitude;
     private String howToGo;
+    private String place;
 }

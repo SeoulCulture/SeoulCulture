@@ -13,7 +13,6 @@
     <main class="mainContents">
         <div id="inputContainer">
             <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
-
                 <table>
                     <tbody>
                     <tr>
@@ -43,12 +42,12 @@
 
                     <tr>
                         <td class="table-head">무료</td>
-                        <td><input type="checkbox" id="free" class="mainInput" name="free" th:checked="${cultureForm.price == 0}"></td>
+                        <td><input type="checkbox" id="free" class="mainInput" th:checked="${cultureForm.price == 0}"></td>
                     </tr>
                     </tbody>
                 </table>
                 <div id="submit-button">
-                    <button id="submitBtn" class="btn btn-primary">고!!</button>
+                    <button id="submitBtn" type="submit" class="btn btn-primary">고!!</button>
                 </div>
             </form>
 
@@ -176,16 +175,4 @@
           ${label.replace(regex, "<mark>$1</mark>")}
         </div>`).join("");
     };
-
-    // active인 요소에 대한 효과1 : input 칸에 value로 넣기
-    function activeEffect() {
-        var innerDiv = document.getElementById("searchResults").querySelector("div");
-        if (innerDiv && innerDiv.classList.contains("active")) {
-            var searchText = innerDiv.textContent;
-            var searchInput = document.getElementById("searchInput");
-            if (searchInput) {
-                searchInput.value = searchText.trim();
-            }
-        }
-    }
 </script>

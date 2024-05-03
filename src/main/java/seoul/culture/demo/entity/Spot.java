@@ -4,10 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import seoul.culture.demo.datareader.SpotDto;
 
-@Entity
+@Entity @Getter
 @RequiredArgsConstructor
 public class Spot {
     @Id
