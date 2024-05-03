@@ -30,9 +30,11 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws IOException {
+        // [문화장소]
         cultureService.cultureRegister();
         moodService.moodRegister();
 
+        // [문화행사]
         // TODO 1: 스케쥴링
         // TODO 2: 스케줄링시 db 테이블 초기화
         log.debug("----------> 문화행사 API 불러오기 -> DB 세팅 중...");
@@ -46,8 +48,7 @@ public class DataLoader implements CommandLineRunner {
                 culture.getLocation()
         )).forEach(cultureRepository::save);
 
-        // 엑셀 내용 db에 반영 및 할당
-        List<SpotDto> result = spotExcelReader.getResult("src/main/resources/KoreaRegionData.xlsx");
-        spotController.setSpotDtos(result);
+        // [장소지정검색] 엑셀내용(장소정보) db에 반영 및 할당
+        spotExcelReader.getResult("src/main/resources/KoreaRegionData.xlsx");
     }
 }

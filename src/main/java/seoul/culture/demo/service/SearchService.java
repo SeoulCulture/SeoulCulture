@@ -15,7 +15,9 @@ import seoul.culture.demo.repository.SpotRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루하게 오래걸림 : 1시간 거리 검색은 결과 보기 불가능할 정도 & 30분 거리도 기다리기 지루함
@@ -31,7 +33,7 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
         this.pathFinder = pathFinder;
     }
 
-    public List<Markable> search(CultureSearchForm form) throws IOException {
+    public Map<String, Object> search(CultureSearchForm form) throws IOException {
         if ((form.getLongitude() == null || form.getLatitude() == null)
             && (form.getPlace() == null || form.getPlace().length() == 0)) {
             return null;
@@ -106,6 +108,12 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
                     .detailUrl(culture.getDetailUrl())
                     .build());
         }
-        return dtos;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("marks", dtos);
+        map.put("lat", form.getLatitude());
+        map.put("lon", form.getLongitude());
+
+        return map;
     }
 }

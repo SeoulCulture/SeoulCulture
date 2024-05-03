@@ -6,6 +6,8 @@
     <title>츄츄</title>
     <script th:inline="javascript" >
         const markerInfo = /*[[${markerInfo}]]*/ null;
+        const currentLatitude = /*[[${latitude}]]*/ null;
+        const currentLongitude = /*[[${longitude}]]*/ null;
     </script>
     <!-- 참고: api key 노출돼도 큰 문제 없다고 함. kakao dev에서 이 key를 사용할 플랫폼 등록하는 구조기 떄문.-->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2878141664ba508ffc07eaf2a35a9ac"></script>
@@ -24,17 +26,7 @@
 
 <div id="pageContents">
     <div id="leftContainer">
-<!--        <div id="mapContainer">-->
         <div id="map"></div>
-<!--        </div>-->
-<!--        목록을 띄워주는 곳-->
-<!--        <div id="markerContainer">-->
-<!--            <div id="markerList"></div>-->
-<!--            <div id="markerContents">-->
-<!--                <div id="markerName"></div>-->
-<!--                <div id="markerPrice"></div>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
     <div id="rightContainer">
         <div id="rightContainerContent" th:include="rightContainer.html"/>

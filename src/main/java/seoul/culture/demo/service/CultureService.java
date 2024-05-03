@@ -30,6 +30,8 @@ public class CultureService {
 
         // 읽어온 데이터를 culture 엔티티로 바꿔서 등록한다.
         cultureInfo.stream()
+                .filter(x -> !cultureRepository.existsByTitleAndLocation(x.getTitle(), x.getLocation()))
+                .filter(x -> !x.getTitle().endsWith("대학교")) // "대학교"로 끝나지 않는 것들만 필터링
                 .map(Culture::new)
                 .forEach(cultureRepository::save);
     }
