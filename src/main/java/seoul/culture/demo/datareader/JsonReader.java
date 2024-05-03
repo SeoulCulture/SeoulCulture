@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface JsonReader {
 
-    List<JsonNode> getResult() throws IOException;
+    List getResult() throws IOException;
 }

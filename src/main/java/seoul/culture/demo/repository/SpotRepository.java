@@ -7,4 +7,6 @@ public interface SpotRepository extends JpaRepository<Spot, Long> {
     boolean existsBySidoAndSpotName(String sido, String spotName);
 
     Spot findBySpotName(String place);
+
+    boolean existsBySpotName(String spotName);
 }

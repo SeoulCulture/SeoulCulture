@@ -23,14 +23,14 @@ public class SpotExcelReader implements ExcelReader {
 
     private final SpotExcelToDatabaseMapper excelDatabaseMapper;
     private final SpotRepository spotRepository;
-
+    private final String EXCEL_PATH ="src/main/resources/KoreaRegionData.xlsx";
 
     @Override
-    public List<SpotDto> getResult(String path) {
+    public List<SpotDto> getResult() {
         List<Spot> dbData = spotRepository.findAll();
         if (dbData.size() > 800) return dbData.stream().map(Spot::toDto).toList();
         try {
-            File excelFile = new File(path);
+            File excelFile = new File(EXCEL_PATH);
             FileInputStream inputStream = new FileInputStream(excelFile);
             OPCPackage opcPackage = OPCPackage.open(inputStream);
             XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
