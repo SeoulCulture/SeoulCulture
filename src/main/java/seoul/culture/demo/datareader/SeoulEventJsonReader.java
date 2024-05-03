@@ -20,33 +20,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+import seoul.culture.demo.entity.Culture;
 import seoul.culture.demo.util.JsonUtil;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
+@Component
 @ConfigurationProperties(prefix = "seoul")  // 스프링 컨테이너가 yml 정보를 통해서 bean을 등록할 때 필요
 @NoArgsConstructor @Setter  // Config 에 의한 Bean 생성을 위해 두가지가 필요
 @Getter
 public final class SeoulEventJsonReader implements JsonReader {
     private String key;
-    private List<JsonNode> results = new ArrayList<>();
-    private final LocalDate now = LocalDate.now();
-    private final LocalDate firstDay = now.with(firstDayOfYear());
-    private final LocalDate lastDay = now.with(lastDayOfYear());
+    private final LocalDate FIRST_DAY = LocalDate.now().with(firstDayOfYear());
+    private final LocalDate LAST_DAY = LocalDate.now().with(lastDayOfYear());
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 
 
-
     @Override
-    public List<JsonNode> getResult() throws IOException {
-        createResult(firstDay, lastDay);
-        return results;
+    public List<Culture> getResult() throws IOException {
+        return createResult(FIRST_DAY, LAST_DAY);
     }
 
-    private void createResult(LocalDate start, LocalDate end) throws IOException {
+    private List<Culture> createResult(LocalDate start, LocalDate end) throws IOException {
         Set<String> set = new HashSet<>();
+        List<JsonNode> jsons = new ArrayList<>();
         LocalDate date = start;
         while (date.isBefore(end) || date.isEqual(end)) {
             String response = read(date);
@@ -63,15 +63,20 @@ public final class SeoulEventJsonReader implements JsonReader {
             for (JsonNode json : contents) {
                 String endTimeStr = json.get("END_DATE").toString().replace("\"", "");
                 LocalDate endDate = LocalDateTime.parse(endTimeStr, endTimeFormatter).toLocalDate();
-                if (endDate.isBefore(now)) {
+                if (endDate.isBefore(LocalDate.now())) {
                     continue;
                 }
                 set.add(json.toString());
-                results.add(json);
+                jsons.add(json);
             }
             date = date.plusDays(1);
         }
         System.out.println("2024년 모든 데이터 개수: " + set.size());
+
+        List<Culture> cultures = jsons.stream()
+                .map(Culture::forSeoulEvent)
+                .toList();
+        return cultures;
     }
 
     private String read(LocalDate date) throws IOException {
@@ -111,7 +116,6 @@ public final class SeoulEventJsonReader implements JsonReader {
 
         return sb.toString();
     }
-
 
     // 조건: date검색을 현재날짜로 하면, 결과가 안 나올수도 있다.
     // 예를 들어 3월12일부터 5월20일까지인 행사가 있을 때,
