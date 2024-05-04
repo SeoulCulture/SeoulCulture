@@ -34,48 +34,68 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
     }
 
     public Map<String, Object> search(CultureSearchForm form) throws IOException {
+        // 유효성 검증
         if ((form.getLongitude() == null || form.getLatitude() == null)
             && (form.getPlace() == null || form.getPlace().length() == 0)) {
-            return null;
+            throw new IllegalArgumentException("위경도좌표없음");
         }
-        if (cultures == null || cultures.size() == 0) {
-            this.cultures = cultureRepository.findAll();
-        }
+        loadCultures();
 
+        // 장소지정검색을 했을 경우, 지정한 장소로 기준좌표 설정
         if (form.getPlace() != null && form.getPlace().length() != 0) {
             Spot spot = spotRepository.findBySpotName(form.getPlace().trim());
             form.setLongitude(String.valueOf(spot.getLongitude()));
             form.setLatitude(String.valueOf(spot.getLatitude()));
         }
 
-        // step1: 위경도 수치 & 시간 인풋 기반 필터링
+        // [필터1] 가격 필터링
+        List<Culture> filteredCultures = filterByPrice(form);
+
+
+        // [필터2] 거리 필터링 - 위경도 & 시간
         int time = form.getTime();
         double currentLat = Double.parseDouble(form.getLatitude());
         double currentLon = Double.parseDouble(form.getLongitude());
+        HowToGo howToGo = HowToGo.valueOf(form.getHowToGo());
+        filteredCultures = filterBySimpleDistance(time, currentLat, currentLon, howToGo, filteredCultures);  // [1] 간단 필터링
+//        filteredCultures = filterByDetailDistance(time, currentLat, currentLon, howToGo, filteredCultures);  // [2] 구체 필터링
 
-        /**
-         * 여기서부터는 howToGo에 따라서 변동됨
-         */
-        HowToGo howToGo = HowToGo.valueOf(form.getHowToGo());  // 도보
-        // 검색속도 향상을 위해서는, 여기서 정확하게 많이 추려내는 것이 관건이다.
-        List<Culture> rawTargets = new ArrayList<>();
+        // 마지막 단계: 리턴할 데이터 준비
+        List<Markable> dtos = new ArrayList<>();
+        for (Culture culture : filteredCultures) {
+            dtos.add(MarkDto.builder()
+                    .category(culture.getCategory().toString())
+                    .latitude(culture.getLocation().getLatitude())
+                    .longitude(culture.getLocation().getLongitude())
+                    .title(culture.getTitle())
+                    .price(culture.getPrice())
+                    .contents(culture.getContents())
+                    .imgUrl(culture.getImgUrl())
+                    .detailUrl(culture.getDetailUrl())
+                    .build());
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("marks", dtos);
+        map.put("lat", form.getLatitude());
+        map.put("lon", form.getLongitude());
+
+        return map;
+    }
+
+    private List<Culture> filterByPrice(CultureSearchForm form) {
+        if (form.getPrice() == null) {
+            return cultures;
+        }
+        List<Culture> filteredCultures = new ArrayList<>();
         for (Culture culture : cultures) {
-            Location location = culture.getLocation();
-            double lat = location.getLatitude();
-            double lon = location.getLongitude();
-            double distanceKm = DistanceCalculator.calculateDistance(currentLat, currentLon, lat, lon);
-            double predictionTime = 0.0;
-            if (howToGo == HowToGo.DRIVING)
-                predictionTime = DrivingTimeCalculator.calculateTime(distanceKm);
-            if (howToGo == HowToGo.WALKING) {
-                predictionTime = WalkingTimeCalculator.calculateTime(distanceKm);
-            }
-            if (predictionTime < time) {
-                rawTargets.add(culture);
+            if (culture.getPrice() <= form.getPrice()) {
+                filteredCultures.add(culture);
             }
         }
+        return filteredCultures;
+    }
 
-        // step2: pathFinder 기반 구체적 필터링
+    private List<Culture> filterByDetailDistance(int time, double currentLat, double currentLon, HowToGo howToGo, List<Culture> rawTargets) throws IOException {
         List<Culture> targets = new ArrayList<>();
         for (Culture culture : rawTargets) {
             Location location = culture.getLocation();
@@ -93,27 +113,32 @@ public class SearchService {   // TODO: 문제점: 속도.. 현재 꽤나 지루
                 targets.add(culture);
             }
         }
+        return targets;
+    }
 
-        // MarkDto로 변경
-        List<Markable> dtos = new ArrayList<>();
-        for (Culture culture : targets) {
-            dtos.add(MarkDto.builder()
-                    .category(culture.getCategory().toString())
-                    .latitude(culture.getLocation().getLatitude())
-                    .longitude(culture.getLocation().getLongitude())
-                    .title(culture.getTitle())
-                    .price(culture.getPrice())
-                    .contents(culture.getContents())
-                    .imgUrl(culture.getImgUrl())
-                    .detailUrl(culture.getDetailUrl())
-                    .build());
+    private List<Culture> filterBySimpleDistance(int time, double currentLat, double currentLon, HowToGo howToGo, List<Culture> cultures) {
+        List<Culture> rawTargets = new ArrayList<>();
+        for (Culture culture : cultures) {
+            Location location = culture.getLocation();
+            double lat = location.getLatitude();
+            double lon = location.getLongitude();
+            double distanceKm = DistanceCalculator.calculateDistance(currentLat, currentLon, lat, lon);
+            double predictionTime = 0.0;
+            if (howToGo == HowToGo.DRIVING)
+                predictionTime = DrivingTimeCalculator.calculateTime(distanceKm);
+            if (howToGo == HowToGo.WALKING) {
+                predictionTime = WalkingTimeCalculator.calculateTime(distanceKm);
+            }
+            if (predictionTime < time) {
+                rawTargets.add(culture);
+            }
         }
+        return rawTargets;
+    }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("marks", dtos);
-        map.put("lat", form.getLatitude());
-        map.put("lon", form.getLongitude());
-
-        return map;
+    private void loadCultures() {
+        if (cultures == null || cultures.size() == 0) {
+            this.cultures = cultureRepository.findAll();
+        }
     }
 }
