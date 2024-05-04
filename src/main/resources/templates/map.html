@@ -19,13 +19,14 @@
     <link rel="stylesheet" href="/css/map.css">
     <link rel="stylesheet" href="/css/whole.css">
     <link rel="stylesheet" href="/css/map_contents.css">
+    <link rel="stylesheet" href="/css/title.css">
+
     <!-- animate -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-<div id="header">
-    <div id="map-title"><a th:onclick="|location.href='@{/}'|" data-hover="서울의 특별한 오늘">서울의 특별한 오늘</a></div>
-</div>
+
+<div th:replace="fragments/serviceTitle :: title"/>
 
 <div id="pageContents">
     <div id="leftContainer">

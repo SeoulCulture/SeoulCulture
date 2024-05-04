@@ -5,13 +5,7 @@
     <div id="loading" style="display: none;">
         <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
     </div>
-    <div id="main-title">
-        <!-- <h2>서울 지금 여기</h2> -->
-            <h3>서울 지금 여기</h3>
-            <br>
-            <h3>Seoul, Now, Here</h3>
-    </div>
-
+    <div th:replace="fragments/serviceTitle :: title"/>
     <main class="mainContents">
         <div id="inputContainer">
             <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
