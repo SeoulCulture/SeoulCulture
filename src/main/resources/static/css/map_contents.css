@@ -13,10 +13,6 @@
     margin: 10px 0px;
 }
 .place-img img {
-    max-height: 400px;
-    /* width: fit-content; */
-    width: 200px;
-    height : fit-content;
     border-radius: 10px;
 }
 
@@ -56,10 +52,10 @@
 
 .modal-body .place-img img {
     max-width: -webkit-fill-available;
-    width: fit-content;
+    width: 80%;
     border-style: ridge;
     border-radius: 10px;
-    margin: 0% 14%;
+    margin: 0% 10%;
 }
 
 .modal-header .place-title {
@@ -85,6 +81,11 @@
     text-align: -webkit-center;
     background-color: rgba(var(--white), var(--alpha04));
     overflow-y: scroll;
+}
+
+#rightContainer .place-img img{
+    border-style: ridge;
+    width: 70%;
 }
 
 #rightContainer .place-contents {

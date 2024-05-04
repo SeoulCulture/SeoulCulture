@@ -140,7 +140,6 @@ function findMarkerAndOpen(id){
 
 const widthThreshold = 700;
 function openModal(marker) {
-    createMarker(marker, 'culture');
     animateAtClicking(`#${marker.id}`, "hinge", "jackInTheBox");
     if (window.innerWidth > widthThreshold) {
         loadRightContainer(marker);
@@ -197,7 +196,7 @@ const animateAtClicking = (element, animation1, animation2, speed_="", prefix = 
                 node.classList.remove(`${prefix}animated`, animationName1);
                 if (speed.length != 0)
                     node.classList.remove(speed);
-                animateCSS(element, animation2, "faster")
+                animateCSS(element, animation2);
             }
             node.addEventListener('animationend', handleAnimationEnd, { once: true });
         });
