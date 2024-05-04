@@ -46,7 +46,6 @@ flex-direction: column;
 #main-title{
 margin : auto;
 align-items : center;
-display : flex;
 }
 
 .form-control{

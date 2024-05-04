@@ -7,7 +7,9 @@
     </div>
     <div id="main-title">
         <!-- <h2>서울 지금 여기</h2> -->
-        <h3>Seoul</h3>
+            <h3>서울 지금 여기</h3>
+            <br>
+            <h3>Seoul, Now, Here</h3>
     </div>
 
     <main class="mainContents">
@@ -16,17 +18,19 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td class="table-head"><label for="moods">기분</label></td>
+                        <td class="table-head"><label for="moods">지금 기분이 어떤가요?</label></td>
+                    </tr>
+                    <tr>
                         <td><input id="moods" class="mainInput" name="moods" th:field="*{moods}"></td>
                     </tr>
-
+                    <br>
                     <tr>
-                        <td class="table-head"><label for="time">소요시간</label></td>
-                        <td><input type="number" class="form-control mainInput" id="time" name="time" placeholder="" th:field="*{time}"></td>
+                        <td class="table-head"><label for="time">어느정도 거리가 괜찮을까요?</label></td>
                     </tr>
-
                     <tr>
-                        <td class="table-head">이동수단</td>
+                        <td><input type="number" class="form-control mainInput normal-main-input" id="time" name="time" placeholder="" th:field="*{time}"></td>
+                    </tr>
+                    <tr>
                         <td>
                             <input type="radio" id="walking" class="mainInput" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
                             <label for="walking">도보</label>
@@ -34,27 +38,35 @@
                             <label for="driving">차량</label>
                         </td>
                     </tr>
-
                     <tr>
-                        <td class="table-head"><label for="price">비용</label></td>
-                        <td><input type="number" class="form-control mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
+                        <td class="table-head"><label for="price">비용은 어느정도가 좋을까요?</label></td>
                     </tr>
-
                     <tr>
-                        <td class="table-head">무료</td>
-                        <td><input type="checkbox" id="free" class="mainInput" th:checked="${cultureForm.price == 0}"></td>
+                        <td><input type="number" class="form-control mainInput normal-main-input" id="price" name="price" placeholder="" th:field="*{price}"></td>
+                    </tr>
+                    <tr>
+                        <td>무료 <input type="checkbox" id="free" class="mainInput" th:checked="${cultureForm.price == 0}"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-head">어디 주변으로 알아볼까요?</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="searchInput" class="mainInput normal-main-input" name="spot" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><div id="searchResults"></div></td>
                     </tr>
                     </tbody>
                 </table>
                 <div id="submit-button">
-                    <button id="submitBtn" type="submit" class="btn btn-primary">고!!</button>
+                    <button id="submitBtn" type="submit" class="btn btn-primary">Let's go!</button>
                 </div>
             </form>
 
             <div id="spotInputBox">
-                <div>장소 지정하기</div>
-                <input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off">
-                <div id="searchResults"></div>
+<!--                <div>장소 지정하기</div>-->
+<!--                <input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off">-->
+<!--                <div id="searchResults"></div>-->
             </div>
         </div>
     </main>

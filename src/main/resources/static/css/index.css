@@ -20,7 +20,12 @@ body{
 #main-title{
     margin : 0 auto;
     align-items : center;
-    display : flex;
+}
+
+#main-title h3{
+    margin-top : 0;
+    margin-bottom : 0;
+    text-align : center;
 }
 
 .mainContents {
@@ -53,13 +58,19 @@ body{
     min-width: 100%;
     font-size: large;
     word-break: keep-all;
-    padding-right: 20px
+    padding-right: 20px;
+    padding-top : 30px;
 }
 
 .mainInput {
     text-align: center;
     margin: 15px 0px 0px 0px;
     padding: 5px;
+}
+
+.normal-main-input{
+    width: 218.5px;
+    height: 28.5px;
 }
 
 .form-sign {
@@ -121,4 +132,17 @@ input[type='number'] {
 #spotInputBox {
     position: relative;
     max-width: min-content;
+}
+
+#moods {
+    background: white
+}
+
+#submitBtn {
+    margin-top: 30px;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px 20px;
+    border: 5px black;
+    background: lightgreen;
 }
