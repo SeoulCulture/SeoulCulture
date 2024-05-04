@@ -12,41 +12,49 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td class="table-head"><label for="moods">지금 기분이 어떤가요?</label></td>
+                        <td class="index_table_head"><label for="moods">지금 기분이 어떤가요?</label></td>
                     </tr>
                     <tr>
                         <td><input id="moods" class="mainInput" name="moods" th:field="*{moods}"></td>
                     </tr>
-                    <br>
                     <tr>
-                        <td class="table-head"><label for="time">어느정도 거리가 괜찮을까요?</label></td>
+                        <td>&nbsp;</td> <!-- 빈 행 -->
                     </tr>
                     <tr>
-                        <td><input type="number" class="form-control mainInput normal-main-input" id="time" name="time" placeholder="" th:field="*{time}"></td>
+                        <td class="index_table_head"><label for="time">어느정도 거리가 괜찮을까요?</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}"></td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="radio" id="walking" class="mainInput" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
+                            <input type="radio" id="walking" class="" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
                             <label for="walking">도보</label>
-                            <input type="radio" id="driving" class="mainInput" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
+                            <input type="radio" id="driving" class="" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
                             <label for="driving">차량</label>
                         </td>
                     </tr>
                     <tr>
-                        <td class="table-head"><label for="price">비용은 어느정도가 좋을까요?</label></td>
+                        <td>&nbsp;</td> <!-- 빈 행 -->
                     </tr>
                     <tr>
-                        <td><input type="number" class="form-control mainInput normal-main-input" id="price" name="price" placeholder="" th:field="*{price}"></td>
+                        <td class="index_table_head"><label for="price">비용은 어느정도가 좋을까요?</label></td>
                     </tr>
                     <tr>
-                        <td>무료 <input type="checkbox" id="free" class="mainInput" th:checked="${cultureForm.price == 0}"></td>
+                        <td><input type="number" class="mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
                     </tr>
                     <tr>
-                        <td class="table-head">어디 주변으로 알아볼까요?</td>
+                        <td>무료 <input type="checkbox" id="free" class="" th:checked="${cultureForm.price == 0}"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td> <!-- 빈 행 -->
+                    </tr>
+                    <tr>
+                        <td class="index_table_head">어디 주변으로 알아볼까요?</td>
                     </tr>
                     <tr>
                         <div id="spotInputBox">
-                            <td><input type="text" id="searchInput" class="mainInput normal-main-input" name="spot" autocomplete="off"></td>
+                            <td><input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off"></td>
                         </div>
                     </tr>
                     <tr>
