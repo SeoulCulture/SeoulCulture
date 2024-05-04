@@ -12,15 +12,6 @@ window.onload = function () {
     initMap();
 }
 
-$(document).ready(function(){
-    var elem = $('.animated');
-
-    elem.each(function () {
-        var isAnimate = $(this).data('animate');
-        $(this).addClass(isAnimate);
-    });
-});
-
 
 // 함수 =============================================================================================
 function initMap() {
@@ -42,8 +33,8 @@ function initCenter() {
         "latitude": currentLatitude,
         "longitude": currentLongitude
     };
-    createMarker(currentLocationMarker, "home", '<div class="lightPoint"></div><div><div class="marker_home animated">' +
-        '<div class="face" data-animate="rubberBand">' +
+    createMarker(currentLocationMarker, "home", '<div class="lightPoint"></div><div><div class="marker_home animate__animated animate__bounce">' +
+        '<div class="face">' +
         '    <div class="eyes">' +
         '        <div class="eye"></div>' +
         '        <div class="eye"></div>' +
@@ -100,21 +91,21 @@ function createMarker(marker, tag, customHtmlContents = undefined) {
 function makeCategoryInEventMarker(marker) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id=${marker.id} class='marker_category modal-link' marker='${strMarker}'>` +
+        + `id=${marker.id} class='marker_category modal-link animate__animated animate__pulse' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
 }
 
 function makeCategoryInPlaceMarker(marker) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id=${marker.id} class='marker_place modal-link' marker='${strMarker}'>` +
+        + `id=${marker.id} class='marker_place modal-link animate__animated animate__bounceIn' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
 }
 
 function makeEmojiMarker(marker, emoji) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id='${marker.id}' class='marker_emoji modal-link' marker='${strMarker}'>` +
+        + `id='${marker.id}' class='marker_emoji modal-link animate__animated animate__bounceIn' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${emoji}</a></div>`;
 }
 

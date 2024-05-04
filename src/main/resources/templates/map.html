@@ -21,9 +21,7 @@
     <link rel="stylesheet" href="/css/whole.css">
     <link rel="stylesheet" href="/css/map_contents.css">
     <!-- animate -->
-    <link type="text/css" rel="stylesheet" href="animate.css">
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.aniview.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
 <div id="header">
@@ -54,7 +52,6 @@
         height: 8px;
         background: linear-gradient(to right, #ffd835, #ffa435 90%);
         border-radius: 30%;
-        z-index: 0;
         transition: transform 0.3s; /* 애니메이션을 위한 트랜지션 설정 */
     }
     .arm-left {
@@ -211,7 +208,4 @@
         armLeft.style.transform = 'rotate(' + angleLeft + 'deg)';
         armRight.style.transform = 'rotate(' + angleRight + 'deg)';
     };
-
-
 </script>
-
