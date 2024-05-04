@@ -51,12 +51,14 @@
         height: 8px;
         background: linear-gradient(to right, #ffd835, #ffa435 90%);
         border-radius: 30%;
-        transition: transform 0.3s; /* 애니메이션을 위한 트랜지션 설정 */
+        transition: transform 0.3s;
     }
+
     .arm-left {
         top: 50%;
         left: -20%;
     }
+
     .arm-right {
         top: 50%;
         left: 70%;
@@ -75,25 +77,17 @@
     }
 
     .lightPoint {
-        z-index: -1;
-        animation: halo 2s infinite;
+        /* animation: halo 2s infinite; */
         position: absolute;
-        top: 50%;
-        left: 50%;
+        left: -19px;
+        top: -30px;
         border-radius: 50%;
+        background: white;
+        height: 80px;
+        width: 80px;
+        -webkit-filter: blur(8px);
     }
 
-    @keyframes halo {
-        0% {
-            box-shadow: 0 0 20px 25px rgba(255, 255, 255, 1);
-        }
-        50% {
-            box-shadow: 0 0 20px 35px rgba(255, 255, 255, 1);
-        }
-        100% {
-            box-shadow: 0 0 20px 25px rgba(255, 255, 255, 1);
-        }
-    }
 
     .face::before {
         content: '';
@@ -111,24 +105,55 @@
 
     .tongue {
         background: #fff3cd;
-        padding: 0px;
         position: absolute;
-        top: 120%;
-        left: 52%;
+        top: 57%;
+        left: 34%;
         height: 4px;
         width: 12px;
         border-radius: 0 0 50% 41%;
-        left: 30%;
     }
 
-    /*.face:hover::before {*/
-    /*    top: 210px;*/
-    /*    width: 150px;*/
-    /*    height: 20px;*/
-    /*    background: #b57700;*/
-    /*    border-bottom-left-radius: 0px;*/
-    /*    border-bottom-right-radius: 0px;*/
-    /*}*/
+    .face:hover::before {
+        width: 22px;
+        height: 15px;
+        animation-duration: 0.5s;
+        animation-name: rainbowLink;
+        animation-iteration-count: infinite;
+    }
+
+    .face:hover .eyes .eye::before {
+        animation-duration: 0.5s;
+        animation-name: rainbowLink;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes rainbowLink {
+        0% {
+            background: #ff2a2a;
+        }
+        15% {
+            background: #ff7a2a;
+        }
+        30% {
+            background: #ffc52a;
+        }
+        45% {
+            background: #43ff2a;
+        }
+        60% {
+            background: #2a89ff;
+        }
+        75% {
+            background: #202082;
+        }
+        90% {
+            background: #6b2aff;
+        }
+        100% {
+            background: #e82aff;
+        }
+    }
+
 
     .marker_shadow {
         background: black;
@@ -169,7 +194,7 @@
 </style>
 <script>
     document.querySelector('body')
-    .addEventListener('mousemove', eyeball);
+        .addEventListener('mousemove', eyeball);
 
     function eyeball() {
         var eye = document.querySelectorAll('.eye');
@@ -183,7 +208,7 @@
     }
 
     // 팔 움직이기
-    document.onmousemove = function(event) {
+    document.onmousemove = function (event) {
         var mouseX = event.clientX; // 마우스의 x좌표
         var mouseY = event.clientY; // 마우스의 y좌표
 

@@ -17,6 +17,15 @@ window.onload = function () {
     kakao.maps.event.addListener(map, 'zoom_changed', function () {
         animateMarkers();
     });
+
+    let homeMarker = document.querySelector(".marker_home");
+    homeMarker.addEventListener("click", (event) => {
+        animateCSS(".marker_home", getRandomAnimation());
+    });
+
+    setInterval(function() {
+        jumpingHomeMarker();
+    }, 3000);
 }
 
 
@@ -28,9 +37,9 @@ function initMap() {
     map = new kakao.maps.Map(mapElement, options);
     initBounds();
     initMarkers();
-    initCenter();
     setBounds();
     animateMarkers();
+    initCenter();
 }
 
 function initBounds() {
@@ -42,15 +51,19 @@ function initCenter() {
         "latitude": currentLatitude,
         "longitude": currentLongitude
     };
-    createMarker(currentLocationMarker, "home", '<div class="lightPoint"></div><div><div class="marker_home">' +
+    createMarker(currentLocationMarker, "home", '<div>' +
+        '<div class="lightPoint animate__animated animate__heartBeat animate__infinite animate__slower"></div>'+
+        '<div class="marker_home">' +
         '<div class="face">' +
         '    <div class="eyes">' +
         '        <div class="eye"></div>' +
         '        <div class="eye"></div>' +
-        '        <div class="tongue"></div>'+
         '    </div>' +
-        '</div><div class="arm arm-left"></div><div class="arm arm-right"></div><div class="marker_shadow">' +
-        '</div></div>');
+        '    <div class="tongue"></div>'+
+        '</div>' +
+        '<div class="arm arm-left"></div><div class="arm arm-right"></div><div class="marker_shadow">' +
+        '</div></div>'
+    );
 
     animateMarkers();
 }
@@ -191,8 +204,18 @@ const animateAtClicking = (element, animation1, animation2, speed_="", prefix = 
     });
 
 function animateMarkers() {
-    animateCSS('.marker_home', 'bounce');
+    jumpingHomeMarker();
     animateCSS('.marker_place', 'bounceIn', "faster");
     animateCSS('.marker_emoji', 'bounceIn');
     animateCSS('.marker_category', 'pulse');
+}
+function jumpingHomeMarker() {
+    animateCSS('.face', 'bounce');
+    animateCSS('.arm', 'bounce');
+}
+
+function getRandomAnimation() {
+    const animations = ["rubberBand", "wobble", "flip"];
+    const randomIndex = Math.floor(Math.random() * animations.length);
+    return animations[randomIndex];
 }
