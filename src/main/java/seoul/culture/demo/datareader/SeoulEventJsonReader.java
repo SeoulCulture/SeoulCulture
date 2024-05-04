@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import seoul.culture.demo.entity.Culture;
+import seoul.culture.demo.entity.mark.CultureEvent;
 import seoul.culture.demo.util.JsonUtil;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
@@ -40,11 +40,11 @@ public final class SeoulEventJsonReader implements JsonReader {
 
 
     @Override
-    public List<Culture> getResult() throws IOException {
+    public List<CultureEvent> getResult() throws IOException {
         return createResult(FIRST_DAY, LAST_DAY);
     }
 
-    private List<Culture> createResult(LocalDate start, LocalDate end) throws IOException {
+    private List<CultureEvent> createResult(LocalDate start, LocalDate end) throws IOException {
         Set<String> set = new HashSet<>();
         List<JsonNode> jsons = new ArrayList<>();
         LocalDate date = start;
@@ -73,10 +73,10 @@ public final class SeoulEventJsonReader implements JsonReader {
         }
         System.out.println("2024년 모든 데이터 개수: " + set.size());
 
-        List<Culture> cultures = jsons.stream()
-                .map(Culture::forSeoulEvent)
+        List<CultureEvent> cultureEvents = jsons.stream()
+                .map(CultureEvent::forSeoulEvent)
                 .toList();
-        return cultures;
+        return cultureEvents;
     }
 
     private String read(LocalDate date) throws IOException {

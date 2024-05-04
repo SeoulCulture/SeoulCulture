@@ -5,10 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import seoul.culture.demo.controller.SpotController;
 import seoul.culture.demo.dto.CultureInfoDto;
-import seoul.culture.demo.entity.Culture;
-import seoul.culture.demo.repository.CultureRepository;
+import seoul.culture.demo.entity.Category;
+import seoul.culture.demo.entity.mark.CultureEvent;
+import seoul.culture.demo.entity.mark.CulturePlace;
+import seoul.culture.demo.repository.CultureEventRepository;
+import seoul.culture.demo.repository.CulturePlaceRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,20 +22,31 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CultureService {
-    private final CultureRepository cultureRepository;
+    private final CulturePlaceRepository culturePlaceRepository;
+    private final CultureEventRepository cultureEventRepository;
+
     private static final String CULTURE_INFO_PATH = "src/main/resources/static/data.json";
 
     @Transactional
-    public void cultureRegister(){
+    public void registerCulturePlace(){
         // 가장 먼저 json 데이터를 읽어온다. - 읽을 때, DTO로 읽어오자.
         List<CultureInfoDto> cultureInfo = readCultureInfo(CULTURE_INFO_PATH);
 
         // 읽어온 데이터를 culture 엔티티로 바꿔서 등록한다.
         cultureInfo.stream()
-                .filter(x -> !cultureRepository.existsByTitleAndLocation(x.getTitle(), x.getLocation()))
-                .filter(x -> !x.getTitle().endsWith("대학교")) // "대학교"로 끝나지 않는 것들만 필터링
-                .map(Culture::new)
-                .forEach(cultureRepository::save);
+                .filter(x -> !culturePlaceRepository.existsByTitleAndLocation(x.getTitle(), x.getLocation()))
+                .filter(x -> !x.getTitle().endsWith("대학교"))
+                .map(x -> {
+                    if (x.getTitle().endsWith("박물관"))
+                        x.setCategory(Category.박물관);
+                    else if (x.getTitle().endsWith("극장"))
+                        x.setCategory(Category.공연장);
+                    else if (x.getTitle().endsWith("갤러리")) {
+                        x.setCategory(Category.전시);
+                    }
+                    return new CulturePlace(x);
+                })
+                .forEach(culturePlaceRepository::save);
     }
 
     private List<CultureInfoDto> readCultureInfo(String jsonPath) {
@@ -49,4 +62,11 @@ public class CultureService {
         }
     }
 
+    @Transactional
+    public void registerCultureEvent(List<CultureEvent> cultures) {
+        // TODO: location이 동일하고, title이 다른 경우는.. 지도상에 겹치는데 그거 클릭 가능하게 처리하려면? (붙어있는 경우도 마찬가지긴 함)
+        cultures.stream().filter(culture -> !cultureEventRepository.existsByLocation(
+                culture.getLocation()
+        )).forEach(cultureEventRepository::save);
+    }
 }

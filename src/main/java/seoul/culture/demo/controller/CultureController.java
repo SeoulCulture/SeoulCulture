@@ -32,7 +32,8 @@ public class CultureController {
 
         Map<String, Object> map = searchService.search(formData);
 
-        model.addAttribute("markerInfo", map.get("marks"));
+        model.addAttribute("markerInfo", map.get("cultures"));
+        model.addAttribute("placeInfo", map.get("places"));
         model.addAttribute("latitude", map.get("lat"));
         model.addAttribute("longitude", map.get("lon"));
         return "map";

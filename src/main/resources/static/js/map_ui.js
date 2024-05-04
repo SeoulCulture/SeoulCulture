@@ -12,9 +12,15 @@ window.onload = function () {
     initMap();
 }
 
-window.addEventListener('resize', function() {
-    relocationMarkers();
+$(document).ready(function(){
+    var elem = $('.animated');
+
+    elem.each(function () {
+        var isAnimate = $(this).data('animate');
+        $(this).addClass(isAnimate);
+    });
 });
+
 
 // 함수 =============================================================================================
 function initMap() {
@@ -22,8 +28,8 @@ function initMap() {
     var options = {center: new kakao.maps.LatLng(currentLatitude, currentLongitude)};
     map = new kakao.maps.Map(mapElement, options);
     initBounds();
-    initCenter()
     initMarkers();
+    initCenter();
     setBounds();
 }
 
@@ -36,13 +42,26 @@ function initCenter() {
         "latitude": currentLatitude,
         "longitude": currentLongitude
     };
-    createMarker(currentLocationMarker, '<div class="marker_home">🤔</div>');
+    createMarker(currentLocationMarker, "home", '<div class="lightPoint"></div><div><div class="marker_home animated">' +
+        '<div class="face" data-animate="rubberBand">' +
+        '    <div class="eyes">' +
+        '        <div class="eye"></div>' +
+        '        <div class="eye"></div>' +
+        '        <div class="tongue"></div>'+
+        '    </div>' +
+        '</div><div class="arm arm-left"></div><div class="arm arm-right"></div><div class="marker_shadow">' +
+        '</div></div>');
 }
 
 function initMarkers() {
-    markerInfo.forEach(function (marker, index) {
-        marker.id = index + 1;
-        createMarker(marker);
+    let index = 0;
+    placeInfo.forEach(function (marker) {
+        marker.id = ++index;
+        createMarker(marker, "place")
+    });
+    markerInfo.forEach(function (marker) {
+        marker.id = ++index;
+        createMarker(marker, "culture");
     });
 }
 
@@ -51,7 +70,7 @@ function setBounds() {
 }
 
 // 마커생성, 맵 범위 조정, 표시
-function createMarker(marker, customHtmlContents = undefined) {
+function createMarker(marker, tag, customHtmlContents = undefined) {
     const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
 
     let content;
@@ -60,8 +79,10 @@ function createMarker(marker, customHtmlContents = undefined) {
             content = makeEmojiMarker(marker, "&#128214");
         } else if (marker.title.endsWith("공원")){
             content = makeEmojiMarker(marker, "&#127795");
+        } else if (tag === "place") {
+            content = makeCategoryInPlaceMarker(marker);
         } else {
-            content = makeCategoryInMarker(marker);
+            content = makeCategoryInEventMarker(marker);
         }
     } else {
         content = customHtmlContents;
@@ -76,10 +97,17 @@ function createMarker(marker, customHtmlContents = undefined) {
     bounds.extend(markerPosition);
 }
 
-function makeCategoryInMarker(marker) {
+function makeCategoryInEventMarker(marker) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id='${marker.id}' class='marker_category modal-link' marker='${strMarker}'>` +
+        + `id=${marker.id} class='marker_category modal-link' marker='${strMarker}'>` +
+        `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
+}
+
+function makeCategoryInPlaceMarker(marker) {
+    const strMarker = JSON.stringify(marker);
+    return `<div type="button"`
+        + `id=${marker.id} class='marker_place modal-link' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
 }
 

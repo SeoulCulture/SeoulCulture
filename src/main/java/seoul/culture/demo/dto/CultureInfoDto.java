@@ -19,6 +19,10 @@ public class CultureInfoDto {
     private String detailUrl;
     private String contact;
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @JsonCreator
     public CultureInfoDto(@JsonProperty("category") String category,
                           @JsonProperty("org_name") String orgName,
