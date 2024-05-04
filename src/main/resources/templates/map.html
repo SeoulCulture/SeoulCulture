@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>츄츄</title>
-    <script th:inline="javascript" >
+    <script th:inline="javascript">
         const markerInfo = /*[[${markerInfo}]]*/ null;
+        const placeInfo = /*[[${placeInfo}]]*/ null;
         const currentLatitude = /*[[${latitude}]]*/ null;
         const currentLongitude = /*[[${longitude}]]*/ null;
     </script>
     <!-- 참고: api key 노출돼도 큰 문제 없다고 함. kakao dev에서 이 key를 사용할 플랫폼 등록하는 구조기 떄문.-->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2878141664ba508ffc07eaf2a35a9ac"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2878141664ba508ffc07eaf2a35a9ac"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -18,6 +20,10 @@
     <link rel="stylesheet" href="/css/map.css">
     <link rel="stylesheet" href="/css/whole.css">
     <link rel="stylesheet" href="/css/map_contents.css">
+    <!-- animate -->
+    <link type="text/css" rel="stylesheet" href="animate.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.aniview.js"></script>
 </head>
 <body>
 <div id="header">
@@ -36,5 +42,176 @@
 <div th:include="modal"/>
 <script type="text/javascript" src="/js/map_contents.js"></script>
 <script type="text/javascript" src="/js/map_ui.js"></script>
-</body>
-</html>
+
+
+<!--test-->
+
+
+<style>
+    .arm {
+        position: absolute;
+        width: 20px;
+        height: 8px;
+        background: linear-gradient(to right, #ffd835, #ffa435 90%);
+        border-radius: 30%;
+        z-index: 0;
+        transition: transform 0.3s; /* 애니메이션을 위한 트랜지션 설정 */
+    }
+    .arm-left {
+        top: 50%;
+        left: -20%;
+    }
+    .arm-right {
+        top: 50%;
+        left: 70%;
+    }
+
+    .face {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(to right, #ffd835, #ffa435 90%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .lightPoint {
+        z-index: -1;
+        animation: halo 2s infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+    }
+
+    @keyframes halo {
+        0% {
+            box-shadow: 0 0 20px 25px rgba(255, 255, 255, 1);
+        }
+        50% {
+            box-shadow: 0 0 20px 35px rgba(255, 255, 255, 1);
+        }
+        100% {
+            box-shadow: 0 0 20px 25px rgba(255, 255, 255, 1);
+        }
+    }
+
+    .face::before {
+        content: '';
+        position: absolute;
+        top: 22px;
+        width: 20px;
+        height: 14px;
+        background: #d10000;
+        border-bottom-left-radius: 10px;
+        transition: 0.5s;
+        border-bottom-right-radius: 13px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .tongue {
+        background: #fff3cd;
+        padding: 0px;
+        position: absolute;
+        top: 120%;
+        left: 52%;
+        height: 4px;
+        width: 12px;
+        border-radius: 0 0 50% 41%;
+        left: 30%;
+    }
+
+    /*.face:hover::before {*/
+    /*    top: 210px;*/
+    /*    width: 150px;*/
+    /*    height: 20px;*/
+    /*    background: #b57700;*/
+    /*    border-bottom-left-radius: 0px;*/
+    /*    border-bottom-right-radius: 0px;*/
+    /*}*/
+
+    .marker_shadow {
+        background: black;
+        height: 6px;
+        width: 30px;
+        left: 12%;
+        position: absolute;
+        -webkit-filter: blur(5px);
+    }
+
+    .eyes {
+        position: relative;
+        top: -5px;
+        display: flex;
+    }
+
+    .eyes .eye {
+        position: relative;
+        width: 11px;
+        height: 11px;
+        display: block;
+        background: #fff;
+        margin: 0 2px;
+        border-radius: 50%
+    }
+
+    .eyes .eye::before {
+        content: '';
+        position: absolute;
+        top: 51%;
+        left: 4px;
+        transform: translate(-50%, -50%);
+        width: 5.5px;
+        height: 5.5px;
+        background: #333;
+        border-radius: 50%;
+    }
+</style>
+<script>
+    document.querySelector('body')
+    .addEventListener('mousemove', eyeball);
+
+    function eyeball() {
+        var eye = document.querySelectorAll('.eye');
+        eye.forEach(function (eye) {
+            let x = (eye.getBoundingClientRect().left) + (eye.clientWidth / 2);
+            let y = (eye.getBoundingClientRect().top) + (eye.clientHeight / 2);
+            let radian = Math.atan2(event.pageX - x, event.pageY - y);
+            let rot = (radian * (180 / Math.PI) * -1) + 270;
+            eye.style.transform = "rotate(" + rot + "deg)";
+        });
+    }
+
+    // 팔 움직이기
+    document.onmousemove = function(event) {
+        var mouseX = event.clientX; // 마우스의 x좌표
+        var mouseY = event.clientY; // 마우스의 y좌표
+
+        var armLeft = document.querySelector('.arm-left');
+        var armRight = document.querySelector('.arm-right');
+
+        var armLeftX = armLeft.getBoundingClientRect().left;
+        var armLeftY = armLeft.getBoundingClientRect().top;
+        var radianLeft = Math.atan2(-(mouseY - armLeftY), mouseX - armLeftX);
+        var angleLeft = radianLeft * (180 / Math.PI);
+
+        var armRightX = armRight.getBoundingClientRect().left;
+        var armRightY = armRight.getBoundingClientRect().top;
+        var radianRight = Math.atan2(mouseY - armRightY, mouseX - armRightX);
+        var angleRight = radianRight * (180 / Math.PI);
+
+        var maxRotation = 45;
+        angleLeft = Math.max(-maxRotation, Math.min(maxRotation, angleLeft));
+        angleRight = Math.max(-maxRotation, Math.min(maxRotation, angleRight));
+
+        armLeft.style.transform = 'rotate(' + angleLeft + 'deg)';
+        armRight.style.transform = 'rotate(' + angleRight + 'deg)';
+    };
+
+
+</script>
+

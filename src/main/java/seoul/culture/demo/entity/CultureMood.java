@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import seoul.culture.demo.entity.mark.CultureEvent;
 
 @Getter
 @Entity
@@ -14,7 +15,7 @@ public class CultureMood {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Culture culture;
+    private CultureEvent cultureEvent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Mood mood;

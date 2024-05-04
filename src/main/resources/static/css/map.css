@@ -65,10 +65,29 @@
     font-weight: bold;
     font-family: 'Noto Sans KR', 'sans-serif';
     color: black !important;
-    text-shadow: 0 0 2px white;
     background: linear-gradient(to bottom, #ffffff, #bababa);
     border-radius: 20px;
     padding: 6px 13px;
+    border-bottom: groove;
+}
+
+.marker_category a {
+    color: #121212;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: larger;
+    text-shadow: 1px 1px #dbdbdb;
+}
+
+.marker_place a {
+    background-color: white;
+    color: cadetblue;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 4px;
+    font-size: medium;
+    text-decoration: none;
+    text-shadow: 1px 1px #dddddd;
 }
 
 .marker_category:hover {
@@ -76,13 +95,37 @@
     text-decoration: none;
 }
 
+.marker_place {
+    background-color: white;
+    border-radius: 10px;
+    padding: 4px;
+    font-size: medium;
+    border-bottom: ridge;
+}
+
 .marker_home {
     position: relative;
-    font-size: 33px;
-    font-weight: bold;
-    font-family: 'Noto Sans KR', 'sans-serif';
-    text-shadow: -3px -3px 0 #ffffff, 3px -3px 0 #ffffff, -3px 3px 0 #cdcdcd, 3px 3px 0 #ffffff;
 }
+
+
+
+/*.blinking{*/
+/*    -webkit-animation:blink 1.5s ease-in-out infinite alternate;*/
+/*    -moz-animation:blink 1.5s ease-in-out infinite alternate;*/
+/*    animation:blink 1.5s ease-in-out infinite alternate;*/
+/*}*/
+/*@-webkit-keyframes blink{*/
+/*    0% {opacity:0;}*/
+/*    100% {opacity:1;}*/
+/*}*/
+/*@-moz-keyframes blink{*/
+/*    0% {opacity:0;}*/
+/*    100% {opacity:1;}*/
+/*}*/
+/*@keyframes blink{*/
+/*    0% {opacity:0;}*/
+/*    100% {opacity:1;}*/
+/*}*/
 
 .marker_category {
     pointer-events: auto;
@@ -115,3 +158,5 @@
   transform: scale(0.9);
   opacity: 0;
 }
+
+/*test*/

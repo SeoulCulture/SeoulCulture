@@ -1,11 +1,11 @@
 package seoul.culture.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import seoul.culture.demo.entity.Culture;
+import org.springframework.stereotype.Repository;
+import seoul.culture.demo.entity.mark.CulturePlace;
 import seoul.culture.demo.entity.Location;
 
-public interface CultureRepository extends JpaRepository<Culture, Long> {
+@Repository
+public interface CulturePlaceRepository extends JpaRepository<CulturePlace, Long> {
     boolean existsByTitleAndLocation(String title, Location location);
-
-    boolean existsByLocation(Location location);
 }

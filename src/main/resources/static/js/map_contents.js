@@ -5,7 +5,7 @@ function loadModal(marker) {
 
 function loadRightContainer(marker) {
     showRightContent();
-    relocationMarkers();
+    // relocationMarkers();
     rightContainer.style.maxWidth = '100%';
     setInformation(marker);
 }
@@ -39,3 +39,7 @@ function setInformation(marker) {
     });
 
 }
+
+window.addEventListener('resize', function() {
+    // relocationMarkers();
+});
