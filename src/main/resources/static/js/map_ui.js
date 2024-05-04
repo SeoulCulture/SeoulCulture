@@ -10,7 +10,15 @@ const rightContainerEmpty = document.getElementById('rightContainerEmpty');
 window.onload = function () {
     hideRightContent();
     initMap();
+
+    kakao.maps.event.addListener(map, 'dragend', function () {
+        animateMarkers();
+    });
+    kakao.maps.event.addListener(map, 'zoom_changed', function () {
+        animateMarkers();
+    });
 }
+
 
 
 // 함수 =============================================================================================
@@ -22,6 +30,7 @@ function initMap() {
     initMarkers();
     initCenter();
     setBounds();
+    animateMarkers();
 }
 
 function initBounds() {
@@ -33,7 +42,7 @@ function initCenter() {
         "latitude": currentLatitude,
         "longitude": currentLongitude
     };
-    createMarker(currentLocationMarker, "home", '<div class="lightPoint"></div><div><div class="marker_home animate__animated animate__bounce">' +
+    createMarker(currentLocationMarker, "home", '<div class="lightPoint"></div><div><div class="marker_home">' +
         '<div class="face">' +
         '    <div class="eyes">' +
         '        <div class="eye"></div>' +
@@ -42,16 +51,18 @@ function initCenter() {
         '    </div>' +
         '</div><div class="arm arm-left"></div><div class="arm arm-right"></div><div class="marker_shadow">' +
         '</div></div>');
+
+    animateMarkers();
 }
 
+const markerInList = [];
+
 function initMarkers() {
-    let index = 0;
     placeInfo.forEach(function (marker) {
-        marker.id = ++index;
         createMarker(marker, "place")
     });
     markerInfo.forEach(function (marker) {
-        marker.id = ++index;
+        markerInList.push(marker);
         createMarker(marker, "culture");
     });
 }
@@ -91,21 +102,21 @@ function createMarker(marker, tag, customHtmlContents = undefined) {
 function makeCategoryInEventMarker(marker) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id=${marker.id} class='marker_category modal-link animate__animated animate__pulse' marker='${strMarker}'>` +
+        + `id=${marker.id} class='marker_category modal-link' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
 }
 
 function makeCategoryInPlaceMarker(marker) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id=${marker.id} class='marker_place modal-link animate__animated animate__bounceIn' marker='${strMarker}'>` +
+        + `id=${marker.id} class='marker_place modal-link' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${marker.category}</a></div>`;
 }
 
 function makeEmojiMarker(marker, emoji) {
     const strMarker = JSON.stringify(marker);
     return `<div type="button"`
-        + `id='${marker.id}' class='marker_emoji modal-link animate__animated animate__bounceIn' marker='${strMarker}'>` +
+        + `id='${marker.id}' class='marker_emoji modal-link' marker='${strMarker}'>` +
         `<a href='javascript:void(0);' onclick='openModal(${strMarker});'>${emoji}</a></div>`;
 }
 
@@ -116,6 +127,8 @@ function findMarkerAndOpen(id){
 
 const widthThreshold = 700;
 function openModal(marker) {
+    createMarker(marker, 'culture');
+    animateAtClicking(`#${marker.id}`, "hinge", "jackInTheBox");
     if (window.innerWidth > widthThreshold) {
         loadRightContainer(marker);
     } else {
@@ -131,4 +144,55 @@ function hideRightContent() {
 function showRightContent() {
     rightContainerEmpty.style.display = 'none';
     rightContainerContent.style.display = 'block';
+}
+
+const animateCSS = (element, animation, speed_="", prefix = 'animate__') =>
+    // We create a Promise and return it
+    new Promise((resolve, reject) => {
+        const animationName = `${prefix}${animation}`;
+        const speed = `${prefix}${speed_}`;
+        const nodes = document.querySelectorAll(element);
+
+        nodes.forEach((node) => {
+            node.classList.add(`${prefix}animated`, animationName);
+            if (speed.length != 0)
+                node.classList.add(speed);
+            // When the animation ends, we clean the classes and resolve the Promise
+            function handleAnimationEnd(event) {
+                event.stopPropagation();
+                node.classList.remove(`${prefix}animated`, animationName);
+                if (speed.length != 0)
+                    node.classList.remove(speed);
+            }
+            node.addEventListener('animationend', handleAnimationEnd, { once: true });
+        });
+});
+
+
+const animateAtClicking = (element, animation1, animation2, speed_="", prefix = 'animate__') =>
+    // We create a Promise and return it
+    new Promise((resolve, reject) => {
+        const animationName1 = `${prefix}${animation1}`;
+        const speed = `${prefix}${speed_}`;
+        const nodes = document.querySelectorAll(element);
+        nodes.forEach((node) => {
+            node.classList.add(`${prefix}animated`, animationName1);
+            if (speed.length != 0)
+                node.classList.add(speed);
+            function handleAnimationEnd(event) {
+                event.stopPropagation();
+                node.classList.remove(`${prefix}animated`, animationName1);
+                if (speed.length != 0)
+                    node.classList.remove(speed);
+                animateCSS(element, animation2, "faster")
+            }
+            node.addEventListener('animationend', handleAnimationEnd, { once: true });
+        });
+    });
+
+function animateMarkers() {
+    animateCSS('.marker_home', 'bounce');
+    animateCSS('.marker_place', 'bounceIn', "faster");
+    animateCSS('.marker_emoji', 'bounceIn');
+    animateCSS('.marker_category', 'pulse');
 }

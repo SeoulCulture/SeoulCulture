@@ -67,6 +67,13 @@ public class SearchService {
         List<Markable> placeDtos = getMarkables(filtered.get("places"));
         Map<String, List> results = removePlaceDtos(cultureDtos, placeDtos);
 
+        // id 부여
+        int index = 0;
+        for (Markable mark : cultureDtos)
+            mark.setId("marker_" + index++);
+        for (Markable mark : placeDtos)
+            mark.setId("marker_" + index++);
+
         Map<String, Object> map = new HashMap<>();
         map.put("cultures", results.get("cultures"));
         map.put("places", results.get("places"));

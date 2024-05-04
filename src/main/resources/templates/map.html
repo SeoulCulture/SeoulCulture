@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>츄츄</title>
     <script th:inline="javascript">
-        const markerInfo = /*[[${markerInfo}]]*/ null;
-        const placeInfo = /*[[${placeInfo}]]*/ null;
+        let markerInfo = /*[[${markerInfo}]]*/ null;
+        let placeInfo = /*[[${placeInfo}]]*/ null;
         const currentLatitude = /*[[${latitude}]]*/ null;
         const currentLongitude = /*[[${longitude}]]*/ null;
     </script>
-    <!-- 참고: api key 노출돼도 큰 문제 없다고 함. kakao dev에서 이 key를 사용할 플랫폼 등록하는 구조기 떄문.-->
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2878141664ba508ffc07eaf2a35a9ac"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

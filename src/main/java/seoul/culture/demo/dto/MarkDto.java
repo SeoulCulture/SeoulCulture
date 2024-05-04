@@ -10,6 +10,7 @@ import java.util.Map;
 @Builder
 @Getter
 public final class MarkDto implements Markable {
+    String id;
     String category;
     String title;
     double latitude;
@@ -68,5 +69,10 @@ public final class MarkDto implements Markable {
     @Override
     public int getPrice() {
         return this.price;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 }

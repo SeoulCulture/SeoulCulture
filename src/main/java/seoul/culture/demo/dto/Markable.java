@@ -12,4 +12,6 @@ public interface Markable {
     String getDetailUrl();
     String getContact();
     int getPrice();
+
+    void setId(String id);
 }

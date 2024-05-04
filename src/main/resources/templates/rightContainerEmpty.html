@@ -2,12 +2,13 @@
     <h3><span style="color: #c60000;">[[${markerInfo.size()}]]</span>곳을 찾았어요</h3>
 </div>
 <table class="table table-striped">
-    <tr th:each="marker, markerStat : ${markerInfo}">
-        <td style="display:none" th:id="'marker'+${markerStat.index+1}"></td>
+    <tr th:each="marker : ${markerInfo}">
+        <td style="display:none" th:id="'list_'+${marker.id}"></td>
         <td th:text="${marker.category}"></td>
-        <td th:text="${marker.title}" th:onclick="findMarkerAndOpen([[${markerStat.index+1}]])"></td>
+        <td th:text="${marker.title}" th:onclick="findMarkerAndOpen([[${marker.id}]])"></td>
     </tr>
 </table>
+
 <br>
 <p>TODO 1: 맵 이외의 공간 누르면 다시 이상태로 복구<br></p>
 <p>TODO 2: 못찾았으면, 바로 이 공간에서 재검색하도록 하기<br></p>
