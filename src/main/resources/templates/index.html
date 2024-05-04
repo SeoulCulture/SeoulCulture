@@ -130,15 +130,31 @@
         };
     });
 
+    // 매칭된 검색 결과 리턴 & 정렬알고리즘(일치율 높은 내림차순)
     function findMatchingStrings(event, val) {
         const matches = [];
+        const inputLength = val.length;
         spotDtos.forEach((spotDto) => {
             if (includeByCho(val, spotDto.spotName)) {
-                matches.push(spotDto.spotName);
+                const matchingChars = calculateMatchingChars(val, spotDto.spotName);
+                const matchRate = (matchingChars / inputLength) * 100; // 일치율 계산
+                matches.push({ name: spotDto.spotName, matchRate: matchRate }); // 일치율과 함께 추가
             }
         });
-        return matches;
+        matches.sort((a, b) => b.matchRate - a.matchRate);
+        return matches.map(match => match.name);
     }
+    function calculateMatchingChars(str1, str2) {
+        let matchingChars = 0;
+        const len = Math.min(str1.length, str2.length);
+        for (let i = 0; i < len; i++) {
+            if (str1[i] === str2[i]) {
+                matchingChars++;
+            }
+        }
+        return matchingChars;
+    }
+
 
     function handleUpDownIndex(event, matches) {
         switch (event.keyCode) {
