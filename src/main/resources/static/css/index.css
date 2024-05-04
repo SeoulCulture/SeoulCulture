@@ -120,5 +120,5 @@ input[type='number'] {
 
 #spotInputBox {
     position: relative;
-    max-width: fit-content;
+    max-width: min-content;
 }
