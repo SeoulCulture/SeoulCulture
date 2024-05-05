@@ -105,6 +105,7 @@
 #rightContainer .place-title {
     font-size: larger;
     font-weight: 600;
+    margin-right: 45px;
 }
 
 /*초기 오른쪽 컨테이너 설정 전용*/
