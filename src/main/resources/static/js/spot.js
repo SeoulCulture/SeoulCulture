@@ -89,14 +89,22 @@ function calculateMatchingChars(str1, str2) {
 
 
 function handleUpDownIndex(event, matches) {
+//    const scrollSpot = document.querySelector(".scroll-spot");
+    let scrollAmount = 0;
+
+    if(nowIndex > 3){
+        scrollAmount = 19;
+    }
     switch (event.keyCode) {
         // UP KEY
         case 38:
             nowIndex = Math.max(nowIndex - 1, 0);
+            searchResults.scrollTop -= scrollAmount;
             break;
         // DOWN KEY
         case 40:
             nowIndex = Math.min(nowIndex + 1, matches.length - 1);
+            searchResults.scrollTop += scrollAmount;
             break;
         // ENTER KEY
         case 13:
