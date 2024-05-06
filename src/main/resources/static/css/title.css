@@ -23,6 +23,12 @@
   16px 16px 10px #482896;
   cursor: pointer;
   font-weight: 900;
+  display: inline-block;
+}
+
+#servieContainer {
+  display: flex;
+  justify-content : center;
 }
 
 #servieTitle:hover {
