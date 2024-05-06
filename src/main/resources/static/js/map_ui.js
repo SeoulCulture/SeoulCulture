@@ -37,9 +37,9 @@ function initMap() {
     map = new kakao.maps.Map(mapElement, options);
     initBounds();
     initMarkers();
+    initCenter();
     setBounds();
     animateMarkers();
-    initCenter();
 }
 
 function initBounds() {
