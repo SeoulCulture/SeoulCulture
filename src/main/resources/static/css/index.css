@@ -12,7 +12,6 @@
     }
 }
 
-
 #main-title{
     margin : 0 auto;
     align-items : center;
@@ -24,33 +23,23 @@
     text-align : center;
 }
 
-.mainContents {
-    display: block;
-    text-align: center;
+/* 정렬 세팅*/
+table {
+    display: flex;
     justify-content: center;
-    min-height: 100%;
-    min-width: 100%;
-    align-content: center;
+    align-items: center;
+    border-spacing: 20px;
 }
 
-#inputContainer {
-    text-align-last: center;
-    text-align: -webkit-center;
-}
-
-#inputBox {
-    font-size: large;
-    text-align-last: center;
+tbody {
     text-align: center;
-    min-width: 80%;
-    min-height: 80%;
-    align-content: center;
 }
 
-.index_table_head {
-    width: fit-content;
-    font-size: large;
-    word-break: keep-all;
+/*/ 그 외*/
+
+.question {
+    width: 100%;
+    position: relative;
 }
 
 .mainInput {
@@ -60,6 +49,7 @@
     border-width: medium;
     border-style: ridge;
     height: 2.2rem;
+    width: -webkit-fill-available;
 }
 
 
@@ -76,12 +66,12 @@
 
 /*number타입 인풋에서 화살표없애기*/
 /* Chrome, Safari, Edge, Opera */
+/* Firefox  */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-/* Firefox  */
 input[type='number'] {
     -moz-appearance: textfield;
 }
@@ -100,20 +90,18 @@ input[type='number'] {
     padding: 0px;
 }
 
-#spotInputBox {
-    position: relative;
-    max-width: min-content;
+#searchBox {
+
 }
 
 #searchResults {
     overflow-y: clip;
     max-height: 110px;
-    top: 100%;
-    width: 100%;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 0px 0px 20px 20px;
     position: absolute;
-    z-index: 1;
+    width: 11rem;
+    margin-left: 0.7rem;
 }
 
 #moods {

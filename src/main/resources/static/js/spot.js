@@ -44,10 +44,8 @@ let nowIndex = 0;
 const ignoreKey = [37, 38, 39, 40]
 let preMatched;
 let preInput;
-$( document ).ready( (event) => { });
 
 function searchSpots() {
-    console.log("event");
     let input;
     let matches;
     if (ignoreKey.includes(event.keyCode)) {
@@ -59,7 +57,6 @@ function searchSpots() {
         preMatched = matches;
         preInput = input;
     }
-    console.log("key input; " + input);
 
     handleUpDownIndex(event, matches);
     showSearchResult(matches, input);

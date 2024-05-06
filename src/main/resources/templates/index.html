@@ -2,77 +2,76 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/index-header :: header"/>
 <body>
-    <div id="loading" style="display: none;">
-        <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
-    </div>
-    <div th:replace="fragments/serviceTitle :: title"/>
-    <main class="mainContents">
-        <div id="inputContainer">
-            <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
-                <table id="table">
-                    <tbody>
-                    <tr>
-                        <td class="index_table_head"><label for="moods">지금 기분이 어떤가요?</label></td>
-                    </tr>
-                    <tr>
-                        <td><input id="moods" class="mainInput" name="moods" th:field="*{moods}"></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td> <!-- 빈 행 -->
-                    </tr>
-                    <tr>
-                        <td class="index_table_head"><label for="time">어느정도 거리가 괜찮을까요?</label></td>
-                    </tr>
-                    <tr>
-                        <td><input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}" required min="1"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="radio" id="walking" class="" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
+<div id="loading" style="display: none;">
+    <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif'
+         style='position: relative; display: block; margin: 0px auto;'/>
+</div>
+<div th:replace="fragments/serviceTitle :: title"/>
+<div id="inputContainer">
+    <form id="form" role="form" action="/culture/search" th:object="${cultureForm}" , method="get">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <div claas="question">
+                        <div>지금 기분이 어떤가요?</div>
+                        <input id="moods" class="mainInput" name="moods" th:field="*{moods}">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div claas="question">
+                        <div>어느 정도 거리가 괜찮을까요?</div>
+                        <input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}"
+                               required min="1">
+                        <div class="checkBox">
+                            <input type="radio" id="walking" class="" name="howToGo" value="WALKING"
+                                   th:checked="${cultureForm.howToGo == 'WALKING'}">
                             <label for="walking">도보</label>
-                            <input type="radio" id="driving" class="" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
+                            <input type="radio" id="driving" class="" name="howToGo" value="DRIVING"
+                                   th:checked="${cultureForm.howToGo == 'DRIVING'}">
                             <label for="driving">차량</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td> <!-- 빈 행 -->
-                    </tr>
-                    <tr>
-                        <td class="index_table_head"><label for="price">비용은 어느정도가 좋을까요?</label></td>
-                    </tr>
-                    <tr>
-                        <td><input type="number" class="mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
-                    </tr>
-                    <tr>
-                        <td>무료 <input type="checkbox" id="free" class="" th:checked="${cultureForm.price == 0}" onclick='togglePriceBox(this)' checked="checked"></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td> <!-- 빈 행 -->
-                    </tr>
-                    <tr>
-                        <td class="index_table_head">어디 주변으로 알아볼까요?</td>
-                    </tr>
-                    <tr>
-                        <td>
-                        <div id="spotInputBox">
-                            <input type="text" id="searchInput" onkeyup="searchSpots();" class="mainInput" name="spot" autocomplete="off">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div claas="question">
+                        <div>비용은 어느정도가 좋을까요?</div>
+                        <input type="number" class="mainInput" id="price" name="price" placeholder=""
+                               th:field="*{price}">
+                        <div class="checkBox">
+                            <div>무료 <input type="checkbox" id="free" class="" th:checked="${cultureForm.price == 0}"
+                                           onclick='togglePriceBox(this)' checked="checked"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div claas="question">
+                        <div>어디 주변으로 알아볼까요?</div>
+                        <div id="searchBox">
+                            <input type="text" id="searchInput" onkeyup="searchSpots();" class="mainInput" name="spot"
+                                   autocomplete="off">
                             <div id="searchResults"></div>
                         </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>내 위치 기준 <input type="checkbox" id="myLocation" class="" onclick='toggleLocationBox(this)'></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div id="submit-button">
-                    <button id="submitBtn" type="submit" class="btn btn-primary">Let's go!</button>
-                </div>
-            </form>
-
-
+                        <div class="checkBox">
+                            <div>내 위치 기준 <input type="checkbox" id="myLocation" class=""
+                                                onclick='toggleLocationBox(this)'></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="submit-button">
+            <button id="submitBtn" type="submit" class="btn btn-primary">Let's go!</button>
         </div>
-    </main>
+    </form>
+</div>
 <div id="searchStatus" style="display: none;">검색 중입니다...</div>
 </body>
 </html>
