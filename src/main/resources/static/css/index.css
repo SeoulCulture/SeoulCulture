@@ -117,9 +117,20 @@ input[type='number'] {
 #submitBtn {
     margin-top: 30px;
     width: 100px;
-    height: 30px;
+    height: 40px;
     border-radius: 20px 20px;
     border: 5px black;
-    background: lightgreen;
+    background: transparent;
+    font-variation-settings: "wght" 900, "ital" 1;
+    font-style: italic;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3%;
+    color: #07BCCB;
+    font-family: "Meta", sans-serif;
+    text-shadow: 3px 2px 0px #e601c0, 5px 5px 0px #e9019a, 6px 6px 0px #f40468, 7px 7px 5px #482896;
+    cursor: pointer;
+    font-weight: 800;
+    padding-right: 15px;
 }
 
