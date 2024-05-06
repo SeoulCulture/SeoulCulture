@@ -38,7 +38,7 @@ public class ReverseGeocoding { // 좌표정보를 주소로 바꾸는 네이버
         String sigungu = regionInfo.get("area2").get("name").asText(); // OO시 OO구
         String eupmyeandong = regionInfo.get("area3").get("name").asText(); // OO동
         String ri = regionInfo.get("area4").get("name").asText(); // OO리
-        String doro = json.get("results").get(0).get("land").get("name").asText();
+        String doro = getDoroNum(json.get("results").get(0).get("land"));
 
         return new HashMap<>() {{
             put("sido", sido);
@@ -47,5 +47,15 @@ public class ReverseGeocoding { // 좌표정보를 주소로 바꾸는 네이버
             put("ri", ri);
             put("doro", doro);
         }};
+    }
+
+    private String getDoroNum(JsonNode land) {
+        String num1 = land.get("number1").asText(); // 번지수에서 -의 앞자리
+        String num2 = land.get("number2").asText(); // -의 뒷자리
+
+        if(!num2.equals(""))
+            num1 = String.join("-", new String[]{num1, num2});
+
+        return num1;
     }
 }

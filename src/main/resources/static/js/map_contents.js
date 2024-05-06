@@ -38,6 +38,41 @@ function setInformation(marker) {
     placeDetail.forEach(function(button) {
         button.setAttribute('onclick', `openDetailUrl('${marker.detailUrl}')`);
     });
+
+    const paths = document.querySelectorAll('.path');
+    paths.forEach(function(button) {
+            button.setAttribute('onclick', `openPath('${marker.latitude}', '${marker.longitude}')`);
+    });
+}
+
+function openPath(dstLat, dstLon){
+
+    const baseurl = '/culture/address';
+
+    const howToGo = new URL(location.href).searchParams.get('howToGo');
+
+    const params = {
+        srcLat : currentLatitude,
+        srcLon : currentLongitude,
+        dstLat : dstLat,
+        dstLon : dstLon,
+        howToGo : howToGo
+    };
+
+    const queryString = new URLSearchParams(params).toString();  // url에 쓰기 적합한 querySting으로 return 해준다.
+    const requrl = `${baseurl}?${queryString}`;   // 완성된 요청 url.
+
+    console.log(requrl);
+
+    fetch(requrl)
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+          // 이 data로 길찾기를 시작하면 됨.
+          console.log(data);
+    });
+
 }
 
 function openDetailUrl(url){
