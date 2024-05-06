@@ -3,6 +3,7 @@ package seoul.culture.demo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import seoul.culture.demo.datareader.*;
 import seoul.culture.demo.entity.mark.CultureEvent;
@@ -43,13 +44,19 @@ public class DataLoader implements CommandLineRunner {
         // [문화행사]
         // TODO 1: 스케쥴링
         // TODO 2: 스케줄링시 db 테이블 초기화
-        List<CultureEvent> cultures = seoulEventJsonReader.getResult();
-        cultureService.registerCultureEvent(cultures);
+        registerCultureEvent();
 
         // [장소지정검색] 엑셀내용(장소정보) db에 반영 및 할당
         spotExcelReader.getResult();
 
         // [장소지정검색] 지하철역 db에 반영 및 할당
         subwayJsonReader.getResult();
+    }
+
+    @Scheduled(cron = "0 0 2 * * *") // 매일 새벽 2시에 문화행사 업데이트
+    public void registerCultureEvent() throws IOException {
+        List<CultureEvent> cultures = seoulEventJsonReader.getResult();
+        cultureService.registerCultureEvent(cultures);
+        System.out.println("Data updated at 2:00 AM");
     }
 }

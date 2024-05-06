@@ -68,16 +68,26 @@ function initCenter() {
     animateMarkers();
 }
 
-const markerInList = [];
+const overlays = {}
 
 function initMarkers() {
     placeInfo.forEach(function (marker) {
-        createMarker(marker, "place")
+        let overlay = createMarker(marker, "place");
+        registerOverlay(overlay, marker.id);
     });
     markerInfo.forEach(function (marker) {
-        markerInList.push(marker);
-        createMarker(marker, "culture");
+        let overlay = createMarker(marker, "culture");
+        registerOverlay(overlay, marker.id);
     });
+}
+
+function registerOverlay(overlay, id) {
+    let existingOverlay = overlays[id];
+    if (existingOverlay != undefined){
+        existingOverlay.setMap(null);
+        delete existingOverlay;
+    }
+    overlays[id] = overlay;
 }
 
 function setBounds() {
@@ -87,7 +97,7 @@ function setBounds() {
 // 마커생성, 맵 범위 조정, 표시
 function createMarker(marker, tag, customHtmlContents = undefined) {
     const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
-
+    marker.tag = tag;
     let content;
     if (customHtmlContents === undefined) {
         if (marker.title.endsWith("도서관") || marker.categoty === "도서관"){
@@ -105,11 +115,14 @@ function createMarker(marker, tag, customHtmlContents = undefined) {
 
     const customOverlay = new kakao.maps.CustomOverlay({
         position: markerPosition,
-        content: content
+        content: content,
+        id: marker.id
     });
 
     customOverlay.setMap(map);
     bounds.extend(markerPosition);
+
+    return customOverlay;
 }
 
 function makeCategoryInEventMarker(marker) {
@@ -140,6 +153,14 @@ function findMarkerAndOpen(id){
 
 const widthThreshold = 700;
 function openModal(marker) {
+    if (marker.tag === "place"){
+        const overlay = createMarker(marker, "place");
+        registerOverlay(overlay, marker.id)
+
+    } else if (marker.tag === "culture") {
+        const overlay = createMarker(marker, "culture");
+        registerOverlay(overlay, marker.id)
+    }
     animateAtClicking(`#${marker.id}`, "hinge", "jackInTheBox");
     if (window.innerWidth > widthThreshold) {
         loadRightContainer(marker);
