@@ -94,15 +94,53 @@ function setBounds() {
     map.setBounds(bounds);
 }
 
+function deletetag(input, allow)
+{
+    var regExp;
+    if(allow.length !=0)
+        regExp = "<\\/?(?!(" + allow.join('|') + "))\\b[^>]*>";
+    else
+        regExp = "<\/?[^>]*>";
+
+    return input.replace(new RegExp(regExp, "gi"), "");
+}
+
+function removeOuterBrTags(inputString) {
+    let startIndex = 0;
+    let endIndex = inputString.length;
+
+    // 문자열의 시작에서부터 <br> 태그가 나오지 않을 때까지 반복
+    while (startIndex < endIndex && inputString.substr(startIndex, 4) === '<br>') {
+        startIndex += 4;
+    }
+
+    // 문자열의 끝부터 <br> 태그가 나오지 않을 때까지 반복
+    while (endIndex > startIndex && inputString.substr(endIndex - 4, 4) === '<br>') {
+        endIndex -= 4;
+    }
+
+    // 시작과 끝 인덱스를 사용하여 앞뒤의 <br> 태그를 제거한 문자열을 반환
+    return inputString.substring(startIndex, endIndex);
+}
+
+
 // 마커생성, 맵 범위 조정, 표시
 function createMarker(marker, tag, customHtmlContents = undefined) {
     const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
     marker.tag = tag;
+    // console.log(typeof marker.contents);
+    if (marker.contents == undefined)
+        marker.contents = "설명이 없습니다";
+    else
+        marker.contents = removeOuterBrTags(deletetag(marker.contents, ['br']))
+                            .replace(/(<br>){3,}/g, '<br><br>');
+    console.log(marker.contents);
     let content;
     if (customHtmlContents === undefined) {
-        if (marker.title.endsWith("도서관") || marker.categoty === "도서관"){
+        const title = marker.title.trim();
+        if (title.endsWith("도서관") || marker.categoty === "도서관") {
             content = makeEmojiMarker(marker, "&#128214");
-        } else if (marker.title.endsWith("공원")){
+        } else if (title.endsWith("공원")) {
             content = makeEmojiMarker(marker, "&#127795");
         } else if (tag === "place") {
             content = makeCategoryInPlaceMarker(marker);
