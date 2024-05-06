@@ -51,7 +51,6 @@ public class CultureService {
 
     private List<CultureInfoDto> readCultureInfo(String jsonPath) {
         ObjectMapper objectMapper = new ObjectMapper();
-
         try {
             // JSON 파일을 읽어와 JsonNode로 변환
             return Arrays.asList(objectMapper.readValue(new File(jsonPath), CultureInfoDto[].class));
@@ -64,6 +63,9 @@ public class CultureService {
 
     @Transactional
     public void registerCultureEvent(List<CultureEvent> cultures) {
+        // 데이터 전체 삭제 : 하루마다 문화행사 데이터는 갈아엎는다.
+        cultureEventRepository.deleteAll();
+
         // TODO: location이 동일하고, title이 다른 경우는.. 지도상에 겹치는데 그거 클릭 가능하게 처리하려면? (붙어있는 경우도 마찬가지긴 함)
         cultures.stream().filter(culture -> !cultureEventRepository.existsByLocation(
                 culture.getLocation()
