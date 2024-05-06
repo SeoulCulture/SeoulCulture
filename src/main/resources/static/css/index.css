@@ -48,7 +48,9 @@
     border-width: medium;
     border-style: ridge;
     height: 2.2rem;
-    width: 50% !important;
+    width: 70%;
+    max-width: 273px;
+    min-width: 160px;
 }
 
 
