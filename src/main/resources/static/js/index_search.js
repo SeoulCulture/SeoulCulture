@@ -31,15 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
         newPlaceInput.value = document.getElementById('searchInput').value; // searchInput에서 값을 가져옴
         form.appendChild(newPlaceInput);
 
-        //화면의 높이와 너비를 구합니다.
-        var maskHeight = $(document).height();
-        var maskWidth = window.document.body.clientWidth;
+        LoadingWithMask();
+    }
 
-//        화면에 출력할 마스크를 설정해줍니다.
+    function LoadingWithMask() {
+        //화면의 높이와 너비를 구합니다.
+        var maskHeight = $(window).height();
+        var maskWidth = $(window).width();
+
+        // 화면에 출력할 마스크를 설정해줍니다.
         var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
         var loadingImg = " <img id='loadingImg' src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: absolute; display: block; margin: 0px auto;'/>";
 
-//        화면에 레이어 추가
+        // 화면에 레이어 추가
         $('body')
             .append(mask);
 
@@ -61,8 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#loadingImg').show();
     }
 
-    function LoadingWithMask(gif) {
-
+    function closeLoadingWithMask() {
+        $('#mask, #loadingImg').hide();
+        $('#mask, #loadingImg').remove();
     }
 
     // 페이지 로드 시에 formData에 위도와 경도 값을 설정
@@ -70,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (navigator.geolocation) {
             // geolocation을 지원하면 위치를 요청
             console.log("위치 요청 시작");
+            LoadingWithMask();
             navigator.geolocation.getCurrentPosition(success, error);
         } else {
             console.log("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
@@ -79,16 +85,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function success(position) {
         const currentLatitude = position.coords.latitude.toString();
         const currentLongitude = position.coords.longitude.toString();
-        console.log(currentLatitude, currentLongitude);
+//        console.log(currentLatitude, currentLongitude);
 
         // 기존 form 요소에 직접 접근하여 위도와 경도를 추가
         let form = document.getElementById('form');
         form.innerHTML += `<input type="hidden" name="latitude" value="${currentLatitude}">`;
         form.innerHTML += `<input type="hidden" name="longitude" value="${currentLongitude}">`;
+
+        closeLoadingWithMask();
     }
 
     function error(e) {
+        closeLoadingWithMask();
         // 위치 정보를 가져오는 데 실패한 경우
         alert("Geolocation 오류 " + e.code + ": " + e.message);
+
     }
 });

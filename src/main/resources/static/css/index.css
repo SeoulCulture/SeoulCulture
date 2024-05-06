@@ -94,9 +94,9 @@ input[type='number'] {
 }
 
 #searchResults {
-    overflow-y: clip;
+    overflow-y: scroll;
     max-height: 110px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 0px 0px 20px 20px;
     position: absolute;
     width: 11rem;
