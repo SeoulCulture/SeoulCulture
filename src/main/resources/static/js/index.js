@@ -1,20 +1,6 @@
 let spotDtos;
 
 document.addEventListener("DOMContentLoaded", function() {
-  const apiUrl = '/moods';
-  fetch(apiUrl)
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      const moodList = data.mood;
-
-      initializeTagify(moodList);
-    })
-    .catch(error => {
-      console.error('[ERROR] moods 가져오기 에러: ', error);
-  });
-
   const spotUrl = '/spots';
   fetch(spotUrl)
       .then(response => {
@@ -43,18 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// moods 를 읽어오는 API 요청 응답 처리
-function initializeTagify(moodList) {
-  const input = document.querySelector('input[name=moods]');
-
-  console.log('Received mood list:', moodList);
-
-  let tagify = new Tagify(input, {
-    whitelist: moodList,
-    userInput: false // 입력 제한
-  });
-}
-``
 function togglePriceBox(checkbox) {
 
   // 1. 텍스트 박스 element 찾기
