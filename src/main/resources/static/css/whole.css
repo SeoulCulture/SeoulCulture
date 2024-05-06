@@ -4,6 +4,11 @@ html {
 body {
     text-align: -webkit-center;
 
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+
     min-height: 100vh;
     background-size: cover;
     background-position: center;
