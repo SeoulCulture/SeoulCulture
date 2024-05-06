@@ -105,6 +105,9 @@ function handleUpDownIndex(event, matches) {
             break;
         // ENTER KEY
         case 13:
+            if (nowIndex = -1) {
+                document.querySelector("#searchInput").value = matches[0];
+            }
             nowIndex = -1;
             matches.length = 0;
             break;
