@@ -213,25 +213,25 @@
     document.onmousemove = function (event) {
         var mouseX = event.clientX; // 마우스의 x좌표
         var mouseY = event.clientY; // 마우스의 y좌표
-
+        var maxRotation = 45;
         var armLeft = document.querySelector('.arm-left');
         var armRight = document.querySelector('.arm-right');
 
-        var armLeftX = armLeft.getBoundingClientRect().left;
-        var armLeftY = armLeft.getBoundingClientRect().top;
-        var radianLeft = Math.atan2(-(mouseY - armLeftY), mouseX - armLeftX);
-        var angleLeft = radianLeft * (180 / Math.PI);
-
-        var armRightX = armRight.getBoundingClientRect().left;
-        var armRightY = armRight.getBoundingClientRect().top;
-        var radianRight = Math.atan2(mouseY - armRightY, mouseX - armRightX);
-        var angleRight = radianRight * (180 / Math.PI);
-
-        var maxRotation = 45;
-        angleLeft = Math.max(-maxRotation, Math.min(maxRotation, angleLeft));
-        angleRight = Math.max(-maxRotation, Math.min(maxRotation, angleRight));
-
-        armLeft.style.transform = 'rotate(' + angleLeft + 'deg)';
-        armRight.style.transform = 'rotate(' + angleRight + 'deg)';
+        if (armLeft != null) {
+            var armLeftX = armLeft.getBoundingClientRect().left;
+            var armLeftY = armLeft.getBoundingClientRect().top;
+            var radianLeft = Math.atan2(-(mouseY - armLeftY), mouseX - armLeftX);
+            var angleLeft = radianLeft * (180 / Math.PI);
+            angleLeft = Math.max(-maxRotation, Math.min(maxRotation, angleLeft));
+            armLeft.style.transform = 'rotate(' + angleLeft + 'deg)';
+        }
+        if (armRight != null) {
+            var armRightX = armRight.getBoundingClientRect().left;
+            var armRightY = armRight.getBoundingClientRect().top;
+            var radianRight = Math.atan2(mouseY - armRightY, mouseX - armRightX);
+            var angleRight = radianRight * (180 / Math.PI);
+            angleRight = Math.max(-maxRotation, Math.min(maxRotation, angleRight));
+            armRight.style.transform = 'rotate(' + angleRight + 'deg)';
+        }
     };
 </script>

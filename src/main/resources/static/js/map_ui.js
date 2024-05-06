@@ -5,6 +5,7 @@ const rightContainer = document.getElementById('rightContainer');
 const leftContainer = document.getElementById('leftContainer');
 const rightContainerContent = document.getElementById('rightContainerContent');
 const rightContainerEmpty = document.getElementById('rightContainerEmpty');
+let markerClusterPoint;
 
 window.onload = function () {
     hideRightContent();
@@ -36,20 +37,62 @@ function relocateToCenter() { // 현위치로 이동
     map.panTo(center);
 }
 
+function getOverayCountRate() {
+    let overlayCnt = 0;
+    for (id in markers) {
+        let element = document.getElementById(id);
+        if (element != null)
+            overlayCnt++;
+    }
+    console.log(overlayCnt, Object.keys(markers).length);
+    return overlayCnt / Object.keys(markers).length;
+}
+
+function setCenterPoint() {
+    var latlng = map.getCenter();
+    var moveLatLon = new kakao.maps.LatLng((2*currentLatitude + latlng.getLat())/3, (2*currentLongitude+latlng.getLng())/3);
+    map.setCenter(moveLatLon);
+
+    // 커스텀 오버레이의 K% 이상이 보이도록 배치
+    let rate = getOverayCountRate();
+    let startValue = 13;
+    map.setLevel(startValue);
+    while (rate >= 0.1) {
+        map.setLevel(--startValue);
+        rate = getOverayCountRate();
+    }
+    map.setLevel(startValue + 1);
+    console.log("커스텀 오버레이가 보이는 비율: ", rate);
+}
+
+function getDistance(lat1,lng1,lat2,lng2) {
+    function deg2rad(deg) {
+        return deg * (Math.PI/180)
+    }
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lng2-lng1);
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c; // Distance in km
+    return d;
+}
+
 function initMap() {
     mapElement = document.getElementById('map');
     var options = {center: new kakao.maps.LatLng(currentLatitude, currentLongitude)};
     map = new kakao.maps.Map(mapElement, options);
     initBounds();
     initMarkers();
-    setBounds();
     animateMarkers();
+    setBounds();
     initCenter();
-    map.setLevel(map.getLevel() - 1);
+    setCenterPoint();
 }
 
 function initBounds() {
     bounds = new kakao.maps.LatLngBounds();
+    bounds.extend(new kakao.maps.LatLng(currentLatitude, currentLongitude));
 }
 
 function initCenter() {
@@ -73,17 +116,28 @@ function initCenter() {
     jumpingHomeMarker();
 }
 
-const overlays = {}
+const overlays = {};
+const markers = {};
 
 function initMarkers() {
+    let lats = 0;
+    let lons = 0;
     placeInfo.forEach(function (marker) {
         let overlay = createMarker(marker, "place");
         registerOverlay(overlay, marker.id);
+        markers[marker.id] = marker;
+        lats += marker.latitude;
+        lons += marker.longitude;
     });
     markerInfo.forEach(function (marker) {
         let overlay = createMarker(marker, "culture");
         registerOverlay(overlay, marker.id);
+        markers[marker.id] = marker;
+        lats += marker.latitude;
+        lons += marker.longitude;
     });
+    const dataLength = placeInfo.length + markerInfo.length;
+    markerClusterPoint = new kakao.maps.LatLng(lats / dataLength, lons / dataLength);
 }
 
 function registerOverlay(overlay, id) {
@@ -109,8 +163,7 @@ function setBounds() {
     map.setBounds(bounds);
 }
 
-function deletetag(input, allow)
-{
+function deletetag(input, allow) {
     var regExp;
     if(allow.length !=0)
         regExp = "<\\/?(?!(" + allow.join('|') + "))\\b[^>]*>";
@@ -141,7 +194,6 @@ function makeContents(marker) {
     else
         marker.contents = removeOuterBrTags(deletetag(marker.contents, ['br']))
             .replace(/(<br>){3,}/g, '<br><br>');
-    console.log(marker.contents);
 }
 
 // 마커생성, 맵 범위 조정, 표시
@@ -199,8 +251,7 @@ function makeEmojiMarker(marker, emoji) {
 }
 
 function findMarkerAndOpen(id){
-    let findMarker = document.getElementById(id).getAttribute('marker');
-    openModal(JSON.parse(findMarker))
+    openModal(markers[id]);
 }
 
 const widthThreshold = 700;
@@ -222,11 +273,13 @@ function openModal(marker) {
 }
 
 function hideRightContent() {
+    rightContainer.style.maxWidth = '30%';
     rightContainerEmpty.style.display = 'block';
     rightContainerContent.style.display = 'none';
 }
 
 function showRightContent() {
+    rightContainer.style.maxWidth = '100%';
     rightContainerEmpty.style.display = 'none';
     rightContainerContent.style.display = 'block';
 }

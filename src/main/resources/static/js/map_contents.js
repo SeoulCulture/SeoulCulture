@@ -5,8 +5,6 @@ function loadModal(marker) {
 
 function loadRightContainer(marker) {
     showRightContent();
-    // relocationMarkers();
-    rightContainer.style.maxWidth = '100%';
     setInformation(marker);
 }
 
