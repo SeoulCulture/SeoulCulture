@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import seoul.culture.demo.dto.CultureSearchForm;
+import seoul.culture.demo.service.MoodService;
 import seoul.culture.demo.service.SearchService;
 
 import java.io.IOException;
@@ -16,11 +17,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CultureController {
     private final SearchService searchService;
+    private final MoodService moodService;
 
     @GetMapping("/")
     public String createCultureForm(Model model){
         CultureSearchForm cultureSearchForm = new CultureSearchForm();
         cultureSearchForm.setHowToGo("WALKING");
+        cultureSearchForm.setMoods(moodService.getMoods().getMood());
         model.addAttribute("cultureForm", cultureSearchForm);
         return "index";
     }
