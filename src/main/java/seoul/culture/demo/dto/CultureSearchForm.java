@@ -12,6 +12,7 @@ import java.util.List;
 @ToString
 public class CultureSearchForm {
     private List<String> moods = new ArrayList<>();
+    private String selectedMood;
     private Integer time;
     private Integer price;
     private String latitude;

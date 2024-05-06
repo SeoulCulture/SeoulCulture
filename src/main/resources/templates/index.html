@@ -9,10 +9,15 @@
 <div th:replace="fragments/serviceTitle :: title"/>
 <div id="contentBody">
 <div id="inputContainer">
-    <form id="form" role="form" action="/culture/search" th:object="${cultureForm}" , method="get">
+    <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
         <div class="question qes1">
             <div>지금 기분이 어떤가요?</div>
-            <input id="moods" class="mainInput" name="moods" th:field="*{moods}">
+            <select class="mainInput" id="selectedMood" name="selectedMood">
+                <option value="">==기분선택==</option>
+                <option th:each="mood : *{moods}"
+                        th:value="${mood}"
+                        th:utext="${mood}"></option>
+            </select>
         </div>
         <div class="question qes2">
             <div>어느 정도 거리가 괜찮을까요?</div>
