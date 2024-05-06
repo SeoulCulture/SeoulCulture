@@ -1,7 +1,6 @@
 let map;
 let bounds;
 let mapElement = document.getElementById('map');
-console.log(currentLatitude, currentLongitude);
 const rightContainer = document.getElementById('rightContainer');
 const leftContainer = document.getElementById('leftContainer');
 const rightContainerContent = document.getElementById('rightContainerContent');
@@ -31,6 +30,12 @@ window.onload = function () {
 
 
 // 함수 =============================================================================================
+
+function relocateToCenter() { // 현위치로 이동
+    var center = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+    map.panTo(center);
+}
+
 function initMap() {
     mapElement = document.getElementById('map');
     var options = {center: new kakao.maps.LatLng(currentLatitude, currentLongitude)};
@@ -40,6 +45,7 @@ function initMap() {
     setBounds();
     animateMarkers();
     initCenter();
+    map.setLevel(map.getLevel() - 1);
 }
 
 function initBounds() {
@@ -90,6 +96,16 @@ function registerOverlay(overlay, id) {
 }
 
 function setBounds() {
+    if (bounds.isEmpty()) {
+        const markerPosition = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+        const customOverlay = new kakao.maps.CustomOverlay({
+            position: markerPosition,
+            content: "<div id='noResult' class='animate__animated animate__slideInDown'>주변에 없어요</div>"
+        });
+        customOverlay.setMap(map);
+        bounds.extend(markerPosition);
+        return;
+    }
     map.setBounds(bounds);
 }
 
@@ -104,36 +120,35 @@ function deletetag(input, allow)
     return input.replace(new RegExp(regExp, "gi"), "");
 }
 
-function removeOuterBrTags(inputString) {
-    let startIndex = 0;
-    let endIndex = inputString.length;
-
-    // 문자열의 시작에서부터 <br> 태그가 나오지 않을 때까지 반복
-    while (startIndex < endIndex && inputString.substr(startIndex, 4) === '<br>') {
-        startIndex += 4;
+function makeContents(marker) {
+    function removeOuterBrTags(inputString) {
+        let startIndex = 0;
+        let endIndex = inputString.length;
+        // 문자열의 시작에서부터 <br> 태그가 나오지 않을 때까지 반복
+        while (startIndex < endIndex && inputString.substr(startIndex, 4) === '<br>') {
+            startIndex += 4;
+        }
+        // 문자열의 끝부터 <br> 태그가 나오지 않을 때까지 반복
+        while (endIndex > startIndex && inputString.substr(endIndex - 4, 4) === '<br>') {
+            endIndex -= 4;
+        }
+        // 시작과 끝 인덱스를 사용하여 앞뒤의 <br> 태그를 제거한 문자열을 반환
+        return inputString.substring(startIndex, endIndex);
     }
-
-    // 문자열의 끝부터 <br> 태그가 나오지 않을 때까지 반복
-    while (endIndex > startIndex && inputString.substr(endIndex - 4, 4) === '<br>') {
-        endIndex -= 4;
-    }
-
-    // 시작과 끝 인덱스를 사용하여 앞뒤의 <br> 태그를 제거한 문자열을 반환
-    return inputString.substring(startIndex, endIndex);
-}
-
-
-// 마커생성, 맵 범위 조정, 표시
-function createMarker(marker, tag, customHtmlContents = undefined) {
-    const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
-    marker.tag = tag;
     // console.log(typeof marker.contents);
     if (marker.contents == undefined)
         marker.contents = "설명이 없습니다";
     else
         marker.contents = removeOuterBrTags(deletetag(marker.contents, ['br']))
-                            .replace(/(<br>){3,}/g, '<br><br>');
+            .replace(/(<br>){3,}/g, '<br><br>');
     console.log(marker.contents);
+}
+
+// 마커생성, 맵 범위 조정, 표시
+function createMarker(marker, tag, customHtmlContents = undefined) {
+    const markerPosition = new kakao.maps.LatLng(marker.latitude, marker.longitude);
+    marker.tag = tag;
+    makeContents(marker);
     let content;
     if (customHtmlContents === undefined) {
         const title = marker.title.trim();
@@ -266,8 +281,7 @@ function animateMarkers() {
     animateCSS('.marker_category', 'pulse');
 }
 function jumpingHomeMarker() {
-    animateCSS('.face', 'bounce');
-    animateCSS('.arm', 'bounce');
+    animateCSS('.marker_home', 'bounce');
 }
 
 function getRandomAnimation() {
