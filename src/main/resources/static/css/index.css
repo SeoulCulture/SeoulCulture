@@ -12,10 +12,6 @@
     }
 }
 
-body{
-    flex-direction: column;
-}
-
 
 #main-title{
     margin : 0 auto;
@@ -104,20 +100,20 @@ input[type='number'] {
     padding: 0px;
 }
 
-#searchResults {
+#spotInputBox {
     position: relative;
+    max-width: min-content;
+}
+
+#searchResults {
     overflow-y: clip;
     max-height: 110px;
     top: 100%;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.3);
-    z-index: 1;
     border-radius: 0px 0px 20px 20px;
-}
-
-#spotInputBox {
-    position: relative;
-    max-width: min-content;
+    position: absolute;
+    z-index: 1;
 }
 
 #moods {

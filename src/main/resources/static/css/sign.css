@@ -17,11 +17,6 @@ user-select: none;
 }
 }
 
-body{
-flex-direction: column;
-}
-
-
 table{
     margin: auto
 }

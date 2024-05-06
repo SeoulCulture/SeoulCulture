@@ -40,28 +40,30 @@ function includeByCho(search, targetWord) {
 }
 
 // 검색
-const $searchInput = document.querySelector("#searchInput");
 let nowIndex = 0;
 const ignoreKey = [37, 38, 39, 40]
 let preMatched;
 let preInput;
-$( document ).ready( (event) => {
-    $searchInput.onkeyup = (event) => {
-        let input;
-        let matches;
-        if (ignoreKey.includes(event.keyCode)) {
-            matches = preMatched;
-            input = preInput;
-        } else {
-            input = document.getElementById('searchInput').value.trim();
-            matches = findMatchingStrings(event, input);
-            preMatched = matches;
-            preInput = input;
-        }
-        handleUpDownIndex(event, matches);
-        showSearchResult(matches, input);
-    };
-});
+$( document ).ready( (event) => { });
+
+function searchSpots() {
+    console.log("event");
+    let input;
+    let matches;
+    if (ignoreKey.includes(event.keyCode)) {
+        matches = preMatched;
+        input = preInput;
+    } else {
+        input = document.getElementById('searchInput').value.trim();
+        matches = findMatchingStrings(event, input);
+        preMatched = matches;
+        preInput = input;
+    }
+    console.log("key input; " + input);
+
+    handleUpDownIndex(event, matches);
+    showSearchResult(matches, input);
+}
 
 // 매칭된 검색 결과 리턴 & 정렬알고리즘(일치율 높은 내림차순)
 function findMatchingStrings(event, val) {

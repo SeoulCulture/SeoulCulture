@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
      }
 
     const form = document.getElementById('form');
+    form.addEventListener('keydown', event => {
+        if (event.code === "Enter") {
+            event.preventDefault();
+        }
+    });
+
     form.onsubmit = function (event) {
         // 장소지정 (place) 정보를 폼에 등록
         const form = document.getElementById('form');
