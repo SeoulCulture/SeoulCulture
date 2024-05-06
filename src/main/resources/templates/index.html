@@ -2,11 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/index-header :: header"/>
 <body>
-<div th:replace="fragments/serviceTitle :: title"/>
-<div id="loading" style="display: none;">
-    <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
-</div>
-<main class="mainContents">
+    <div id="loading" style="display: none;">
+        <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' style='position: relative; display: block; margin: 0px auto;'/>
+    </div>
+    <div th:replace="fragments/serviceTitle :: title"/>
+    <main class="mainContents">
         <div id="inputContainer">
             <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
                 <table id="table">
@@ -24,7 +24,7 @@
                         <td class="index_table_head"><label for="time">어느정도 거리가 괜찮을까요?</label></td>
                     </tr>
                     <tr>
-                        <td><input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}"></td>
+                        <td><input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}" required min="1"></td>
                     </tr>
                     <tr>
                         <td>
@@ -44,7 +44,7 @@
                         <td><input type="number" class="mainInput" id="price" name="price" placeholder="" th:field="*{price}"></td>
                     </tr>
                     <tr>
-                        <td>무료 <input type="checkbox" id="free" class="" th:checked="${cultureForm.price == 0}"></td>
+                        <td>무료 <input type="checkbox" id="free" class="" th:checked="${cultureForm.price == 0}" onclick='togglePriceBox(this)' checked="checked"></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td> <!-- 빈 행 -->
@@ -60,6 +60,9 @@
                         </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td>내 위치 기준 <input type="checkbox" id="myLocation" class="" onclick='toggleLocationBox(this)'></td>
+                    </tr>
                     </tbody>
                 </table>
                 <div id="submit-button">
@@ -67,11 +70,7 @@
                 </div>
             </form>
 
-<!--            <div id="spotInputBox">-->
-<!--                <div>장소 지정하기</div>-->
-<!--                <input type="text" id="searchInput" class="mainInput" name="spot" autocomplete="off">-->
-<!--                <div id="searchResults"></div>-->
-<!--            </div>-->
+
         </div>
     </main>
 <div id="searchStatus" style="display: none;">검색 중입니다...</div>

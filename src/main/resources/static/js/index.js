@@ -54,3 +54,40 @@ function initializeTagify(moodList) {
     userInput: false // 입력 제한
   });
 }
+``
+function togglePriceBox(checkbox) {
+
+  // 1. 텍스트 박스 element 찾기
+  const priceInput = document.getElementById('price');
+
+  // 2-1. 체크박스 선택여부 체크
+  // 2-2. 체크박스 선택여부에 따라 텍스트박스 활성화/비활성화
+  priceInput.disabled = checkbox.checked ? true : false;
+
+  // 3. 텍스트박스 활성화/비활성화 여부에 따라
+  // - 텍스트박스가 비활성화 된 경우 : 텍스트박스 초기화
+  // - 텍스트박스가 활성화 된 경우 : 포커스 이동
+  if(priceInput.disabled) {
+    priceInput.value = null;
+  }else {
+    priceInput.focus();
+  }
+}
+
+function toggleLocationBox(checkbox){
+  // 1. 텍스트 박스 element 찾기
+  const locationInput = document.getElementById('searchInput');
+
+  // 2-1. 체크박스 선택여부 체크
+  // 2-2. 체크박스 선택여부에 따라 텍스트박스 활성화/비활성화
+  locationInput.disabled = checkbox.checked ? true : false;
+
+  // 3. 텍스트박스 활성화/비활성화 여부에 따라
+  // - 텍스트박스가 비활성화 된 경우 : 텍스트박스 초기화
+  // - 텍스트박스가 활성화 된 경우 : 포커스 이동
+  if(locationInput.disabled) {
+    locationInput.value = null;
+  }else {
+    locationInput.focus();
+  }
+}
