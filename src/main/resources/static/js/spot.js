@@ -40,19 +40,20 @@ function includeByCho(search, targetWord) {
 }
 
 // 검색
-let nowIndex = 0;
-const ignoreKey = [37, 38, 39, 40]
+const ignoreKey = [37, 38, 39, 40]  // 방향키
 let preMatched;
 let preInput;
 
 function searchSpots() {
-    let input;
+    let input = document.getElementById('searchInput').value.trim();
     let matches;
     if (ignoreKey.includes(event.keyCode)) {
         matches = preMatched;
         input = preInput;
+    } else if (input.length == 0) {
+        showSearchResult("", "");
+        return;
     } else {
-        input = document.getElementById('searchInput').value.trim();
         matches = findMatchingStrings(event, input);
         preMatched = matches;
         preInput = input;
@@ -64,7 +65,7 @@ function searchSpots() {
 
 // 매칭된 검색 결과 리턴 & 정렬알고리즘(일치율 높은 내림차순)
 function findMatchingStrings(event, val) {
-    const matches = [];
+    let matches = [];
     const inputLength = val.length;
     spotDtos.forEach((spotDto) => {
         if (includeByCho(val, spotDto.spotName)) {
@@ -74,6 +75,7 @@ function findMatchingStrings(event, val) {
         }
     });
     matches.sort((a, b) => b.matchRate - a.matchRate);
+    matches = matches.slice(0, 3);
     return matches.map(match => match.name);
 }
 function calculateMatchingChars(str1, str2) {
@@ -87,47 +89,44 @@ function calculateMatchingChars(str1, str2) {
     return matchingChars;
 }
 
+let nowIndex = -1;
 
 function handleUpDownIndex(event, matches) {
-//    const scrollSpot = document.querySelector(".scroll-spot");
-    let scrollAmount = 0;
-
-    if(nowIndex > 3){
-        scrollAmount = 19;
-    }
     switch (event.keyCode) {
         // UP KEY
         case 38:
             nowIndex = Math.max(nowIndex - 1, 0);
-            searchResults.scrollTop -= scrollAmount;
+            document.querySelector("#searchInput").value = matches[nowIndex] || "";
             break;
         // DOWN KEY
         case 40:
             nowIndex = Math.min(nowIndex + 1, matches.length - 1);
-            searchResults.scrollTop += scrollAmount;
+            document.querySelector("#searchInput").value = matches[nowIndex] || "";
             break;
         // ENTER KEY
         case 13:
-            document.querySelector("#searchInput").value = matches[nowIndex] || "";
-            // 초기화
-            nowIndex = 0;
+            nowIndex = -1;
             matches.length = 0;
             break;
         // 그외 다시 초기화
         default:
-            nowIndex = 0;
+            nowIndex = -1;
             break;
     }
 }
 
 const showSearchResult = (matches, input) => {
-    const regex = makeRegexByCho(input);
-
     const searchResults = document.getElementById("searchResults");
+
+    if (matches == "" && input == "") {
+        searchResults.innerHTML = "";
+        return;
+    }
+    const regex = makeRegexByCho(input);
     searchResults.innerHTML = matches
         .map(
             (label, index) => `
-    <div class='${nowIndex === index ? "active" : ""}'>
+    <div class='${nowIndex === index ? "spot active" : "spot"}'>
       ${label.replace(regex, "<mark>$1</mark>")}
     </div>`).join("");
 };

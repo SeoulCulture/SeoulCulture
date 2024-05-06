@@ -94,13 +94,20 @@ input[type='number'] {
 }
 
 #searchResults {
-    overflow-y: scroll;
-    max-height: 110px;
+    height: fit-content;
+    width: 35%;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 0px 0px 20px 20px;
     position: absolute;
-    width: 11rem;
-    margin-left: 0.7rem;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.spot {
+    min-height: 31px;
+    height: fit-content;
+    align-content: center;
+    word-break: keep-all;
 }
 
 #moods {
