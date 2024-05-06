@@ -124,14 +124,18 @@
     box-shadow: 0 0 20px white;
 }
 
-#right-container-close{
-    position: absolute;
-    right: 20px;
-}
-
 #rightContainer .table td, #rightContainer .table th {
     padding: .3rem;
     word-break: keep-all;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
+}
+
+#right-container-close{
+    position: absolute;
+    right: 20px;
+}
+
+.table {
+    --bs-table-bg: transparent;
 }
