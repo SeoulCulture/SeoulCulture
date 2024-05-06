@@ -108,6 +108,35 @@
     opacity: 1;
 }
 
+#noResult {
+    background: #575757;
+    width: fit-content;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin-left: -67px;
+    margin-top: -96px;
+    height: fit-content;
+    position: absolute;
+    border-radius: .4em;
+    padding: 7px 19px;
+    color: ghostwhite;
+    border-style: outset;
+}
+
+#noResult:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border: 0.969em solid transparent;
+    border-top-color: #575757;
+    border-bottom: 0;
+    margin-left: -0.969em;
+    /* border-style: outset; */
+    margin-bottom: -0.969em;
+}
+
 
 /* ============== 마커 디자인 ================ */
 .marker_category {
