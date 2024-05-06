@@ -8,38 +8,37 @@
 
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
 }
 
-#main-title{
-    margin : 0 auto;
-    align-items : center;
-}
-
-#main-title h3{
-    margin-top : 0;
-    margin-bottom : 0;
-    text-align : center;
-}
-
-/* 정렬 세팅*/
-table {
-    display: flex;
-    justify-content: center;
+#main-title {
+    margin: 0 auto;
     align-items: center;
-    border-spacing: 20px;
 }
 
-tbody {
+#main-title h3 {
+    margin-top: 0;
+    margin-bottom: 0;
     text-align: center;
 }
 
-/*/ 그 외*/
+/* 정렬 세팅*/
 
+#contentBody {
+    text-align: -webkit-center;
+}
+
+#inputContainer {
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    margin: 10% 0%;
+}
+
+/*/ 그 외*/
 .question {
-    width: 100%;
-    position: relative;
+    margin: 20px 0px;
 }
 
 .mainInput {
@@ -49,7 +48,7 @@ tbody {
     border-width: medium;
     border-style: ridge;
     height: 2.2rem;
-    width: -webkit-fill-available;
+    width: 50% !important;
 }
 
 
@@ -57,10 +56,9 @@ tbody {
     margin: 0px !important;
 }
 
-.tagify{
+.tagify {
     overflow: auto;
-    flex-wrap:nowrap;
-    min-width: 100%;
+    flex-wrap: nowrap;
     height: fit-content;
 }
 
@@ -72,6 +70,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type='number'] {
     -moz-appearance: textfield;
 }
@@ -81,7 +80,7 @@ input[type='number'] {
 #searchResults > div.active {
     font-size: larger;
     padding: 3px 0px;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .mark, mark {
@@ -116,3 +115,4 @@ input[type='number'] {
     border: 5px black;
     background: lightgreen;
 }
+
