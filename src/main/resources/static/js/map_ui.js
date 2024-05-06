@@ -37,9 +37,9 @@ function initMap() {
     map = new kakao.maps.Map(mapElement, options);
     initBounds();
     initMarkers();
-    initCenter();
     setBounds();
     animateMarkers();
+    initCenter();
 }
 
 function initBounds() {
@@ -64,8 +64,7 @@ function initCenter() {
         '<div class="arm arm-left"></div><div class="arm arm-right"></div><div class="marker_shadow">' +
         '</div></div>'
     );
-
-    animateMarkers();
+    jumpingHomeMarker();
 }
 
 const overlays = {}
@@ -262,7 +261,6 @@ const animateAtClicking = (element, animation1, animation2, speed_="", prefix = 
     });
 
 function animateMarkers() {
-    jumpingHomeMarker();
     animateCSS('.marker_place', 'bounceIn', "faster");
     animateCSS('.marker_emoji', 'bounceIn');
     animateCSS('.marker_category', 'pulse');
