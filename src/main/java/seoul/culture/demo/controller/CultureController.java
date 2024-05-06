@@ -19,7 +19,9 @@ public class CultureController {
 
     @GetMapping("/")
     public String createCultureForm(Model model){
-        model.addAttribute("cultureForm", new CultureSearchForm());
+        CultureSearchForm cultureSearchForm = new CultureSearchForm();
+        cultureSearchForm.setHowToGo("WALKING");
+        model.addAttribute("cultureForm", cultureSearchForm);
         return "index";
     }
 
