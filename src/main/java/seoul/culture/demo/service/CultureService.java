@@ -41,9 +41,10 @@ public class CultureService {
                         x.setCategory(Category.박물관);
                     else if (x.getTitle().endsWith("극장"))
                         x.setCategory(Category.공연장);
-                    else if (x.getTitle().endsWith("갤러리")) {
+                    else if (x.getTitle().endsWith("갤러리"))
                         x.setCategory(Category.전시);
-                    }
+                    else if (x.getTitle().contains("축제"))
+                        x.setCategory(Category.축제);
                     return new CulturePlace(x);
                 })
                 .forEach(culturePlaceRepository::save);

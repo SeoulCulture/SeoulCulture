@@ -58,17 +58,19 @@ public class CultureEvent extends Mark{
         } catch (NullPointerException e) {}
         String contents = Formatter.contents(variousInfo);
 
+        String title = "제목 없음";
+        try {
+            title = Formatter.stringWithNoQuotes(json.get("TITLE").toString());
+        } catch (NullPointerException e) {}
+
         Category category = null;
         try {
             category = Category.getCategoryByName(Formatter.stringWithNoQuotes(json.get("CODENAME").toString()));
         } catch (NullPointerException e) {
             category = Category.몰라;
+            if (title.contains("축제") || title.contains("페스티벌") || title.contains("festival"))
+                category = Category.축제;
         }
-
-        String title = "제목 없음";
-        try {
-            title = Formatter.stringWithNoQuotes(json.get("TITLE").toString());
-        } catch (NullPointerException e) {}
 
         String imgUrl = "";
         try {

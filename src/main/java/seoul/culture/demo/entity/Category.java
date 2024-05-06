@@ -24,7 +24,8 @@ public enum Category {
     전통축제(List.of("축제-전통/역사")),
     시민축제(List.of("축제-시민화합")),
     국악(List.of("국악")),
-    몰라(List.of("몰라"));
+    몰라(List.of("몰라")), 
+    축제(List.of("축제"));
 
     private final List<String> names;
     Category(List<String> names) {

@@ -1,7 +1,6 @@
 let map;
 let bounds;
 let mapElement = document.getElementById('map');
-console.log(currentLatitude, currentLongitude);
 const rightContainer = document.getElementById('rightContainer');
 const leftContainer = document.getElementById('leftContainer');
 const rightContainerContent = document.getElementById('rightContainerContent');
@@ -31,15 +30,23 @@ window.onload = function () {
 
 
 // 함수 =============================================================================================
+
+function relocateToCenter() { // 현위치로 이동
+    var center = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+    map.panTo(center);
+}
+
 function initMap() {
     mapElement = document.getElementById('map');
     var options = {center: new kakao.maps.LatLng(currentLatitude, currentLongitude)};
     map = new kakao.maps.Map(mapElement, options);
+    var zoomControl = new kakao.maps.ZoomControl();
     initBounds();
     initMarkers();
     setBounds();
     animateMarkers();
     initCenter();
+    map.setLevel(map.getLevel() - 1);
 }
 
 function initBounds() {
@@ -266,8 +273,7 @@ function animateMarkers() {
     animateCSS('.marker_category', 'pulse');
 }
 function jumpingHomeMarker() {
-    animateCSS('.face', 'bounce');
-    animateCSS('.arm', 'bounce');
+    animateCSS('.marker_home', 'bounce');
 }
 
 function getRandomAnimation() {
