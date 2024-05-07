@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,10 @@ public class ConfusionService {
     private final CityConfusionJsonReader cityConfusionJsonReader;
     private final ConfusionAreaRepository confusionAreaRepository;
 
-    public List<ConfusionResponseDto> getRealTimeConfusions() {
+    public List<ConfusionResponseDto> getRealTimeConfusions() throws IOException {
+        if (realTimeConfusions.size() == 0) {
+            getRealTimeJson();
+        }
         return realTimeConfusions;
     }
 
