@@ -28,8 +28,6 @@ import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Component
-@ConfigurationProperties(prefix = "seoul")  // 스프링 컨테이너가 yml 정보를 통해서 bean을 등록할 때 필요
-@NoArgsConstructor @Setter  // Config 에 의한 Bean 생성을 위해 두가지가 필요
 @Getter
 public final class SeoulEventJsonReader implements JsonReader {
     private String key;

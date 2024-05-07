@@ -8,6 +8,10 @@ import java.util.Map;
 
 public class Formatter {
 
+    public static double toDouble(String str) {
+        return Double.parseDouble(stringWithNoQuotes(str));
+    }
+
     public static String stringWithNoQuotes(String str) {
         return str.trim().replaceAll("^\"|\"$", "").replace("\'", "＇").replace("\"", "\\\"");
     }
