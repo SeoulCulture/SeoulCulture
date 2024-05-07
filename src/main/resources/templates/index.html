@@ -23,7 +23,7 @@
             <div class="qesLabel">어느 정도 거리가 괜찮을까요?</div>
             <input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}"
                    required min="1">
-            <div class="checkBox">
+            <div class="checkBox select">
                 <input type="radio" id="walking" class="" name="howToGo" value="WALKING"
                        th:checked="${cultureForm.howToGo == 'WALKING'}">
                 <label for="walking">도보</label>

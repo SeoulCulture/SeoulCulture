@@ -33,7 +33,7 @@ public class NaverPathFinder implements PathFinder {
 
     @Override
     public void setPathInfo(double lat1, double lon1, double lat2, double lon2, HowToGo howToGo) throws IOException {
-        if (howToGo != HowToGo.DRIVING) return;
+//        if (howToGo != HowToGo.DRIVING) return;
         this.srcLat = lat1;
         this.srcLon = lon1;
         this.dstLat = lat2;
