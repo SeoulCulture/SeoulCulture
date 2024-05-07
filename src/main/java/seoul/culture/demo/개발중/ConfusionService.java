@@ -17,12 +17,12 @@ import seoul.culture.demo.util.Formatter;
 @Service
 public class ConfusionService {
 
-    private List<ConfusionResponseDto> realTimeConfusions = new ArrayList<>();
+    private List<ConfusionResponseDto> realTimeConfusions;
     private final CityConfusionJsonReader cityConfusionJsonReader;
     private final ConfusionAreaRepository confusionAreaRepository;
 
     public List<ConfusionResponseDto> getRealTimeConfusions() throws IOException {
-        if (realTimeConfusions.size() == 0) {
+        if (realTimeConfusions == null || realTimeConfusions.size() == 0) {
             getRealTimeJson();
         }
         return realTimeConfusions;
@@ -45,6 +45,7 @@ public class ConfusionService {
         List<ConfusionResponseDto> response = new ArrayList<>();
         for (ConfusionDto result : results) {
             ConfusionArea areaData = confusionAreaRepository.getByPoi(result.getPoi());
+            if (areaData.getAreaData().size() == 0) continue;
             ConfusionResponseDto res = ConfusionResponseDto.builder()
                     .poi(areaData.getPoi())
                     .name(areaData.getName())
@@ -53,7 +54,7 @@ public class ConfusionService {
                     .confusionData(result).build();
             response.add(res);
         }
-        this.realTimeConfusions = response;
+        setRealTimeConfusions(response);
     }
 
 
