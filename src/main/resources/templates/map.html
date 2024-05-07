@@ -28,7 +28,11 @@
 
 <div th:replace="fragments/serviceTitle :: title"/>
 
-<div id="btnRelocation" onclick="relocateToCenter();">내 위치😋</div>
+
+<div id="btnContainer">
+    <div id="btnRelocation" onclick="relocateToCenter();">내 위치😋</div>
+    <div id="btnZoom" onclick="relocateToCluster();">모아보기</div>
+</div>
 <div id="pageContents">
     <div id="leftContainer">
         <div id="map"></div>

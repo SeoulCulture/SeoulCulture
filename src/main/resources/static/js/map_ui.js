@@ -37,6 +37,10 @@ function relocateToCenter() { // 현위치로 이동
     map.panTo(center);
 }
 
+function relocateToCluster() {
+    map.panTo(markerClusterPoint);
+}
+
 function getOverayCountRate() {
     let overlayCnt = 0;
     for (id in markers) {

@@ -27,13 +27,18 @@
 
 #contentBody {
     text-align: -webkit-center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
 }
 
-#inputContainer {
-    text-align: center;
-    width: 80%;
+#inputContainer{
+    margin: 2% 0;
+    width: 100%;
     height: 100%;
-    margin: 10% 0%;
+    position: fixed;
+    overflow: hidden;
 }
 
 /*/ 그 외*/
@@ -59,9 +64,17 @@
 }
 
 .tagify {
+    height: 2.2rem;
     overflow: auto;
     flex-wrap: nowrap;
     height: fit-content;
+}
+
+.qesLabel {
+    font-size: large;
+    margin-bottom: 0.39rem;
+    font-weight: 500;
+    text-shadow: 1px 1px lightgrey;
 }
 
 /*number타입 인풋에서 화살표없애기*/

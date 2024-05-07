@@ -1,15 +1,21 @@
 html {
+    width: 100%;
+    height: 100%;
 }
 
 body {
     text-align: -webkit-center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+
 
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
 
-    min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

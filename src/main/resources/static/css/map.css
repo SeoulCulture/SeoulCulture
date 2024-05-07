@@ -64,7 +64,7 @@
     }
 }
 
-#btnRelocation {
+#btnRelocation, #btnZoom {
     margin: 7px;
     border-radius: 14px;
     border-style: ridge;
@@ -85,10 +85,14 @@
     overflow: hidden;
 }
 
-#btnRelocation:hover {
+#btnZoom {
+    left: 106px;
+    background: oldlace;
+    color: darkgreen;
+    text-shadow: 1px 1px rgb(255 198 198);
 }
 
-#btnRelocation:after {
+#btnRelocation:after, #btnZoom:after {
     content: '';
     position: absolute;
     top: calc(50% - 50px);
@@ -103,9 +107,13 @@
     opacity: 0;
 }
 
-#btnRelocation:hover:after {
+#btnRelocation:hover:after, #btnZoom:hover:after {
     left: calc(100% + 50px);
     opacity: 1;
+}
+
+#btnContainer {
+    position: absolute;
 }
 
 #noResult {
