@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function success(position) {
         const currentLatitude = position.coords.latitude.toString();
         const currentLongitude = position.coords.longitude.toString();
-//        console.log(currentLatitude, currentLongitude);
+        console.log(currentLatitude, currentLongitude);
 
         // 기존 form 요소에 직접 접근하여 위도와 경도를 추가
         let form = document.getElementById('form');
