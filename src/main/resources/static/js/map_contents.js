@@ -39,7 +39,7 @@ function setInformation(marker) {
 
     const paths = document.querySelectorAll('.path');
     paths.forEach(function(button) {
-            button.setAttribute('onclick', `openPath('${marker.latitude}', '${marker.longitude}')`);
+            button.setAttribute('onclick', `openPath('${marker.latitude}', '${marker.longitude}'); toastOn()`);
     });
 }
 
@@ -68,9 +68,28 @@ function openPath(dstLat, dstLon){
       })
       .then(data => {
           // 이 data로 길찾기를 시작하면 됨.
-          console.log(data);
+          console.log(data)
+
+          navigator.clipboard.writeText(data)
+              .then(() => {
+              console.log("Text copied to clipboard...")
+          })
+              .catch(err => {
+              console.log('Something went wrong', err);
+          })
     });
 
+}
+
+//1. 토스트 메시지, 버튼요소를 변수에 대입
+let toastMessage = document.getElementById('toast_message');
+
+//2. 토스트 메시지 노출-사라짐 함수 작성
+function toastOn(){
+    toastMessage.classList.add('active');
+    setTimeout(function(){
+        toastMessage.classList.remove('active');
+    },1000);
 }
 
 function openDetailUrl(url){

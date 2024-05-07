@@ -48,7 +48,7 @@ function getOverayCountRate() {
         if (element != null)
             overlayCnt++;
     }
-    console.log(overlayCnt, Object.keys(markers).length);
+//    console.log(overlayCnt, Object.keys(markers).length);
     return overlayCnt / Object.keys(markers).length;
 }
 
