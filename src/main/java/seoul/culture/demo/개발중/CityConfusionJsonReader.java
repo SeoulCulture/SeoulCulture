@@ -1,9 +1,11 @@
-package seoul.culture.demo.datareader;
+package seoul.culture.demo.개발중;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import seoul.culture.demo.config.SeoulApiConfig;
+import seoul.culture.demo.datareader.ConfusionDto;
+import seoul.culture.demo.datareader.JsonReader;
 import seoul.culture.demo.util.Formatter;
 import seoul.culture.demo.util.JsonUtil;
 
@@ -22,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor // 실시간 갱신됨
 public class CityConfusionJsonReader implements JsonReader {
 
-    private final DateTimeFormatter updateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter updateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final SeoulApiConfig seoulApiConfig;
     private final List<String> poiList = List.of(
@@ -51,6 +53,7 @@ public class CityConfusionJsonReader implements JsonReader {
             "POI111", "POI112", "POI113", "POI114", "POI115"
     );
 
+
     @Override
     public List getResult() throws IOException {
 
@@ -62,10 +65,10 @@ public class CityConfusionJsonReader implements JsonReader {
 
             // create DTO
             ConfusionDto dto = ConfusionDto.builder()
-                    .name(contents.get("AREA_NM").toString())
-                    .code(contents.get("AREA_CD").toString())
-                    .confusion(contents.get("AREA_CONGEST_LVL").toString())
-                    .confusionMsg(contents.get("AREA_CONGEST_MSG").toString())
+                    .name(Formatter.stringWithNoQuotesForJson(contents.get("AREA_NM").toString()))
+                    .poi(Formatter.stringWithNoQuotesForJson(contents.get("AREA_CD").toString()))
+                    .confusion(Formatter.stringWithNoQuotesForJson(contents.get("AREA_CONGEST_LVL").toString()))
+                    .confusionMsg(Formatter.stringWithNoQuotesForJson(contents.get("AREA_CONGEST_MSG").toString()))
                     .maleRate(Formatter.toDouble(contents.get("MALE_PPLTN_RATE").toString()))
                     .femaleRate(Formatter.toDouble(contents.get("FEMALE_PPLTN_RATE").toString()))
                     .rateIn0to10(Formatter.toDouble(contents.get("PPLTN_RATE_10").toString()))
@@ -78,7 +81,7 @@ public class CityConfusionJsonReader implements JsonReader {
                     .rateIn70(Formatter.toDouble(contents.get("PPLTN_RATE_70").toString()))
                     .resentRate(Formatter.toDouble(contents.get("RESNT_PPLTN_RATE").toString()))
                     .nonResentRate(Formatter.toDouble(contents.get("NON_RESNT_PPLTN_RATE").toString()))
-                    .updateTime(LocalDateTime.parse(contents.get("PPLTN_TIME").toString(), updateTimeFormatter))
+                    .updateTime(LocalDateTime.parse(Formatter.stringWithNoQuotesForJson(contents.get("PPLTN_TIME").toString()), updateTimeFormatter))
                     .build();
 
             confusionDtos.add(dto);

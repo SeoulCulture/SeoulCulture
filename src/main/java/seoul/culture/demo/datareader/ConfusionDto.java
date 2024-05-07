@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ConfusionDto {
     private String name;
-    private String code;
+    private String poi;
     private String confusion;
     private String confusionMsg;
     private double maleRate;

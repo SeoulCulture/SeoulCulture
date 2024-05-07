@@ -1,0 +1,717 @@
+[
+  {
+    "poi": "POI001",
+    "name": "강남 MICE 관광특구",
+    "eng": "Gangnam MICE Special Tourist Zone",
+    "area": [
+      "37.5136442,127.0562957",
+      "37.5078663,127.0593463",
+      "37.5090382,127.0628369",
+      "37.5141503,127.0600127"
+    ]
+  },
+  {
+    "poi": "POI002",
+    "name": "동대문 관광특구",
+    "eng": "Dongdaemun Fashion Town Special Tourist Zone",
+    "area": [
+      "37.564885,127.01111",
+      "37.5648054,127.0023956",
+      "37.5697534,127.0019659",
+      "37.5697935,127.0157903",
+      "37.5655466,127.0161441"
+    ]
+  },
+  {
+    "poi": "POI003",
+    "name": "명동 관광특구",
+    "eng": "Myeong-dong Namdaemun Bukchang-dong Da-dong Mugyo-dong Special Tourist Zone",
+    "area": [
+      "37.5587627,126.9785032",
+      "37.5574753,126.9763553",
+      "37.5590225,126.9757706",
+      "37.5608286,126.975719",
+      "37.5644408,126.9768195",
+      "37.5692191,126.9772364",
+      "37.5689043,126.9827695",
+      "37.5681362,126.9877144",
+      "37.5645638,126.9876352",
+      "37.5626714,126.9888076",
+      "37.5611576,126.989037",
+      "37.5604893,126.982401",
+      "37.5596504,126.9803089"
+    ]
+  },
+  {
+    "poi": "POI004",
+    "name": "이태원 관광특구",
+    "eng": "Itaewon Special Tourist Zone",
+    "area": []
+  },
+  {
+    "poi": "POI005",
+    "name": "잠실 관광특구",
+    "eng": "Jamsil Special Tourist Zone",
+    "area": []
+  },
+  {
+    "poi": "POI006",
+    "name": "종로·청계 관광특구",
+    "eng": "Jongno Cheonggye Special Tourist Zone",
+    "area": []
+  },
+  {
+    "poi": "POI007",
+    "name": "홍대 관광특구",
+    "eng": "HongDae Culture & Arts Special Tourist Zone",
+    "area": []
+  },
+  {
+    "poi": "POI008",
+    "name": "경복궁",
+    "eng": "Gyeongbokgung Palace",
+    "area": []
+  },
+  {
+    "poi": "POI009",
+    "name": "광화문·덕수궁",
+    "eng": "Gwanghwamun & Deoksugung Palace",
+    "area": []
+  },
+  {
+    "poi": "POI010",
+    "name": "보신각",
+    "eng": "Bosingak",
+    "area": []
+  },
+  {
+    "poi": "POI011",
+    "name": "서울 암사동 유적",
+    "eng": "Amsa Prehistoric Settlement Site",
+    "area": []
+  },
+  {
+    "poi": "POI012",
+    "name": "창덕궁·종묘",
+    "eng": "Changdeokgung Palace & Jongmyo Shrine",
+    "area": []
+  },
+  {
+    "poi": "POI013",
+    "name": "가산디지털단지역",
+    "eng": "Gasan Digital Complex station",
+    "area": []
+  },
+  {
+    "poi": "POI014",
+    "name": "강남역",
+    "eng": "Gangnam station",
+    "area": []
+  },
+  {
+    "poi": "POI015",
+    "name": "건대입구역",
+    "eng": "Konkuk University station",
+    "area": []
+  },
+  {
+    "poi": "POI016",
+    "name": "고덕역",
+    "eng": "Godeok station",
+    "area": []
+  },
+  {
+    "poi": "POI017",
+    "name": "고속터미널역",
+    "eng": "Express Bus Terminal station",
+    "area": []
+  },
+  {
+    "poi": "POI018",
+    "name": "교대역",
+    "eng": "Seoul National University of Education station",
+    "area": []
+  },
+  {
+    "poi": "POI019",
+    "name": "구로디지털단지역",
+    "eng": "Guro Digital Complex station",
+    "area": []
+  },
+  {
+    "poi": "POI020",
+    "name": "구로역",
+    "eng": "Guro station",
+    "area": []
+  },
+  {
+    "poi": "POI021",
+    "name": "군자역",
+    "eng": "Gunja station",
+    "area": []
+  },
+  {
+    "poi": "POI022",
+    "name": "남구로역",
+    "eng": "Namguro station",
+    "area": []
+  },
+  {
+    "poi": "POI023",
+    "name": "대림역",
+    "eng": "Daerim station",
+    "area": []
+  },
+  {
+    "poi": "POI024",
+    "name": "동대문역",
+    "eng": "Dongdaemun station",
+    "area": []
+  },
+  {
+    "poi": "POI025",
+    "name": "뚝섬역",
+    "eng": "Ttukseom station",
+    "area": []
+  },
+  {
+    "poi": "POI026",
+    "name": "미아사거리역",
+    "eng": "Miasageori station",
+    "area": []
+  },
+  {
+    "poi": "POI027",
+    "name": "발산역",
+    "eng": "Balsan station",
+    "area": []
+  },
+  {
+    "poi": "POI028",
+    "name": "북한산우이역",
+    "eng": "Bukhansan Ui station",
+    "area": []
+  },
+  {
+    "poi": "POI029",
+    "name": "사당역",
+    "eng": "Sadang station",
+    "area": []
+  },
+  {
+    "poi": "POI030",
+    "name": "삼각지역",
+    "eng": "Samgakji station",
+    "area": []
+  },
+  {
+    "poi": "POI031",
+    "name": "서울대입구역",
+    "eng": "Seoul National University station",
+    "area": []
+  },
+  {
+    "poi": "POI032",
+    "name": "서울식물원·마곡나루역",
+    "eng": "Seoul Botanic Park·Magongnaru station",
+    "area": []
+  },
+  {
+    "poi": "POI033",
+    "name": "서울역",
+    "eng": "Seoul station",
+    "area": []
+  },
+  {
+    "poi": "POI034",
+    "name": "선릉역",
+    "eng": "Seolleung station",
+    "area": []
+  },
+  {
+    "poi": "POI035",
+    "name": "성신여대입구역",
+    "eng": "Sungshin Women's University station",
+    "area": []
+  },
+  {
+    "poi": "POI036",
+    "name": "수유역",
+    "eng": "Suyu station",
+    "area": []
+  },
+  {
+    "poi": "POI037",
+    "name": "신논현역·논현역",
+    "eng": "Sinnonhyeon·Nonhyeon station",
+    "area": []
+  },
+  {
+    "poi": "POI038",
+    "name": "신도림역",
+    "eng": "Sindorim station",
+    "area": []
+  },
+  {
+    "poi": "POI039",
+    "name": "신림역",
+    "eng": "Sillim station",
+    "area": []
+  },
+  {
+    "poi": "POI040",
+    "name": "신촌·이대역",
+    "eng": "Sinchon·Ewha Womans University station",
+    "area": []
+  },
+  {
+    "poi": "POI041",
+    "name": "양재역",
+    "eng": "Yangjae station",
+    "area": []
+  },
+  {
+    "poi": "POI042",
+    "name": "역삼역",
+    "eng": "Yeoksam station",
+    "area": []
+  },
+  {
+    "poi": "POI043",
+    "name": "연신내역",
+    "eng": "Yeonsinnae station",
+    "area": []
+  },
+  {
+    "poi": "POI044",
+    "name": "오목교역·목동운동장",
+    "eng": "Omokgyo·Mok-dong Stadium station",
+    "area": []
+  },
+  {
+    "poi": "POI045",
+    "name": "왕십리역",
+    "eng": "Wangsimni station",
+    "area": []
+  },
+  {
+    "poi": "POI046",
+    "name": "용산역",
+    "eng": "Yongsan station",
+    "area": []
+  },
+  {
+    "poi": "POI047",
+    "name": "이태원역",
+    "eng": "Itaewon station",
+    "area": []
+  },
+  {
+    "poi": "POI048",
+    "name": "장지역",
+    "eng": "Jangji station",
+    "area": []
+  },
+  {
+    "poi": "POI049",
+    "name": "장한평역",
+    "eng": "Janghanpyeong station",
+    "area": []
+  },
+  {
+    "poi": "POI050",
+    "name": "천호역",
+    "eng": "Cheonho station",
+    "area": []
+  },
+  {
+    "poi": "POI051",
+    "name": "총신대입구(이수)역",
+    "eng": "Chongshin University(Isu) station",
+    "area": []
+  },
+  {
+    "poi": "POI052",
+    "name": "충정로역",
+    "eng": "Chungjeongno station",
+    "area": []
+  },
+  {
+    "poi": "POI053",
+    "name": "합정역",
+    "eng": "Hapjeong station",
+    "area": []
+  },
+  {
+    "poi": "POI054",
+    "name": "혜화역",
+    "eng": "Hyehwa station",
+    "area": []
+  },
+  {
+    "poi": "POI055",
+    "name": "홍대입구역(2호선)",
+    "eng": "Hongik University station(Line 2)",
+    "area": []
+  },
+  {
+    "poi": "POI056",
+    "name": "회기역",
+    "eng": "Hoegi station",
+    "area": []
+  },
+  {
+    "poi": "POI057",
+    "name": "4·19 카페거리",
+    "eng": "4·19 Cafe street",
+    "area": []
+  },
+  {
+    "poi": "POI058",
+    "name": "가락시장",
+    "eng": "Garak Market",
+    "area": []
+  },
+  {
+    "poi": "POI059",
+    "name": "가로수길",
+    "eng": "Garosu-gil",
+    "area": []
+  },
+  {
+    "poi": "POI060",
+    "name": "광장(전통)시장",
+    "eng": "Gwangjang(Traditional) Market",
+    "area": []
+  },
+  {
+    "poi": "POI061",
+    "name": "김포공항",
+    "eng": "Gimpo Airport",
+    "area": []
+  },
+  {
+    "poi": "POI062",
+    "name": "낙산공원·이화마을",
+    "eng": "Naksan Park·Ihwa Village",
+    "area": []
+  },
+  {
+    "poi": "POI063",
+    "name": "노량진",
+    "eng": "Noryangjin",
+    "area": []
+  },
+  {
+    "poi": "POI064",
+    "name": "덕수궁길·정동길",
+    "eng": "Deoksugung-gil·Jeongdong-gil",
+    "area": []
+  },
+  {
+    "poi": "POI065",
+    "name": "방배역 먹자골목",
+    "eng": "Bangbae food alley",
+    "area": []
+  },
+  {
+    "poi": "POI066",
+    "name": "북촌한옥마을",
+    "eng": "Bukchon Hanok Village",
+    "area": []
+  },
+  {
+    "poi": "POI067",
+    "name": "서촌",
+    "eng": "Seochon",
+    "area": []
+  },
+  {
+    "poi": "POI068",
+    "name": "성수카페거리",
+    "eng": "Seongsu Cafe Street",
+    "area": []
+  },
+  {
+    "poi": "POI069",
+    "name": "수유리 먹자골목",
+    "eng": "Suyuri food alley",
+    "area": []
+  },
+  {
+    "poi": "POI070",
+    "name": "쌍문동 맛집거리",
+    "eng": "Ssangmun-dong restaurant street",
+    "area": []
+  },
+  {
+    "poi": "POI071",
+    "name": "압구정로데오거리",
+    "eng": "Apgujeong Rodeo Street",
+    "area": []
+  },
+  {
+    "poi": "POI072",
+    "name": "여의도",
+    "eng": "Yeouido",
+    "area": []
+  },
+  {
+    "poi": "POI073",
+    "name": "연남동",
+    "eng": "Yeonnam-dong",
+    "area": []
+  },
+  {
+    "poi": "POI074",
+    "name": "영등포 타임스퀘어",
+    "eng": "Yeongdeungpo Time square",
+    "area": []
+  },
+  {
+    "poi": "POI075",
+    "name": "외대앞",
+    "eng": "Hankuk University of Foreign Studies",
+    "area": []
+  },
+  {
+    "poi": "POI076",
+    "name": "용리단길",
+    "eng": "Yongnidan-gil",
+    "area": []
+  },
+  {
+    "poi": "POI077",
+    "name": "이태원 앤틱가구거리",
+    "eng": "Itaewon Antiques street",
+    "area": []
+  },
+  {
+    "poi": "POI078",
+    "name": "인사동·익선동",
+    "eng": "Insa-dong·Ikseon-dong",
+    "area": []
+  },
+  {
+    "poi": "POI079",
+    "name": "창동 신경제 중심지",
+    "eng": "Changdong New Economic Center",
+    "area": []
+  },
+  {
+    "poi": "POI080",
+    "name": "청담동 명품거리",
+    "eng": "Cheongdam-dong Luxury Fashion street",
+    "area": []
+  },
+  {
+    "poi": "POI081",
+    "name": "청량리 제기동 일대 전통시장",
+    "eng": "Traditional market in Cheongnyangni Jegi-dong",
+    "area": []
+  },
+  {
+    "poi": "POI082",
+    "name": "해방촌·경리단길",
+    "eng": "Haebangchon·Gyeongnidan-gil",
+    "area": []
+  },
+  {
+    "poi": "POI083",
+    "name": "DDP(동대문디자인플라자)",
+    "eng": "DDP(Dongdaemun Design Plaza)",
+    "area": []
+  },
+  {
+    "poi": "POI084",
+    "name": "DMC(디지털미디어시티)",
+    "eng": "DMC(Digital Media City)",
+    "area": []
+  },
+  {
+    "poi": "POI085",
+    "name": "강서한강공원",
+    "eng": "Gangseo Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI086",
+    "name": "고척돔",
+    "eng": "Gocheok Dome",
+    "area": []
+  },
+  {
+    "poi": "POI087",
+    "name": "광나루한강공원",
+    "eng": "Gwangnaru Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI088",
+    "name": "광화문광장",
+    "eng": "Gwanghwamun Square",
+    "area": []
+  },
+  {
+    "poi": "POI089",
+    "name": "국립중앙박물관·용산가족공원",
+    "eng": "The National Museum of Korea·Yongsan Family Park",
+    "area": []
+  },
+  {
+    "poi": "POI090",
+    "name": "난지한강공원",
+    "eng": "Nanji Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI091",
+    "name": "남산공원",
+    "eng": "Namsan Park",
+    "area": []
+  },
+  {
+    "poi": "POI092",
+    "name": "노들섬",
+    "eng": "Nodeul island",
+    "area": []
+  },
+  {
+    "poi": "POI093",
+    "name": "뚝섬한강공원",
+    "eng": "Ttukseom Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI094",
+    "name": "망원한강공원",
+    "eng": "Mangwon Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI095",
+    "name": "반포한강공원",
+    "eng": "Banpo Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI096",
+    "name": "북서울꿈의숲",
+    "eng": "Dream Forest",
+    "area": []
+  },
+  {
+    "poi": "POI097",
+    "name": "불광천",
+    "eng": "Bulgwangcheon River",
+    "area": []
+  },
+  {
+    "poi": "POI098",
+    "name": "서리풀공원·몽마르뜨공원",
+    "eng": "Seoripul Park·Montmartre Park",
+    "area": []
+  },
+  {
+    "poi": "POI099",
+    "name": "서울광장",
+    "eng": "Seoul Plaza",
+    "area": []
+  },
+  {
+    "poi": "POI100",
+    "name": "서울대공원",
+    "eng": "Seoul Grand Park",
+    "area": []
+  },
+  {
+    "poi": "POI101",
+    "name": "서울숲공원",
+    "eng": "Seoul Forest",
+    "area": []
+  },
+  {
+    "poi": "POI102",
+    "name": "아차산",
+    "eng": "Achasan",
+    "area": []
+  },
+  {
+    "poi": "POI103",
+    "name": "양화한강공원",
+    "eng": "Yanghwa Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI104",
+    "name": "어린이대공원",
+    "eng": "Children's Grand Park",
+    "area": []
+  },
+  {
+    "poi": "POI105",
+    "name": "여의도한강공원",
+    "eng": "Yeouido Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI106",
+    "name": "월드컵공원",
+    "eng": "World Cup Park",
+    "area": []
+  },
+  {
+    "poi": "POI107",
+    "name": "응봉산",
+    "eng": "Eungbongsan",
+    "area": []
+  },
+  {
+    "poi": "POI108",
+    "name": "이촌한강공원",
+    "eng": "Ichon Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI109",
+    "name": "잠실종합운동장",
+    "eng": "Jamsil (Seoul) Sports Complex",
+    "area": []
+  },
+  {
+    "poi": "POI110",
+    "name": "잠실한강공원",
+    "eng": "Jamsil Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI111",
+    "name": "잠원한강공원",
+    "eng": "Jamwon Hangang Park",
+    "area": []
+  },
+  {
+    "poi": "POI112",
+    "name": "청계산",
+    "eng": "Cheonggyesan",
+    "area": []
+  },
+  {
+    "poi": "POI113",
+    "name": "청와대",
+    "eng": "Cheongwadae",
+    "area": []
+  },
+  {
+    "poi": "POI114",
+    "name": "북창동 먹자골목",
+    "eng": "Bukchang-dong food alley",
+    "area": []
+  },
+  {
+    "poi": "POI115",
+    "name": "남대문시장",
+    "eng": "Namdaemun Market",
+    "area": []
+  }
+]

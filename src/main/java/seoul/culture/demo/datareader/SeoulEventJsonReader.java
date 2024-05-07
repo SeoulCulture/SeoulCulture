@@ -17,10 +17,9 @@ import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import seoul.culture.demo.config.SeoulApiConfig;
 import seoul.culture.demo.entity.mark.CultureEvent;
 import seoul.culture.demo.util.JsonUtil;
 
@@ -29,13 +28,13 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Component
 @Getter
+@RequiredArgsConstructor
 public final class SeoulEventJsonReader implements JsonReader {
-    private String key;
+    private final SeoulApiConfig apiConfig;
     private final LocalDate FIRST_DAY = LocalDate.now().with(firstDayOfYear());
     private final LocalDate LAST_DAY = LocalDate.now().with(lastDayOfYear());
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-
 
     @Override
     public List<CultureEvent> getResult() throws IOException {
@@ -82,7 +81,7 @@ public final class SeoulEventJsonReader implements JsonReader {
 
         // API URL
         StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
-        urlBuilder.append("/" + URLEncoder.encode(this.key, "UTF-8"))
+        urlBuilder.append("/" + URLEncoder.encode(apiConfig.getKey(), "UTF-8"))
                 .append("/" + URLEncoder.encode("json", "UTF-8"))
                 .append("/" + URLEncoder.encode("culturalEventInfo", "UTF-8"))
                 .append("/" + URLEncoder.encode("1", "UTF-8"))
