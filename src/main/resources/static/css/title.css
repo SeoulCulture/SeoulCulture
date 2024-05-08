@@ -6,7 +6,7 @@
   font-weight: normal;
 }
 
-#serviceTitle {
+#serviceTitle, #submitBtn {
   width: 100%;
   transition: all 0.5s;
   /*-webkit-text-stroke: 4px #d6f4f4;*/
@@ -17,11 +17,11 @@
   margin-bottom: 2%;
   color: transparent;
   font-family: "Meta", sans-serif;
-  text-shadow: 4px 4px 0px #07BCCB,
-  7px 7px 0px #e601c0,
+  text-shadow: 4px 4px 0px #1cd3e2,
+  7px 7px 0px #7d4a74,
   10px 10px 0px #e9019a,
   13px 13px 0px #f40468,
-  16px 16px 10px #482896;
+  16px 16px 10px #fffee5;
   cursor: pointer;
   font-weight: 900;
 }

@@ -33,13 +33,12 @@
 }
 
 #inputContainer {
-    margin: 1% 0;
     overflow: hidden;
 }
 
 /*/ 그 외*/
 .question {
-    margin: 16px 0px;
+    margin: 14px 0px;
 }
 
 .mainInput {
@@ -48,12 +47,15 @@
     border-color: chocolate;
     border-width: medium;
     border-style: ridge;
-    height: 2.2rem;
+    height: 2.0rem;
     width: 70%;
     max-width: 273px;
     min-width: 160px;
 }
 
+#selectedMood {
+    height: 2.5rem;
+}
 
 .tagify__input {
     margin: 0px !important;
@@ -124,19 +126,13 @@ input[type='number'] {
 }
 
 #submitBtn {
-    text-align: center;
     width: 100%;
     height: 100%;
-    border: 5px black;
-    background: transparent;
-    font-style: italic;
-    font-size: 4rem;
-    text-align: center;
-    color: #1cd3e2;
-    font-family: "Meta", sans-serif;
-    text-shadow: 3px 2px 0px #e601c0, 5px 5px 0px #e9019a, 6px 6px 0px #f40468, 7px 7px 5px #482896;
-    cursor: pointer;
-    font-weight: 800;
+    border: 5px black !important;
+    background: transparent !important;
+    font-size: 4rem !important;
+    text-align: center !important;
+    font-weight: 800 !important;
 }
 
 
