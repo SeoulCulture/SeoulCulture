@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
 function drawAreaInMap(confusionData) {
     const areas = confusionData['areas'];
     if(areas.length > 3){
-        console.log("[혼잡영역] 그리기 시작");
         // 현재 confusion을 전역에 저장
         const detail = confusionData['confusionData'];
         const confusion = {
@@ -56,7 +55,7 @@ function drawAreaInMap(confusionData) {
         let polygonPath = createPolygonPath(areas);
         const polygon = drawPolygon(polygonPath, detail['confusion'])
         polygon.setMap(map);
-        console.log("[혼잡영역] 그렸음");
+        console.log("[혼잡영역] 폴리곤 그렸음");
         addEventByConfusionTag(detail['confusion'], polygon, confusion);
     }
     else if (confusionData['areas'].length == 1) {
