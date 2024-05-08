@@ -29,21 +29,17 @@
     text-align: -webkit-center;
     width: 100%;
     height: 100%;
-    position: fixed;
     overflow: hidden;
 }
 
-#inputContainer{
-    margin: 2% 0;
-    width: 100%;
-    height: 100%;
-    position: fixed;
+#inputContainer {
+    margin: 1% 0;
     overflow: hidden;
 }
 
 /*/ 그 외*/
 .question {
-    margin: 20px 0px;
+    margin: 16px 0px;
 }
 
 .mainInput {
@@ -128,27 +124,23 @@ input[type='number'] {
 }
 
 #submitBtn {
-    margin-top: 30px;
-    width: 100px;
-    height: 40px;
-    border-radius: 20px 20px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
     border: 5px black;
     background: transparent;
-    font-variation-settings: "wght" 900, "ital" 1;
     font-style: italic;
-    font-size: 2rem;
+    font-size: 4rem;
     text-align: center;
-    margin-bottom: 3%;
-    color: #07BCCB;
+    color: #1cd3e2;
     font-family: "Meta", sans-serif;
     text-shadow: 3px 2px 0px #e601c0, 5px 5px 0px #e9019a, 6px 6px 0px #f40468, 7px 7px 5px #482896;
     cursor: pointer;
     font-weight: 800;
-    padding-right: 15px;
 }
 
 .select {
-    padding: 15px 10px;
+    padding: 8px 0px;
 }
 .select input[type=radio]{
     display: none;
