@@ -39,22 +39,22 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws IOException {
-//        // [문화장소]
-//        cultureService.registerCulturePlace();
-//        moodService.moodRegister();
-//
-//        // [문화행사]
-//        registerCultureEvent();   // (아래에 스케줄러도 있음)
-//
-//        // [장소지정검색] 엑셀내용(장소정보) db에 반영 및 할당
-//        spotExcelReader.getResult();
-//
-//        // [장소지정검색] 지하철역 db에 반영 및 할당
-//        subwayJsonReader.getResult();
-//
-//         [혼잡도] ConfusionArea 엔티티 생성하기
-//        confusionService.registerConfusionArea();  // 혼잡도 영역 기본세팅
-//        confusionService.getRealTimeJson(); // 실시간 데이터 (아래 스케줄러도 있음)
+        // [문화장소]
+        cultureService.registerCulturePlace();
+        moodService.moodRegister();
+
+        // [문화행사]
+        registerCultureEvent();   // (아래에 스케줄러도 있음)
+
+        // [장소지정검색] 엑셀내용(장소정보) db에 반영 및 할당
+        spotExcelReader.getResult();
+
+        // [장소지정검색] 지하철역 db에 반영 및 할당
+        subwayJsonReader.getResult();
+
+        // [혼잡도] ConfusionArea 엔티티 생성하기
+        confusionService.registerConfusionArea();  // 혼잡도 영역 기본세팅
+        confusionService.getRealTimeJson(); // 실시간 데이터 (아래 스케줄러도 있음)
     }
 
     @Scheduled(cron = "0 0 2 * * *") // 매일 새벽 2시에 문화행사 업데이트
