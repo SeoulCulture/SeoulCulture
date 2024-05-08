@@ -139,28 +139,74 @@ input[type='number'] {
     font-weight: 800;
 }
 
+
+/*여기서부터 체크박스 및 라디오버튼*/
 .select {
     padding: 8px 0px;
 }
 .select input[type=radio]{
     display: none;
 }
-.select input[type=radio]+label{
+.select input[type=radio]+label {
     display: inline-block;
     cursor: pointer;
-    height: 24px;
-    width: 90px;
-    border: 1px solid #333;
-    line-height: 24px;
-    text-align: center;
-    font-weight:bold;
-    font-size:13px;
-}
-.select input[type=radio]+label{
+    height: fit-content;
+    width: fit-content;
+    padding: 3px 10px;
+    margin: 0px 2px;
+    font-weight: bold;
+    align-content: center;
+    font-size: 11px;
     background-color: #fff;
+    border-radius: 3px;
     color: #333;
+    box-shadow: 1px 4px 0 rgb(0,0,0,0.5);
+
 }
-.select input[type=radio]:checked+label{
-    background-color: #ff969f;
+.select input[type=radio]:checked+label {
+    top: 4px;
+    background-color: #ae0085;
+    color: #fff;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
+    position: relative;
+}
+
+.select input[type=radio]+label:hover {
+    /*background-color: #ae0085;*/
+    /*color: #fff;*/
+}
+
+/* 체크박스 스타일 */
+.checkBox {
+    padding: 8px 0px;
+}
+.checkBox input[type=checkbox] {
+    display: none;
+}
+/* 체크박스 라벨 스타일 */
+.checkBox input[type=checkbox]+label {
+    display: inline-block;
+    cursor: pointer;
+    height: fit-content;
+    width: fit-content;
+    padding: 3px 10px;
+    margin: 0px 2px;
+    font-weight: bold;
+    align-content: center;
+    font-size: 11px;
+    background-color: #fff;
+    border-radius: 3px;
     color: #333;
+    box-shadow: 1px 4px 0 rgb(0,0,0,0.5);
+}
+/* 체크된 체크박스 라벨 스타일 */
+.checkBox input[type=checkbox]:checked+label {
+    background-color: #ae0085;
+    color: #fff;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
+}
+/* 체크박스 라벨 호버 스타일 */
+.checkBox input[type=checkbox]+label:hover {
+    /*background-color: #ae0085;*/
+    /*color: #fff;*/
 }

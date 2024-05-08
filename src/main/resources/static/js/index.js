@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function togglePriceBox(checkbox) {
-
   // 1. 텍스트 박스 element 찾기
   const priceInput = document.getElementById('price');
 
