@@ -1,16 +1,16 @@
 /* TODO: 스크롤 디자인 : map화면에서 오른쪽컨테이너에서 스크롤 디자인*/
 
 /*막대*/
-#rightContainer::-webkit-scrollbar {
-    width: 15px;
+#rightContainer::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 0px;
 }
 /*배경*/
-#rightContainer::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.7);
+#rightContainer::-webkit-scrollbar-thumb, body::-webkit-scrollbar {
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
 }
 /*버튼*/
-#rightContainer::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.3);
+#rightContainer::-webkit-scrollbar-track, body::-webkit-scrollbar {
+    background-color: rgba(175, 175, 175, 0.3);
     border-radius: 10px;
 }

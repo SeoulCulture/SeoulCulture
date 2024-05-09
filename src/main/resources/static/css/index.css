@@ -23,6 +23,19 @@
     text-align: center;
 }
 
+
+#serviceDescription {
+    font-size: smaller;
+    letter-spacing: 0px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 6px honeydew;
+    font-weight: 500;
+}
+#titleInDescription {
+    color: #6c0000;
+    font-weight: 800;
+}
+
 /* 정렬 세팅*/
 
 #contentBody {
@@ -71,8 +84,7 @@
 .qesLabel {
     font-size: large;
     margin-bottom: 0.39rem;
-    font-weight: 500;
-    text-shadow: 1px 1px lightgrey;
+    font-weight: 600;
 }
 
 /*number타입 인풋에서 화살표없애기*/

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/index-header :: header"/>
-<body>
+<body id="indexBody">
 <div id="loading" style="display: none;">
     <img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif'
          style='position: relative; display: block; margin: 0px auto;'/>
@@ -9,16 +9,25 @@
 <div th:replace="fragments/serviceTitle :: title"/>
 <div id="contentBody">
 <div id="inputContainer">
+    <div id="serviceDescription">
+        <p>안녕하세요? <span id="titleInDescription">'서울 지금 여기'</span>에 오신 것을 환영합니다.<br>
+            세상은 내가 모르는 사이에 끊임없는 문화를 만들어갑니다.</p>
+        <p>남는 시간을 흘려보내기는 아쉽지 않나요?<br>
+            <span id="titleInDescription">분명히 '근처 어딘가'에서 풍부한 경험을 할 수 있습니다.</span></p>
+        <p><span id="titleInDescription">지금 서울에서</span> 활발히 운영중인 행사를 보여드릴게요.<br>
+            <span id="titleInDescription">지금이 아니면</span> 행복한 경험을 놓칠 지도 몰라요.</p>
+
+    </div>
     <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
-        <div class="question qes1">
-            <div class="qesLabel">지금 기분이 어떤가요?</div>
-            <select class="mainInput" id="selectedMood" name="selectedMood">
-                <option value="">==기분선택==</option>
-                <option th:each="mood : *{moods}"
-                        th:value="${mood}"
-                        th:utext="${mood}"></option>
-            </select>
-        </div>
+<!--        <div class="question qes1">-->
+<!--            <div class="qesLabel">지금 기분이 어떤가요?</div>-->
+<!--            <select class="mainInput" id="selectedMood" name="selectedMood">-->
+<!--                <option value="">==기분선택==</option>-->
+<!--                <option th:each="mood : *{moods}"-->
+<!--                        th:value="${mood}"-->
+<!--                        th:utext="${mood}"></option>-->
+<!--            </select>-->
+<!--        </div>-->
         <div class="question qes2">
             <div class="qesLabel">어디 주변으로 알아볼까요?</div>
             <div id="searchBox">
@@ -43,16 +52,16 @@
                 <label for="driving">차량</label>
             </div>
         </div>
-        <div class="question qes4">
-            <div class="qesLabel">비용은 어느정도가 좋을까요?</div>
-            <input type="number" class="mainInput" id="price" name="price" placeholder="" th:field="*{price}" required>
-            <div class="checkBox">
-                <div>
-                    <input type="checkbox" id="free" onclick='togglePriceBox(this)' th:checked="${cultureForm.price == 0}">
-                    <label for="free">무료</label>
-                </div>
-            </div>
-        </div>
+<!--        <div class="question qes4">-->
+<!--            <div class="qesLabel">비용은 어느정도가 좋을까요?</div>-->
+<!--            <input type="number" class="mainInput" id="price" name="price" placeholder="" th:field="*{price}" required>-->
+<!--            <div class="checkBox">-->
+<!--                <div>-->
+<!--                    <input type="checkbox" id="free" onclick='togglePriceBox(this)' th:checked="${cultureForm.price == 0}">-->
+<!--                    <label for="free">무료</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div id="submit-button">
             <button id="submitBtn" type="submit">Go!</button>
         </div>
@@ -62,3 +71,12 @@
 </div>
 </body>
 </html>
+
+<script>
+    $('a').click(function () {
+        $('html, body').animate({
+            scrollTop: $($.attr(this, 'href')).offset().top
+        }, 500);
+        return false;
+    });
+</script>

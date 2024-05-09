@@ -1,5 +1,8 @@
 <h3 id="reSearchTitle" class="animate__animated animate__pulse"> 다시 검색하기 </h3>
-
+<div id="serviceDescription">
+    거리를 조금 더 늘려보세요.<br>
+    또는 출발 위치를 변경해보세요.
+</div>
 <div id="inputContainer">
     <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
         <div class="question qes2">
@@ -24,16 +27,6 @@
                 <label for="walking">도보</label>
                 <input type="radio" id="driving" class="" name="howToGo" value="DRIVING" th:checked="${cultureForm.howToGo == 'DRIVING'}">
                 <label for="driving">차량</label>
-            </div>
-        </div>
-        <div class="question qes4">
-            <div class="qesLabel reQesLabel">비용은 어느정도가 좋을까요?</div>
-            <input type="number" class="mainInput" id="price" name="price" placeholder="" th:field="*{price}" required>
-            <div class="checkBox">
-                <div>
-                    <input type="checkbox" id="free" onclick='togglePriceBox(this)' th:checked="${cultureForm.price == 0}">
-                    <label for="free">무료</label>
-                </div>
             </div>
         </div>
         <div id="submit-button">

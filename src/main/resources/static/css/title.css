@@ -68,7 +68,6 @@
   margin-top: -7px;
   margin-bottom: 8px;
   font-style: italic;
-  font-size: 3rem;
   text-align: center;
   color: transparent;
   background: transparent;
@@ -81,4 +80,6 @@
   16px 16px 10px #fffee5;
   cursor: pointer;
   font-weight: 900;
+  padding: 14px 0px;
+  font-size: 66px;
 }
