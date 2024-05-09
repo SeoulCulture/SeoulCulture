@@ -76,12 +76,12 @@
 }
 
 /*오른쪽 컨테이너 전용*/
-#rightContainer {
-    padding: 20px;
-    text-align: -webkit-center;
-    background-color: rgba(var(--white), var(--alpha04));
-    overflow-y: scroll;
-}
+/*#rightContainer {*/
+/*    padding: 20px;*/
+/*    text-align: -webkit-center;*/
+/*    background-color: rgba(var(--white), var(--alpha04));*/
+/*    overflow-y: scroll;*/
+/*}*/
 
 #rightContainer .place-img img{
     border-style: ridge;

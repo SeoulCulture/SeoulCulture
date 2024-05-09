@@ -17,15 +17,12 @@ public enum Category {
     콘서트(List.of("콘서트")),
     공연장(List.of("극장", "공연장")),
     연극(List.of("연극")),
-    문화축제(List.of("축제-문화/예술")),
-    문화원(List.of("문화예술회관", "문화원")),
-    독주독창회(List.of("독주/독창회")),
+    축제(List.of("축제-문화/예술", "축제-전통/역사", "축제-시민화합", "축제")),
+    문화관(List.of("문화예술회관", "문화원")),
+    음악(List.of("독주/독창회")),
     무용(List.of("무용")),
-    전통축제(List.of("축제-전통/역사")),
-    시민축제(List.of("축제-시민화합")),
     국악(List.of("국악")),
-    몰라(List.of("몰라")), 
-    축제(List.of("축제"));
+    몰라(List.of("몰라"));
 
     private final List<String> names;
     Category(List<String> names) {

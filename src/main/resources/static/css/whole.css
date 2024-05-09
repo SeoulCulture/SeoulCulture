@@ -5,6 +5,7 @@ html {
 
 body {
     text-align: -webkit-center;
+    margin: 2px 0px 0px 0px;
 
     -webkit-user-select:none;
     -moz-user-select:none;

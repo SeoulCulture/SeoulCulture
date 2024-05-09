@@ -42,6 +42,8 @@ function relocateToCluster() {
 }
 
 function getOverayCountRate() {
+    if (Object.keys(markers).length == 0)
+        return 0;
     let overlayCnt = 0;
     for (id in markers) {
         let element = document.getElementById(id);
@@ -54,11 +56,16 @@ function getOverayCountRate() {
 
 function setCenterPoint() {
     var latlng = map.getCenter();
-    var moveLatLon = new kakao.maps.LatLng((2*currentLatitude + latlng.getLat())/3, (2*currentLongitude+latlng.getLng())/3);
+    var moveLatLon = new kakao.maps.LatLng((2 * currentLatitude + latlng.getLat()) / 3, (2 * currentLongitude + latlng.getLng()) / 3);
     map.setCenter(moveLatLon);
 
     // 커스텀 오버레이의 K% 이상이 보이도록 배치
     let rate = getOverayCountRate();
+    if (rate == 0) {
+        map.setLevel(4);
+        return;
+    }
+
     let startValue = 13;
     map.setLevel(startValue);
     while (rate >= 0.1) {
@@ -82,6 +89,19 @@ function getDistance(lat1,lng1,lat2,lng2) {
     return d;
 }
 
+function hasNoResult() {
+    if (markerInfo.length + placeInfo.length == 0) {
+        const markerPosition = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+        const customOverlay = new kakao.maps.CustomOverlay({
+            position: markerPosition,
+            content: "<div id='noResult' class='animate__animated animate__slideInDown'>주변에 없어요</div>"
+        });
+        customOverlay.setMap(map);
+        bounds.extend(markerPosition);
+        return;
+    }
+}
+
 function initMap() {
     mapElement = document.getElementById('map');
     var options = {center: new kakao.maps.LatLng(currentLatitude, currentLongitude)};
@@ -92,6 +112,7 @@ function initMap() {
     setBounds();
     initCenter();
     setCenterPoint();
+    hasNoResult();
 }
 
 function initBounds() {
@@ -154,16 +175,6 @@ function registerOverlay(overlay, id) {
 }
 
 function setBounds() {
-    if (bounds.isEmpty()) {
-        const markerPosition = new kakao.maps.LatLng(currentLatitude, currentLongitude);
-        const customOverlay = new kakao.maps.CustomOverlay({
-            position: markerPosition,
-            content: "<div id='noResult' class='animate__animated animate__slideInDown'>주변에 없어요</div>"
-        });
-        customOverlay.setMap(map);
-        bounds.extend(markerPosition);
-        return;
-    }
     map.setBounds(bounds);
 }
 
@@ -181,18 +192,14 @@ function makeContents(marker) {
     function removeOuterBrTags(inputString) {
         let startIndex = 0;
         let endIndex = inputString.length;
-        // 문자열의 시작에서부터 <br> 태그가 나오지 않을 때까지 반복
         while (startIndex < endIndex && inputString.substr(startIndex, 4) === '<br>') {
             startIndex += 4;
         }
-        // 문자열의 끝부터 <br> 태그가 나오지 않을 때까지 반복
         while (endIndex > startIndex && inputString.substr(endIndex - 4, 4) === '<br>') {
             endIndex -= 4;
         }
-        // 시작과 끝 인덱스를 사용하여 앞뒤의 <br> 태그를 제거한 문자열을 반환
         return inputString.substring(startIndex, endIndex);
     }
-    // console.log(typeof marker.contents);
     if (marker.contents == undefined)
         marker.contents = "설명이 없습니다";
     else

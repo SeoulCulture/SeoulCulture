@@ -7,7 +7,7 @@
 }
 
 #serviceTitle, #submitBtn {
-  width: 100%;
+  width: fit-content;
   transition: all 0.5s;
   /*-webkit-text-stroke: 4px #d6f4f4;*/
   font-variation-settings: "wght" 900, "ital" 1;

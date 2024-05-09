@@ -36,9 +36,13 @@
 }
 
 #rightContainer {
-    margin-left: 10px;
-    height: 100%;
-    background-color: rgba(var(--skycolar), var(--alpha01));
+    padding: 20px;
+    text-align: -webkit-center;
+    background-color: rgba(var(--white), var(--alpha04));
+    overflow-y: auto;
+    min-width: min-content;
+    padding-left: 14px;
+    padding-right: 2px;
 }
 
 #map {
@@ -162,19 +166,14 @@
     padding: 7px 19px;
     color: ghostwhite;
     border-style: outset;
-}
+    font-family: 'TTHakgyoansimMonggeulmonggeulR', "Noto Sans KR" !important;
 
-#noResult:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    border: 0.969em solid transparent;
-    border-top-color: #575757;
-    border-bottom: 0;
-    margin-left: -0.969em;
-    /* border-style: outset; */
-    margin-bottom: -0.969em;
+}
+@font-face {
+    font-family: 'TTHakgyoansimMonggeulmonggeulR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMonggeulmonggeulR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 
@@ -260,4 +259,42 @@
     opacity: 0;
 }
 
-/*test*/
+/*검색결과 테이블 같은*/
+.findings {
+    display: table;
+    text-align: left;
+    margin-top: 20px;
+    border-collapse: collapse;
+
+}
+
+.finding:last-child {
+    border-bottom: none;
+}
+
+.finding {
+    display: table-row;
+    border-bottom: 1px solid #ffd8d8;
+
+}
+
+.f {
+    display: table-cell;
+    align-content: center;
+}
+
+.fCategory {
+    padding-right: 5px;
+    width: 57px;
+    min-width: 57px;
+    font-size: medium;
+    height: fit-content;
+    color: saddlebrown;
+    font-weight: 500;
+}
+
+.fTitle {
+    font-size: 0.91rem;
+    padding: 6px 0px;
+    word-break: keep-all;
+}
