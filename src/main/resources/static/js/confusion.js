@@ -24,53 +24,51 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
 });
-
 // 혼잡도에 따른 영역 시각화 (다각형 그리기)
 function drawAreaInMap(confusionData) {
     const areas = confusionData['areas'];
-    if(areas.length > 3){
-        // 현재 confusion을 전역에 저장
-        const detail = confusionData['confusionData'];
-        const confusion = {
-            "nameKor" : confusionData['name'],
-            "nameEng" : confusionData['eng'],
-            "confusion" : detail['confusion'],
-            "msg" : detail['confusionMsg'],
-            "maleRate" : detail['maleRate'],
-            'femaleRate' : detail['femaleRate'],
-            'rate0': detail['rateIn0To10'],
-            'rate10' : detail['rateIn10'],
-            'rate20' : detail['rateIn20'],
-            'rate30' : detail['rateIn30'],
-            'rate40' : detail['rateIn40'],
-            'rate50' : detail['rateIn50'],
-            'rate60' : detail['rateIn60'],
-            'rate70' : detail['rateIn70'],
-            'resentRate' : detail['resentRate'],
-            'nonResentRate' : detail['nonResentRate'],
-            'updateTime' : detail['updateTime']
-        }
-        confusions[confusionData['poi']] = confusion;
+    const detail = confusionData['confusionData'];
+    const confusion = {
+        "nameKor" : confusionData['name'],
+        "nameEng" : confusionData['eng'],
+        "confusion" : detail['confusion'],
+        "msg" : detail['confusionMsg'],
+        'updateTime' : detail['updateTime']
+    }
+    confusions[confusionData['poi']] = confusion;  // 전역에 저장
 
+    if(areas.length > 3){
         let polygonPath = createPolygonPath(areas);
         const polygon = drawPolygon(polygonPath, detail['confusion'])
         polygon.setMap(map);
-        console.log("[혼잡영역] 폴리곤 그렸음");
         addEventByConfusionTag(detail['confusion'], polygon, confusion);
     }
     else if (confusionData['areas'].length == 1) {
-        // 일정 반경의 원?
+        let [lat, lon] = areas[0].split(",");
+        const circle = drawCircle(lat, lon, detail['confusion']);
+        addEventByConfusionTag(detail['confusion'], circle, confusion);
     }
 }
 
+function drawCircle(lat, lon, confusionTag) {
+    let colorCode = setColorcodeByConfusion(confusionTag);
+    var circle = new kakao.maps.Circle({
+        center: new kakao.maps.LatLng(parseFloat(lat), parseFloat(lon)),
+        radius: 100, // meter
+        strokeWeight: 3,
+        strokeColor: colorCode,
+        strokeOpacity: 0.8,
+        strokeStyle: 'dashed',
+        fillColor: colorCode,
+        fillOpacity: 0.25
+    });
+    circle.setMap(map);
+    return circle;
+}
+
 function drawPolygon(polygonPath, confusionTag) {
-    // 여유 50% 이하 인구가 평소와 비교하여 적음
-    // 보통 50% 초과 75% 이하 인구가 평소와 비교하여 비슷함
-    // 약간 붐빔 75% 초과 100% 이하 인구가 평소와 비교하여 많음
-    // 붐빔 100% 초과 인구가 평소와 비교하여 매우 많음
     let colorCode;
     colorCode = setColorcodeByConfusion(confusionTag);
-
     const polygon = new kakao.maps.Polygon({
         path: polygonPath, // 그려질 다각형의 좌표 배열입니다
         strokeWeight: 3, // 선의 두께입니다
@@ -158,34 +156,34 @@ function setColorcodeByConfusion(confusionTag, colorCode) {
     return colorCode;
 }
 
-function addEventByConfusionTag(confusionTag, polygon, confusion) {
+function addEventByConfusionTag(confusionTag, areaObject, confusion) {
     // 마우스오버 이벤트
     if (confusionTag == "여유") {
-        kakao.maps.event.addListener(polygon, 'mouseover', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse1(confusion);
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseout', function () {
             outConfuse1();
         });
     } else if (confusionTag == "보통") {
-        kakao.maps.event.addListener(polygon, 'mouseover', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse2(confusion);
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseout', function () {
             outConfuse2();
         });
     } else if (confusionTag == "약간 붐빔") {
-        kakao.maps.event.addListener(polygon, 'mouseover', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse3(confusion);
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseout', function () {
             outConfuse3();
         });
     } else if (confusionTag == "붐빔") {
-        kakao.maps.event.addListener(polygon, 'mouseover', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse4(confusion);
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function () {
+        kakao.maps.event.addListener(areaObject, 'mouseout', function () {
             outConfuse4();
         });
     }
