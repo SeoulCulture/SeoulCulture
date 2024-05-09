@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import seoul.culture.demo.config.PathConfig;
 import seoul.culture.demo.dto.CultureInfoDto;
 import seoul.culture.demo.entity.Category;
 import seoul.culture.demo.entity.mark.CultureEvent;
@@ -25,7 +26,7 @@ public class CultureService {
     private final CulturePlaceRepository culturePlaceRepository;
     private final CultureEventRepository cultureEventRepository;
 
-    private static final String CULTURE_INFO_PATH = "src/main/resources/static/data.json";
+    private static final String CULTURE_INFO_PATH = PathConfig.CULTURE_INFO_PATH;
 
     @Transactional
     public void registerCulturePlace(){

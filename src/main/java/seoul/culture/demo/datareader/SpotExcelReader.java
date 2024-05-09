@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
+import seoul.culture.demo.config.PathConfig;
 import seoul.culture.demo.entity.Spot;
 import seoul.culture.demo.repository.SpotRepository;
 
@@ -23,7 +24,7 @@ public class SpotExcelReader implements ExcelReader {
 
     private final SpotExcelToDatabaseMapper excelDatabaseMapper;
     private final SpotRepository spotRepository;
-    private final String EXCEL_PATH ="src/main/resources/KoreaRegionData.xlsx";
+    private final String EXCEL_PATH = PathConfig.EXEL_PATH;
 
     @Override
     public List<SpotDto> getResult() {

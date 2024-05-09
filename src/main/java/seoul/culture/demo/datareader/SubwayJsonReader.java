@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import seoul.culture.demo.config.PathConfig;
 import seoul.culture.demo.entity.Spot;
 import seoul.culture.demo.repository.SpotRepository;
 import seoul.culture.demo.util.Formatter;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SubwayJsonReader implements JsonReader {
 
-    private final String SUBWAY_DATA_PATH = "src/main/resources/seoul_subway.json";
+    private final String SUBWAY_DATA_PATH = PathConfig.SUBWAY_DATA_PATH;
     private final SpotRepository spotRepository;
 
     public List<Spot> getResult() throws IOException {

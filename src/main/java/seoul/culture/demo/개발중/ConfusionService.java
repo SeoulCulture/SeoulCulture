@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.transaction.annotation.Transactional;
+import seoul.culture.demo.config.PathConfig;
 import seoul.culture.demo.datareader.ConfusionDto;
 import seoul.culture.demo.util.Formatter;
 
@@ -64,7 +65,7 @@ public class ConfusionService {
         // 임시 삭제: 지우기 꼮!
         confusionAreaRepository.deleteAll();
 
-        List<ConfusionArea> confusionAreas = readPoiData("src/main/java/seoul/culture/demo/개발중/poi.json");
+        List<ConfusionArea> confusionAreas = readPoiData(PathConfig.CONFUSION_PATH);
         confusionAreas.stream().filter(area -> !confusionAreaRepository.existsByPoi(area.getPoi()))
                 .forEach(confusionAreaRepository::save);
         System.out.println("혼잡도 표시대상 Area 개수:" + confusionAreas.size());
