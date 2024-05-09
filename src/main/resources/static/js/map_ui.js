@@ -6,12 +6,13 @@ const leftContainer = document.getElementById('leftContainer');
 const rightContainerContent = document.getElementById('rightContainerContent');
 const rightContainerEmpty = document.getElementById('rightContainerEmpty');
 const noResultRightContainer = document.getElementById('noResultRightContainer');
-const currentPoint = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+let currentPoint;
 
 
 let markerClusterPoint;
 
 window.onload = function () {
+    currentPoint = new kakao.maps.LatLng(currentLatitude, currentLongitude);
     hideRightContent();
     initMap();
 
