@@ -5,6 +5,10 @@ const rightContainer = document.getElementById('rightContainer');
 const leftContainer = document.getElementById('leftContainer');
 const rightContainerContent = document.getElementById('rightContainerContent');
 const rightContainerEmpty = document.getElementById('rightContainerEmpty');
+const noResultRightContainer = document.getElementById('noResultRightContainer');
+const currentPoint = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+
+
 let markerClusterPoint;
 
 window.onload = function () {
@@ -17,6 +21,14 @@ window.onload = function () {
     kakao.maps.event.addListener(map, 'zoom_changed', function () {
         animateMarkers();
     });
+
+    document.addEventListener('keydown', function(event) {
+        // ESC & existing right-container contents
+        if (event.keyCode === 27 && rightContainerContent.style.display === 'block') {
+            hideRightContent();
+        }
+    });
+
 
     let homeMarker = document.querySelector(".marker_home");
     homeMarker.addEventListener("click", (event) => {
@@ -33,14 +45,15 @@ window.onload = function () {
 // 함수 =============================================================================================
 
 function relocateToCenter() { // 현위치로 이동
-    var center = new kakao.maps.LatLng(currentLatitude, currentLongitude);
-    map.panTo(center);
+    map.panTo(currentPoint);
 }
 
 function relocateToCluster() {
-    if (markerInfo.length == 0)
-
-    map.panTo(markerClusterPoint);
+    if (markerInfo.length == 0) {
+        map.panTo(markerClusterPoint);
+    } else {
+        map.panTo(markerClusterPoint);
+    }
 }
 
 function getOverayCountRate() {
@@ -92,13 +105,13 @@ function getDistance(lat1,lng1,lat2,lng2) {
 
 function hasNoResult() {
     if (markerInfo.length + placeInfo.length == 0) {
-        const markerPosition = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+        showNoResultRightContent();
         const customOverlay = new kakao.maps.CustomOverlay({
-            position: markerPosition,
+            position: currentPoint,
             content: "<div id='noResult' class='animate__animated animate__slideInDown'>주변에 없어요</div>"
         });
         customOverlay.setMap(map);
-        bounds.extend(markerPosition);
+        bounds.extend(currentPoint);
         return;
     }
 }
@@ -118,7 +131,7 @@ function initMap() {
 
 function initBounds() {
     bounds = new kakao.maps.LatLngBounds();
-    bounds.extend(new kakao.maps.LatLng(currentLatitude, currentLongitude));
+    bounds.extend(currentPoint);
 }
 
 function initCenter() {
@@ -128,7 +141,7 @@ function initCenter() {
     };
     createMarker(currentLocationMarker, "home", '<div>' +
         '<div class="lightPoint animate__animated animate__heartBeat animate__infinite animate__slower"></div>'+
-        '<div class="marker_home">' +
+        '<div class="marker_shadow"></div><div class="marker_home">' +
         '<div class="face">' +
         '    <div class="eyes">' +
         '        <div class="eye"></div>' +
@@ -136,8 +149,8 @@ function initCenter() {
         '    </div>' +
         '    <div class="tongue"></div>'+
         '</div>' +
-        '<div class="arm arm-left"></div><div class="arm arm-right"></div><div class="marker_shadow">' +
-        '</div></div>'
+        '<div class="arm arm-left"></div><div class="arm arm-right"></div>' +
+        '</div>'
     );
     jumpingHomeMarker();
 }
@@ -164,7 +177,7 @@ function initMarkers() {
     });
     const dataLength = placeInfo.length + markerInfo.length;
     if (dataLength == 0) {
-        markerClusterPoint = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+        markerClusterPoint = currentPoint;
     } else {
         markerClusterPoint = new kakao.maps.LatLng(lats / dataLength, lons / dataLength);
     }
@@ -288,14 +301,26 @@ function openModal(marker) {
     }
 }
 
+
+function showNoResultRightContent() {
+    rightContainer.style.maxWidth = '30%';
+    rightContainerEmpty.style.display = 'none';
+    rightContainerContent.style.display = 'none';
+    noResultRightContainer.style.display = "block";
+}
+
 function hideRightContent() {
+    rightContainer.style.transition = "max-width 0s linear"
     rightContainer.style.maxWidth = '30%';
     rightContainerEmpty.style.display = 'block';
+    noResultRightContainer.style.display = "none";
     rightContainerContent.style.display = 'none';
 }
 
 function showRightContent() {
+    rightContainer.style.transition = "max-width 0.4s linear"
     rightContainer.style.maxWidth = '100%';
     rightContainerEmpty.style.display = 'none';
+    noResultRightContainer.style.display = "none";
     rightContainerContent.style.display = 'block';
 }

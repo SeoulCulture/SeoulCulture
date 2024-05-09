@@ -57,3 +57,28 @@
 .qes4 {
   transition-duration: 2s;
 }
+
+
+.reSubmitBtn {
+  width: fit-content;
+  transition: all 0.5s;
+  font-variation-settings: "wght" 900, "ital" 1;
+  height: fit-content;
+  margin-right: 22px;
+  margin-top: -7px;
+  margin-bottom: 8px;
+  font-style: italic;
+  font-size: 3rem;
+  text-align: center;
+  color: transparent;
+  background: transparent;
+  font-family: "Meta", sans-serif;
+  border: transparent;
+  text-shadow: 4px 4px 0px #1cd3e2,
+  7px 7px 0px #7d4a74,
+  10px 10px 0px #e9019a,
+  13px 13px 0px #f40468,
+  16px 16px 10px #fffee5;
+  cursor: pointer;
+  font-weight: 900;
+}

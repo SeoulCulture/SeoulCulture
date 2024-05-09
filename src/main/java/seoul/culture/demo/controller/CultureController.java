@@ -26,9 +26,9 @@ public class CultureController {
     @GetMapping("/")
     public String createCultureForm(Model model){
         CultureSearchForm cultureSearchForm = new CultureSearchForm();
+        model.addAttribute("cultureForm", cultureSearchForm);
         cultureSearchForm.setHowToGo("WALKING");
         cultureSearchForm.setMoods(moodService.getMoods().getMood());
-        model.addAttribute("cultureForm", cultureSearchForm);
         return "index";
     }
 
@@ -41,6 +41,12 @@ public class CultureController {
 
         Map<String, Object> map = searchService.search(formData);
 
+        CultureSearchForm cultureSearchForm = new CultureSearchForm();
+        cultureSearchForm.setHowToGo(formData.getHowToGo());
+        cultureSearchForm.setPlace(
+                formData.getHowToGo() == "DRIVING" ? "DRIVING" : "WALKING"
+        );
+        model.addAttribute("cultureForm", cultureSearchForm);
         model.addAttribute("markerInfo", map.get("cultures"));
         model.addAttribute("placeInfo", map.get("places"));
         model.addAttribute("latitude", map.get("lat"));

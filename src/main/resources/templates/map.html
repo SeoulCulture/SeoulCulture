@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="/css/map_contents.css">
     <link rel="stylesheet" href="/css/title.css">
     <link rel="stylesheet" href="/css/scroll.css">
+    <link rel="stylesheet" href="/css/index.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
@@ -43,6 +45,7 @@
     <div id="rightContainer">
         <div id="rightContainerContent" th:include="rightContainer.html"/>
         <div id="rightContainerEmpty" th:include="rightContainerEmpty.html"/>
+        <div id="noResultRightContainer" th:include="noResultRightContainer.html"/>
     </div>
 </div>
 <div id="confusionToast"></div>
@@ -52,6 +55,8 @@
 <script type="text/javascript" src="/js/confusion.js"></script>
 <script type="text/javascript" src="/js/ruler.js"></script>
 <script type="text/javascript" src="/js/animate.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/index_search.js"></script>
 </body>
 
 <!--test-->
@@ -65,15 +70,12 @@
         background: linear-gradient(to right, #ffd835, #ffa435 90%);
         border-radius: 30%;
         transition: transform 0.3s;
-    }
-
-    .arm-left {
         top: 50%;
+    }
+    .arm-left {
         left: -20%;
     }
-
     .arm-right {
-        top: 50%;
         left: 70%;
     }
 
@@ -173,6 +175,7 @@
         height: 6px;
         width: 30px;
         left: 12%;
+        top: 38px;
         position: absolute;
         -webkit-filter: blur(5px);
     }

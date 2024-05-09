@@ -22,17 +22,26 @@
     width: fit-content;
     border-radius: 15px;
     padding: 5px 10px;
-    margin-right: 1%;
     word-break: keep-all;
     color: honeydew;
     text-shadow: 1px 1px firebrick;
+    margin: auto;
+    display: inline-block;
 }
+
+.modal-header .close {
+    position: absolute;
+    left: 88%;
+}
+
 
 /*모달 전용*/
 .modal-header{
     align-items: center;
     padding: 4% 5% 1% 5%;
+    align-self: center;
 }
+
 .modal-body{
     text-align: -webkit-center;
     padding: 0% 5%;
@@ -64,24 +73,8 @@
     text-align: -webkit-center;
     margin-bottom: 0px;
     border-bottom: 0px;
+    padding: 0px 12px;
 }
-
-.modal-header {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: start;
-    -ms-flex-pack: justify;
-    align-self: center;
-    padding: 15px;
-}
-
-/*오른쪽 컨테이너 전용*/
-/*#rightContainer {*/
-/*    padding: 20px;*/
-/*    text-align: -webkit-center;*/
-/*    background-color: rgba(var(--white), var(--alpha04));*/
-/*    overflow-y: scroll;*/
-/*}*/
 
 #rightContainer .place-img img{
     border-style: ridge;
@@ -94,23 +87,29 @@
     border-radius: 16px;
     border: ridge;
     max-width: fit-content;
+    margin: 19px 6px;
 }
 
 .right-container-header {
-    display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px 6px;
 }
 
 #rightContainer .place-title {
     font-size: larger;
     font-weight: 600;
     margin-right: 45px;
+    margin-left: 10px;
+    display: inline-block;
 }
 
-/*초기 오른쪽 컨테이너 설정 전용*/
-#initialRightContainerTitle h3 {
-    color: black;
+#initialRightContainerTitle{
+    position: absolute;
+    padding-left: 32px;
+    color: #252525;
+    font-weight: 600;
+    letter-spacing: 2px;
     margin: 0;
     text-shadow: 0 0 7px #fff, 0 0 10px #ffcfcf, 0 0 21px #fff, 0 0 42px rgb(255 202 202), 0 0 82px rgb(255 255 255), 0 0 92px rgb(255 255 255), 0 0 102px rgb(255 255 255), 0 0 151px #ffffff;
 }
@@ -124,21 +123,11 @@
     box-shadow: 0 0 20px white;
 }
 
-#rightContainer .table td, #rightContainer .table th {
-    padding: .3rem;
-    word-break: keep-all;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-}
-
 #right-container-close{
     position: absolute;
     right: 20px;
 }
 
-.table {
-    --bs-table-bg: transparent;
-}
 
 /*토스트 메시지*/
 #toast_message, #confusionToast{
