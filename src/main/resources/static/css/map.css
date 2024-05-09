@@ -69,12 +69,12 @@
 }
 
 .mapBtn {
+    height: inherit;
     margin: 7px;
     border-radius: 14px;
     border-style: ridge;
     position: fixed;
     width: fit-content;
-    height: 45px;
     z-index: 5;
     text-align: center;
     align-content: center;
@@ -125,7 +125,7 @@
 }
 
 .imgInBtn {
-    width: 71px;
+    width: 62px;
 }
 
 .mapBtn:after {
@@ -150,6 +150,7 @@
 
 #btnContainer {
     position: absolute;
+    height: 38px;
 }
 
 #noResult {
