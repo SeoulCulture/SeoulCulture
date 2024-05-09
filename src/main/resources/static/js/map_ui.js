@@ -38,6 +38,8 @@ function relocateToCenter() { // 현위치로 이동
 }
 
 function relocateToCluster() {
+    if (markerInfo.length == 0)
+
     map.panTo(markerClusterPoint);
 }
 
@@ -50,7 +52,6 @@ function getOverayCountRate() {
         if (element != null)
             overlayCnt++;
     }
-//    console.log(overlayCnt, Object.keys(markers).length);
     return overlayCnt / Object.keys(markers).length;
 }
 
@@ -162,7 +163,11 @@ function initMarkers() {
         lons += marker.longitude;
     });
     const dataLength = placeInfo.length + markerInfo.length;
-    markerClusterPoint = new kakao.maps.LatLng(lats / dataLength, lons / dataLength);
+    if (dataLength == 0) {
+        markerClusterPoint = new kakao.maps.LatLng(currentLatitude, currentLongitude);
+    } else {
+        markerClusterPoint = new kakao.maps.LatLng(lats / dataLength, lons / dataLength);
+    }
 }
 
 function registerOverlay(overlay, id) {
