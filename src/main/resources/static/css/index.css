@@ -116,6 +116,7 @@ input[type='number'] {
 }
 
 #searchResults {
+    display: none;
     max-width: 252px;
     min-width: 140px;
     height: fit-content;

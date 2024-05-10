@@ -58,6 +58,13 @@ function searchSpots() {
         preMatched = matches;
         preInput = input;
     }
+    if (matches.length == 0) {
+        document.getElementById('searchResults').style.display = 'none';
+
+    } else {
+        document.getElementById('searchResults').style.display = 'block';
+    }
+
 
     handleUpDownIndex(event, matches);
     showSearchResult(matches, input);
@@ -110,6 +117,7 @@ function handleUpDownIndex(event, matches) {
             }
             nowIndex = -1;
             matches.length = 0;
+            document.getElementById('searchResults').style.display = 'none';
             break;
         // 그외 다시 초기화
         default:
@@ -122,6 +130,7 @@ const showSearchResult = (matches, input) => {
     const searchResults = document.getElementById("searchResults");
 
     if (matches == "" && input == "") {
+        document.getElementById('searchResults').style.display = 'none';
         searchResults.innerHTML = "";
         return;
     }
