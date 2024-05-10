@@ -8,20 +8,6 @@ function loadRightContainer(marker) {
     setInformation(marker);
 }
 
-function relocationMarkers(){
-    let preWidth = leftContainer.offsetWidth;
-    const checkWidthInterval = setInterval(function() {
-        const currentWidth = leftContainer.offsetWidth;
-        if (currentWidth === preWidth) {
-            clearInterval(checkWidthInterval);
-            initMap();
-        } else {
-            preWidth = currentWidth;
-        }
-    }, 100);
-}
-
-
 function setInformation(marker) {
     console.log(marker)
     $(".place-category").text(marker.category);
@@ -77,7 +63,6 @@ function openPath(dstLat, dstLon){
               console.log('Something went wrong', err);
           })
     });
-
 }
 
 //1. 토스트 메시지, 버튼요소를 변수에 대입
@@ -107,8 +92,3 @@ function checkUrlValidate(url){
         return false;
     }
 }
-
-
-window.addEventListener('resize', function() {
-    // relocationMarkers();
-});

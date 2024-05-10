@@ -2,7 +2,6 @@ let map;
 let bounds;
 let mapElement = document.getElementById('map');
 const rightContainer = document.getElementById('rightContainer');
-const leftContainer = document.getElementById('leftContainer');
 const rightContainerContent = document.getElementById('rightContainerContent');
 const rightContainerEmpty = document.getElementById('rightContainerEmpty');
 const noResultRightContainer = document.getElementById('noResultRightContainer');
@@ -75,7 +74,7 @@ function setCenterPoint() {
     map.setCenter(moveLatLon);
 
     // 수가 적으면 레벨조정 하지 않음
-    if (Object.keys(overlays).length <= 5) {
+    if (Object.keys(overlays).length <= 20) {
         return;
     }
     // 커스텀 오버레이의 K% 이상이 보이도록 배치
@@ -109,7 +108,7 @@ function getDistance(lat1,lng1,lat2,lng2) {
 }
 
 function hasNoResult() {
-    if (markerInfo.length + placeInfo.length == 0) {
+    if (markerInfo.length == 0) {
         showNoResultRightContent();
         const customOverlay = new kakao.maps.CustomOverlay({
             position: currentPoint,
