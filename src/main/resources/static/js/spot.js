@@ -99,27 +99,29 @@ function calculateMatchingChars(str1, str2) {
 let nowIndex = -1;
 let nowValue;
 function handleUpDownIndex(event, matches) {
-    console.log((nowIndex));
     switch (event.keyCode) {
         // UP KEY
         case 38:
             nowIndex = Math.max(nowIndex - 1, 0);
+            console.log((nowIndex));
             document.querySelector("#searchInput").value = matches[nowIndex] || "";
             nowValue =  matches[nowIndex] || "";
             break;
         // DOWN KEY
         case 40:
             nowIndex = Math.min(nowIndex + 1, matches.length - 1);
+            console.log((nowIndex));
             document.querySelector("#searchInput").value = matches[nowIndex] || "";
             nowValue =  matches[nowIndex] || "";
             break;
         // ENTER KEY
         case 13:
-            console.log(nowValue);
-            if (nowIndex = -1) {
+            console.log((nowIndex));
+            if (nowIndex == -1) {
                 document.querySelector("#searchInput").value = matches[0];
+            } else {
+                document.querySelector("#searchInput").value = nowValue;
             }
-            document.querySelector("#searchInput").value = nowValue;
             nowIndex = -1;
             nowValue = "";
             document.getElementById('searchResults').style.display = 'none';
