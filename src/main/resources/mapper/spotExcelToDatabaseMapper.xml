@@ -5,7 +5,7 @@
 
 <!--    위 매퍼 클래스의 메서드명 및, 파라미터로 들어오는 매핑대상  Dto-->
     <insert id="insert" parameterType="seoul.culture.demo.datareader.SpotDto">
-        INSERT INTO Spot
+        INSERT INTO spot
         (
             spot_name,
             sido,
@@ -13,7 +13,8 @@
             longitude
         )
         VALUES
-            (#{spotName}
+        (
+            #{spotName}
             ,#{sido}
             ,#{latitude}
             ,#{longitude}

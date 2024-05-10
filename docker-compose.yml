@@ -1,0 +1,38 @@
+version: "3.8"
+
+networks:
+  backbone:
+    driver: bridge
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: mysql
+      MYSQL_ROOT_PASSWORD: seoul-culture
+      MYSQL_USER: seoul-culture
+      MYSQL_PASSWORD: seoul-culture
+      TZ: 'Asia/Seoul'
+      LC_ALL: C.UTF-8
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      - backbone
+  seoul-culture:
+    container_name: seoul-culture
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+    networks:
+      - backbone
+    depends_on:
+      - mysql
+    environment:
+      - TZ=Asia/Seoul
