@@ -315,3 +315,7 @@
 .modal-open .modal {
     align-content: center;
 }
+
+#searchBox{
+    position: relative;
+}
