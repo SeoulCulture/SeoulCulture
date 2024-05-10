@@ -255,16 +255,6 @@ function getTimeHTML(distance) {
     }
     walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
 
-    // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
-    var bycicleTime = distance / 227 | 0;
-    var bycicleHour = '', bycicleMin = '';
-
-    // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
-    if (bycicleTime > 60) {
-        bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
-    }
-    bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
-
     // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
     var content = '<div class="dotOverlay rulerDistance">';
         content += '    <span class="label">' + distance + 'm<br>';

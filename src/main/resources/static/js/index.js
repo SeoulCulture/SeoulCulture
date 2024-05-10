@@ -13,20 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
       .catch(error => {
         console.error('[ERROR] spotDtos 가져오기 에러: ', error);
   });
-
-//  const freeCheckbox = document.getElementById('free');
-//  // '무료' 체크박스 관련 비용입력 비활성화 처리
-//  freeCheckbox.addEventListener('change', function () {
-//    const freeCheckbox = document.getElementById('free');
-//    const priceInput = document.getElementById('price');
-//    if (freeCheckbox.checked) {
-//      priceInput.disabled = true;
-//      priceInput.value = null;
-//    } else {
-//      priceInput.disabled = false;
-//      priceInput.focus();
-//    }
-//  });
 });
 
 function togglePriceBox(checkbox) {

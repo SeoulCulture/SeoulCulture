@@ -6,7 +6,7 @@
 <div id="inputContainer">
     <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
         <div class="question qes2">
-            <div class="qesLabel reQesLabel">어디 주변으로 알아볼까요?</div>
+            <div class="qesLabel">어디에서 출발하나요?</div>
             <div id="searchBox">
                 <input type="text" id="searchInput" onkeyup="searchSpots();" class="mainInput" name="spot" autocomplete="off" required>
                 <div id="searchResults"></div>
@@ -19,9 +19,9 @@
             </div>
         </div>
         <div class="question qes3">
-            <div class="qesLabel reQesLabel">어느 정도 거리가 괜찮을까요?</div>
-            <input type="number" class="mainInput" id="time" name="time" placeholder="" th:field="*{time}"
-                   required min="1">
+            <div class="qesLabel">몇 분 안으로 갈까요?</div>
+            <input type="number" class="mainInput minInput" id="time" name="time" placeholder="" th:field="*{time}"
+                   required min="1" oninput='handleOnInput(this, 5)' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
             <div class="checkBox select">
                 <input type="radio" id="walking" class="" name="howToGo" value="WALKING" th:checked="${cultureForm.howToGo == 'WALKING'}">
                 <label for="walking">도보</label>

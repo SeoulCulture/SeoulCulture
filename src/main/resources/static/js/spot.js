@@ -40,7 +40,7 @@ function includeByCho(search, targetWord) {
 }
 
 // 검색
-const ignoreKey = [37, 38, 39, 40]  // 방향키
+const ignoreKey = [37, 38, 39, 40, 13]  // 방향키 및 엔터
 let preMatched;
 let preInput;
 
@@ -78,7 +78,7 @@ function findMatchingStrings(event, val) {
         if (includeByCho(val, spotDto.spotName)) {
             const matchingChars = calculateMatchingChars(val, spotDto.spotName);
             const matchRate = (matchingChars / inputLength) * 100; // 일치율 계산
-            matches.push({ name: spotDto.spotName, matchRate: matchRate }); // 일치율과 함께 추가
+            matches.push({ name: spotDto.spotName.trim(), matchRate: matchRate }); // 일치율과 함께 추가
         }
     });
     matches.sort((a, b) => b.matchRate - a.matchRate);
@@ -97,26 +97,31 @@ function calculateMatchingChars(str1, str2) {
 }
 
 let nowIndex = -1;
-
+let nowValue;
 function handleUpDownIndex(event, matches) {
+    console.log((nowIndex));
     switch (event.keyCode) {
         // UP KEY
         case 38:
             nowIndex = Math.max(nowIndex - 1, 0);
             document.querySelector("#searchInput").value = matches[nowIndex] || "";
+            nowValue =  matches[nowIndex] || "";
             break;
         // DOWN KEY
         case 40:
             nowIndex = Math.min(nowIndex + 1, matches.length - 1);
             document.querySelector("#searchInput").value = matches[nowIndex] || "";
+            nowValue =  matches[nowIndex] || "";
             break;
         // ENTER KEY
         case 13:
+            console.log(nowValue);
             if (nowIndex = -1) {
                 document.querySelector("#searchInput").value = matches[0];
             }
+            document.querySelector("#searchInput").value = nowValue;
             nowIndex = -1;
-            matches.length = 0;
+            nowValue = "";
             document.getElementById('searchResults').style.display = 'none';
             break;
         // 그외 다시 초기화
@@ -138,7 +143,12 @@ const showSearchResult = (matches, input) => {
     searchResults.innerHTML = matches
         .map(
             (label, index) => `
-    <div class='${nowIndex === index ? "spot active" : "spot"}'>
+    <div style="cursor: pointer;" onclick="spotClicked(this);" class='${nowIndex === index ? "spot active" : "spot"}'>
       ${label.replace(regex, "<mark>$1</mark>")}
     </div>`).join("");
 };
+
+function spotClicked(spot) {
+    document.querySelector("#searchInput").value = spot.textContent.trim();
+    document.getElementById('searchResults').style.display = 'none';
+}

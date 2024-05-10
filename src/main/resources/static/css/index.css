@@ -132,7 +132,7 @@ input[type='number'] {
 
 #searchResults {
     display: none;
-    max-width: 252px;
+    max-width: 209px;
     min-width: 140px;
     height: fit-content;
     width: 48%;
