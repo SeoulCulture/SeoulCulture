@@ -6,8 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import seoul.culture.demo.dto.CultureSearchForm;
-import seoul.culture.demo.pathfinder.HowToGo;
-import seoul.culture.demo.pathfinder.NaverPathFinder;
+import seoul.culture.demo.pathfinder.ReverseGeocoding;
 import seoul.culture.demo.service.MoodService;
 import seoul.culture.demo.service.SearchService;
 import seoul.culture.demo.util.Formatter;
@@ -21,7 +20,7 @@ import java.util.Map;
 public class CultureController {
     private final SearchService searchService;
     private final MoodService moodService;
-    private final NaverPathFinder naverPathFinder;
+    private final ReverseGeocoding reverseGeocoding;
 
     @GetMapping("/")
     public String createCultureForm(Model model){
@@ -59,8 +58,7 @@ public class CultureController {
     public String getAddress(@RequestParam double srcLat, @RequestParam double srcLon,
                                           @RequestParam double dstLat, @RequestParam double dstLon,
                                           @RequestParam String howToGo) throws IOException {
-        naverPathFinder.setPathInfo(srcLat, srcLon, dstLat, dstLon, HowToGo.valueOf(howToGo));
-        Map<String, String> dstAddress = naverPathFinder.getDstAddress();
-        return Formatter.toAddress(dstAddress);
+        Map<String, String> address = reverseGeocoding.getAddress(dstLat, dstLon);
+        return Formatter.toAddress(address);
     }
 }
