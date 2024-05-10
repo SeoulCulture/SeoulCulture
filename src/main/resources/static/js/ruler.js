@@ -113,8 +113,13 @@ let movingHandler = function (mouseEvent) {
         moveLine.setPath(movepath);
         moveLine.setMap(map);
 
-        var distance = Math.round(clickLine.getLength() + moveLine.getLength()), // 선의 총 거리를 계산합니다
-            content = '<div class="dotOverlay rulerDistance">' + distance + 'm</div>'; // 커스텀오버레이에 추가될 내용입니다
+        var distance = Math.round(clickLine.getLength() + moveLine.getLength()); // 선의 총 거리를 계산합니다
+        var distanceUnit = 'm';
+        if(over1Km(distance)){
+            distance = convertKm(distance);
+            distanceUnit = 'km'
+        }
+        var content = '<div class="dotOverlay rulerDistance">' + distance + distanceUnit+'</div>'; // 커스텀오버레이에 추가될 내용입니다
 
         // 거리정보를 지도에 표시합니다
         showDistance(content, mousePosition);
@@ -207,11 +212,16 @@ function displayCircleDot(position, distance) {
 
     // 지도에 표시합니다
     circleOverlay.setMap(map);
-
+    let distanceUnit = 'm';
     if (distance > 0) {
+        if(over1Km(distance)){
+            distance = convertKm(distance);
+            distanceUnit = 'km';
+        }
+
         // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
         var distanceOverlay = new kakao.maps.CustomOverlay({
-            content: '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>m</div>',
+            content: '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>'+ distanceUnit+'</div>',
             position: position,
             yAnchor: 1,
             zIndex: 2
@@ -223,6 +233,22 @@ function displayCircleDot(position, distance) {
 
     // 배열에 추가합니다
     dots.push({circle: circleOverlay, distance: distanceOverlay});
+}
+
+function over1Km(meters){
+    if(meters >= 1000){
+        return true;
+    }
+
+    return false;
+}
+
+function convertKm(meters) {
+  if (meters >= 1000) {
+    return (meters / 1000).toFixed(1);
+  } else {
+    return meters;
+  }
 }
 // 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 모두 제거하는 함수입니다
 function deleteCircleDot() {
@@ -250,14 +276,34 @@ function getTimeHTML(distance) {
     var walkHour = '', walkMin = '';
 
     // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
-    if (walkkTime > 60) {
+    if (walkkTime >= 60) {
         walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
     }
-    walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+    if(walkkTime % 60 != 0){
+        walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+    }
+
+
+    // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+    var bycicleTime = distance / 227 | 0;
+    var bycicleHour = '', bycicleMin = '';
+
+    // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+    if (bycicleTime > 60) {
+        bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+    }
+    bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+    var distanceUnit = 'm';
+    if(over1Km(distance)){
+        distance = convertKm(distance);
+        distanceUnit = 'km';
+    }
 
     // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
     var content = '<div class="dotOverlay rulerDistance">';
-        content += '    <span class="label">' + distance + 'm<br>';
+        content += '    <span class="label">' + distance + distanceUnit+'<br>';
         content += '    <span class="rulerDobo">도보 </span>' + walkHour + walkMin;
         content += '</div>'
 
