@@ -302,13 +302,14 @@
     font-size: medium;
     height: fit-content;
     color: saddlebrown;
-    font-weight: 500;
+    font-weight: 649;
 }
 
 .fTitle {
     font-size: 0.91rem;
     padding: 6px 0px;
     word-break: keep-all;
+    text-shadow: 1px 1px 3px whitesmoke;
 }
 
 .modal-open .modal {

@@ -74,6 +74,10 @@ function setCenterPoint() {
     var moveLatLon = new kakao.maps.LatLng((2 * currentLatitude + latlng.getLat()) / 3, (2 * currentLongitude + latlng.getLng()) / 3);
     map.setCenter(moveLatLon);
 
+    // 수가 적으면 레벨조정 하지 않음
+    if (Object.keys(overlays).length <= 5) {
+        return;
+    }
     // 커스텀 오버레이의 K% 이상이 보이도록 배치
     let rate = getOverayCountRate();
     if (rate == 0) {

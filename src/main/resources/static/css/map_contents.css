@@ -34,6 +34,24 @@
     left: 88%;
 }
 
+#ContentBtnContainer{
+    padding: 7px 0px;
+}
+
+.btnPathCopy, .btnPlaceDetail {
+    border-radius: 12px;
+    padding: 3px 9px;
+    border-style: hidden;
+    box-shadow: 0px 1px 0px midnightblue;
+    background: lavender;
+    text-shadow: 1px 0px aliceblue;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0px 6px;
+}
+
+
 
 /*모달 전용*/
 .modal-header{
@@ -104,8 +122,10 @@
     display: inline-block;
 }
 
-#initialRightContainerTitle{
-    position: absolute;
+#initialRightContainerTitle {
+    padding-top: 18px;
+    padding-bottom: 6px;
+    position: relative;
     padding-left: 32px;
     color: #252525;
     font-weight: 600;
@@ -149,3 +169,4 @@
     opacity: 100%;
     bottom: 50px;
 }
+

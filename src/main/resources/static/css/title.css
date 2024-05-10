@@ -7,6 +7,7 @@
 }
 
 #serviceTitle, #submitBtn {
+  padding:0px 7px;
   width: fit-content;
   transition: all 0.5s;
   /*-webkit-text-stroke: 4px #d6f4f4;*/
@@ -14,7 +15,7 @@
   font-style: italic;
   font-size: 3rem;
   text-align: center;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
   color: transparent;
   font-family: "Meta", sans-serif;
   text-shadow: 4px 4px 0px #1cd3e2,

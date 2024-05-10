@@ -30,6 +30,8 @@
     margin-bottom: 30px;
     text-shadow: 1px 1px 6px honeydew;
     font-weight: 500;
+    word-break: keep-all;
+    padding: 0px 10px;
 }
 #titleInDescription {
     color: #6c0000;
@@ -37,7 +39,6 @@
 }
 
 /* 정렬 세팅*/
-
 #contentBody {
     text-align: -webkit-center;
     width: 100%;
@@ -119,11 +120,12 @@ input[type='number'] {
     min-width: 140px;
     height: fit-content;
     width: 48%;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 0px 0px 20px 20px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
+    border-style: outset;
 }
 
 .spot {

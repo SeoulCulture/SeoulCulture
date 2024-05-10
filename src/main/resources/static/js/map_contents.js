@@ -32,12 +32,12 @@ function setInformation(marker) {
     });
     $(".place-contents").html(marker.contents);
     $(".place-price").html("가격: " + marker.price);
-    const placeDetail = document.querySelectorAll('.place-detail');
+    const placeDetail = document.querySelectorAll('.btnPlaceDetail');
     placeDetail.forEach(function(button) {
         button.setAttribute('onclick', `openDetailUrl('${marker.detailUrl}')`);
     });
 
-    const paths = document.querySelectorAll('.path');
+    const paths = document.querySelectorAll('.btnPathCopy');
     paths.forEach(function(button) {
             button.setAttribute('onclick', `openPath('${marker.latitude}', '${marker.longitude}'); toastOn()`);
     });
