@@ -31,7 +31,6 @@ function setInformation(marker) {
         img.src = marker.imgUrl;
     });
     $(".place-contents").html(marker.contents);
-    $(".place-price").html("가격: " + marker.price);
     const placeDetail = document.querySelectorAll('.btnPlaceDetail');
     placeDetail.forEach(function(button) {
         button.setAttribute('onclick', `openDetailUrl('${marker.detailUrl}')`);
