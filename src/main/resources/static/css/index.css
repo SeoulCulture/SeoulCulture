@@ -55,6 +55,19 @@
     margin: 14px 0px;
 }
 
+.qesLabel {
+    font-size: large;
+    margin-bottom: 0.39rem;
+    font-weight: 600;
+}
+
+.qes3 input {
+    background-image: url("/img/min.png");
+    background-position: 89% center;
+    background-repeat: no-repeat;
+    background-size: 42px  42px;
+}
+
 .mainInput {
     text-align: center;
     border-radius: 20px;
@@ -63,9 +76,14 @@
     border-style: ridge;
     height: 2.0rem;
     width: 70%;
-    max-width: 273px;
+    max-width: 230px;
     min-width: 160px;
 }
+
+.minInput {
+    max-width: 100px !important;
+}
+
 
 #selectedMood {
     height: 2.5rem;
@@ -82,12 +100,6 @@
     height: fit-content;
 }
 
-.qesLabel {
-    font-size: large;
-    margin-bottom: 0.39rem;
-    font-weight: 600;
-}
-
 /*number타입 인풋에서 화살표없애기*/
 /* Chrome, Safari, Edge, Opera */
 /* Firefox  */
@@ -101,6 +113,9 @@ input[type='number'] {
     -moz-appearance: textfield;
 }
 
+#minUnit {
+
+}
 
 /*검색창*/
 #searchResults > div.active {

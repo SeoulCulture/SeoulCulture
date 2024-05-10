@@ -27,7 +27,7 @@ function makeRegexByCho(search = "") {
     const regex = CHO_HANGUL.reduce(
         (acc, cho, index) =>
             acc.replace(
-                new RegExp(cho, "g"),
+                 new RegExp(cho, "g"),
                 `[${combine(index, 0, 0)}-${combine(index + 1, 0, -1)}]`
             ),
         search

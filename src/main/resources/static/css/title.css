@@ -27,6 +27,10 @@
   font-weight: 900;
 }
 
+#submitBtn {
+  padding-right: 26px;
+}
+
 #serviceTitle:hover {
   -webkit-text-stroke: 2px #d6f4f4;
   text-shadow: none;
