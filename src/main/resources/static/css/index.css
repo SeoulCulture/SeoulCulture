@@ -142,6 +142,7 @@ input[type='number'] {
     left: 50%;
     transform: translate(-50%, 0%);
     border-style: outset;
+    z-index: 100;
 }
 
 .spot {
