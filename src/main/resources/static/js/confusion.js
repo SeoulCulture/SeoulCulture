@@ -99,23 +99,22 @@ function overConfuse4(confusion){
     confusionToastOn();
 }
 function makeConfusionMsgString(confusion){
-    return `[${confusion['confusion']}] ${confusion['nameKor']}`
-    // "nameKor" : confusionData['name'],
-    //     "nameEng" : confusionData['eng'],
-    //     "msg" : detail['confusionMsg'],
-    //     "maleRate" : detail['maleRate'],
-    //     'femaleRate' : detail['femaleRate'],
-    //     'rate0': detail['rateIn0To10'],
-    //     'rate10' : detail['rateIn10'],
-    //     'rate20' : detail['rateIn20'],
-    //     'rate30' : detail['rateIn30'],
-    //     'rate40' : detail['rateIn40'],
-    //     'rate50' : detail['rateIn50'],
-    //     'rate60' : detail['rateIn60'],
-    //     'rate70' : detail['rateIn70'],
-    //     'resentRate' : detail['resentRate'],
-    //     'nonResentRate' : detail['nonResentRate'],
-    //     'updateTime' : detail['updateTime']
+    let color;
+   switch (confusion['confusion']) {
+     case '붐빔':
+       color = '🔴'
+       break;
+     case '약간 붐빔':
+       color = '🟡'
+       break;
+     case '보통':
+       color = '🟢'
+       break;
+     case '여유':
+       color = '🔵'
+       break;
+    }
+    return `${color} ${confusion['nameKor']} 혼잡도 : [${confusion['confusion']}]`
 }
 function outConfuse1() {
     confusionToast.classList.remove('active');
