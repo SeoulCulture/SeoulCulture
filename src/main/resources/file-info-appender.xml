@@ -4,7 +4,7 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>./log/info/seeandyougo-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>./log/info/seoulCulture-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
             <maxHistory>15</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>

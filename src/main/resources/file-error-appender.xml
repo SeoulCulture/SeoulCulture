@@ -9,7 +9,7 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>./log/error/seeandyougo-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>./log/error/seoulCulture-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
             <maxHistory>45</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
