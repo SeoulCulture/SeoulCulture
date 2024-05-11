@@ -150,6 +150,7 @@
 
 /*토스트 메시지*/
 #toast_message, #confusionToast{
+    word-break: keep-all;
     opacity: 0;
     position: fixed;
     bottom: -100px;
@@ -163,6 +164,15 @@
     transition: all 0.5s;
     z-index: 100;
 }
+
+
+@media (max-width: 477px) {
+    #toast_message, #confusionToast {
+        font-size: 16px;
+        min-width: 65%;
+    }
+}
+
 /*토스트 메시지 활성화 되었을 때*/
 #toast_message.active, #confusionToast.active{
     opacity: 100%;

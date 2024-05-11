@@ -12,7 +12,7 @@ function getRuler() {
         return;
     }
     const toast = document.getElementById("confusionToast")
-    toast.innerHTML = "자를 얻었습니다! 거리를 재 볼 곳을 클릭해보세요📐"
+    toast.innerHTML = "<div> 📏 거리재기 모드</div>"
     toast.classList.add('active');
 
     // 자를 얻는다 (마우스 디자인 변경)
@@ -143,7 +143,7 @@ let movingHandler = function (mouseEvent) {
 // 지도에 마우스 오른쪽 클릭 이벤트를 등록합니다// 선을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면 선 그리기를 종료합니다
 let finishHandler = function (mouseEvent) {
     const toast = document.getElementById("confusionToast")
-    toast.innerHTML = "거리재기 끝! 📐"
+    toast.innerHTML = "거리재기 끝 📐"
     setTimeout(function() {
         toast.classList.remove('active');
     }, 1500);
