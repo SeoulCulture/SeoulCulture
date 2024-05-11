@@ -24,7 +24,7 @@
 }
 
 
-#serviceDescription {
+#descriptionContainer {
     font-size: smaller;
     letter-spacing: 0px;
     margin-bottom: 30px;
@@ -33,7 +33,11 @@
     word-break: keep-all;
     padding: 0px 10px;
 }
-#titleInDescription {
+.paragraph{
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+.descriptionEmphasis {
     color: #6c0000;
     font-weight: 800;
 }

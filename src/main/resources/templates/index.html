@@ -9,13 +9,13 @@
 <div th:replace="fragments/serviceTitle :: title"/>
 <div id="contentBody">
 <div id="inputContainer">
-    <div id="serviceDescription">
-        <p>안녕하세요? <span id="titleInDescription">'서울, 지금 여기.'</span>에 오신 것을 환영합니다.<br>
+    <div id="descriptionContainer">
+        <p id="paragraph1" class="paragraph">안녕하세요? <span class="descriptionEmphasis">'서울, 지금 여기.'</span>에 오신 것을 환영합니다.<br>
             세상은 내가 모르는 사이에 끊임없는 문화를 만들어갑니다.</p>
-        <p>시간을 흘려보내기 아쉽지 않나요?<br>
-            <span id="titleInDescription">분명 '근처 어딘가'에서 풍부한 경험을 할 수 있습니다.</span></p>
-        <p><span id="titleInDescription">지금 서울에서</span> 활발히 운영중인 행사를 보여드릴게요.<br>
-            <span id="titleInDescription">지금이 아니면</span> 행복한 경험을 놓칠 지도 몰라요.</p>
+        <p id="paragraph2" class="paragraph">시간을 흘려보내기 아쉽지 않나요?<br>
+            <span class="descriptionEmphasis">분명 '근처 어딘가'에서 풍부한 경험을 할 수 있습니다.</span></p>
+        <p id="paragraph3" class="paragraph"><span class="description">지금 서울에서</span> 활발히 운영중인 행사를 보여드릴게요.<br>
+            <span class="descriptionEmphasis">지금이 아니면</span> 행복한 경험을 놓칠 지도 몰라요.</p>
 
     </div>
     <form id="form" role="form" action="/culture/search" th:object="${cultureForm}", method="get">
