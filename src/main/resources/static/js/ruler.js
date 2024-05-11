@@ -6,8 +6,10 @@ var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 �
 var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
 
 function getRuler() {
+    console.log(drawingFlag);
     if (drawingFlag == true) {
         finishHandler();
+        return;
     }
     const toast = document.getElementById("confusionToast")
     toast.innerHTML = "자를 얻었습니다! 거리를 재 볼 곳을 클릭해보세요📐"
@@ -18,7 +20,7 @@ function getRuler() {
 
     // 시작한다
     kakao.maps.event.addListener(map, 'click', drawingHandler);
-    kakao.maps.event.addListener(map, 'touchstart', drawingHandler);
+    kakao.maps.event.addListener(map, 'touchend', drawingHandler);
 
     kakao.maps.event.addListener(map, 'mousemove', movingHandler);
     kakao.maps.event.addListener(map, 'touchmove', movingHandler);

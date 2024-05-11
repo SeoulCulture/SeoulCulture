@@ -34,7 +34,7 @@ public class CultureController {
     @RequestMapping(value = "/culture/search")
     // get, post 둘다 받아야 한다. post로 첫 요청 받아도, 렌더링하려면 get 을 날리는 듯?
     public String showInfo(CultureSearchForm formData, Model model) throws IOException {
-        if (formData.getLatitude() == null || formData.getLongitude() == null) {
+        if (formData.getPlace() == null && (formData.getLatitude() == null || formData.getLongitude() == null)) {
             throw new IllegalArgumentException("위경도정보없음");
         }
 

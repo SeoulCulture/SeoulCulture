@@ -96,9 +96,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function error(e) {
-        closeLoadingWithMask();
         // 위치 정보를 가져오는 데 실패한 경우
-        alert("Geolocation 오류 " + e.code + ": " + e.message);
-
+        alert("기기의 위치 정보를 가져올 수 없습니다.\n 검색시 별도로 위치를 지정해주세요.");
+        let form = document.getElementById('form');
+        form.innerHTML += `<input type="hidden" name="latitude" value="${null}">`;
+        form.innerHTML += `<input type="hidden" name="longitude" value="${null}">`;
+        closeLoadingWithMask();
     }
 });
