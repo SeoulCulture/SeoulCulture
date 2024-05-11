@@ -161,28 +161,52 @@ function addEventByConfusionTag(confusionTag, areaObject, confusion) {
         kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse1(confusion);
         });
+        kakao.maps.event.addListener(areaObject, 'touchstart', function () {
+            overConfuse1(confusion);
+        });
         kakao.maps.event.addListener(areaObject, 'mouseout', function () {
+            outConfuse1();
+        });
+        kakao.maps.event.addListener(areaObject, 'touchend', function () {
             outConfuse1();
         });
     } else if (confusionTag == "보통") {
         kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse2(confusion);
         });
+        kakao.maps.event.addListener(areaObject, 'touchstart', function () {
+            overConfuse2(confusion);
+        });
         kakao.maps.event.addListener(areaObject, 'mouseout', function () {
+            outConfuse2();
+        });
+        kakao.maps.event.addListener(areaObject, 'touchend', function () {
             outConfuse2();
         });
     } else if (confusionTag == "약간 붐빔") {
         kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse3(confusion);
         });
+        kakao.maps.event.addListener(areaObject, 'touchstart', function () {
+            overConfuse3(confusion);
+        });
         kakao.maps.event.addListener(areaObject, 'mouseout', function () {
+            outConfuse3();
+        });
+        kakao.maps.event.addListener(areaObject, 'touchend', function () {
             outConfuse3();
         });
     } else if (confusionTag == "붐빔") {
         kakao.maps.event.addListener(areaObject, 'mouseover', function () {
             overConfuse4(confusion);
         });
+        kakao.maps.event.addListener(areaObject, 'touchstart', function () {
+            overConfuse4(confusion);
+        });
         kakao.maps.event.addListener(areaObject, 'mouseout', function () {
+            outConfuse4();
+        });
+        kakao.maps.event.addListener(areaObject, 'touchend', function () {
             outConfuse4();
         });
     }
