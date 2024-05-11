@@ -1,17 +1,28 @@
 
 var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
 var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
-var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+var clickLine; // 마우스로 클릭한 좌표로 그려질 선 객체입니다
 var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
 var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
 
 function getRuler() {
+    if (drawingFlag == true) {
+        finishHandler();
+    }
+    const toast = document.getElementById("confusionToast")
+    toast.innerHTML = "자를 얻었습니다! 거리를 재 볼 곳을 클릭해보세요📐"
+    toast.classList.add('active');
+
     // 자를 얻는다 (마우스 디자인 변경)
     map.setCursor('url("/img/ruler.png") 30 0, auto');
 
     // 시작한다
     kakao.maps.event.addListener(map, 'click', drawingHandler);
+    kakao.maps.event.addListener(map, 'touchstart', drawingHandler);
+
     kakao.maps.event.addListener(map, 'mousemove', movingHandler);
+    kakao.maps.event.addListener(map, 'touchmove', movingHandler);
+
     kakao.maps.event.addListener(map, 'rightclick', finishHandler);
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' || event.key == 'Delete') {
@@ -129,6 +140,11 @@ let movingHandler = function (mouseEvent) {
 
 // 지도에 마우스 오른쪽 클릭 이벤트를 등록합니다// 선을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면 선 그리기를 종료합니다
 let finishHandler = function (mouseEvent) {
+    const toast = document.getElementById("confusionToast")
+    toast.innerHTML = "거리재기 끝! 📐"
+    setTimeout(function() {
+        toast.classList.remove('active');
+    }, 1500);
 
     map.setCursor('auto');
 
