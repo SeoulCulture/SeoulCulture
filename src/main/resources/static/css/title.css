@@ -6,6 +6,24 @@
   font-weight: normal;
 }
 
+@media (max-width: 477px) {
+  .longTitle {
+    display: none;
+  }
+  .shortTitle {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 477px) {
+  .shortTitle {
+    display: none;
+  }
+  .longTitle {
+    display: inline-block;
+  }
+}
+
 #serviceTitle, #submitBtn {
   padding:0px 7px;
   width: fit-content;
