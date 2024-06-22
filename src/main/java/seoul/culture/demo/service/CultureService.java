@@ -12,6 +12,8 @@ import seoul.culture.demo.entity.mark.CultureEvent;
 import seoul.culture.demo.entity.mark.CulturePlace;
 import seoul.culture.demo.repository.CultureEventRepository;
 import seoul.culture.demo.repository.CulturePlaceRepository;
+import seoul.culture.demo.subscribe.Keyword;
+import seoul.culture.demo.subscribe.KeywordDataStorage;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +27,8 @@ import java.util.List;
 public class CultureService {
     private final CulturePlaceRepository culturePlaceRepository;
     private final CultureEventRepository cultureEventRepository;
+    private final KeywordDataStorage keywordDataStorage;
+
 
     private static final String CULTURE_INFO_PATH = PathConfig.CULTURE_INFO_PATH;
 
@@ -72,5 +76,12 @@ public class CultureService {
         cultures.stream().filter(culture -> !cultureEventRepository.existsByLocation(
                 culture.getLocation()
         )).forEach(cultureEventRepository::save);
+
+        // TODO: 추후 재검토 대상임. 키워드 감지 및 키워드저장소에 추가
+        for (Keyword keyword : Keyword.values()) {
+            cultures.stream().filter(culture ->
+                            culture.getTitle().replace(" ", "").contains(keyword.toString())) // 타이틀 안에 있어야 함! (그러면 나이를 대상으로 알림받기는 못함. 행사명 only)
+            .forEach(culture -> keywordDataStorage.add(keyword.toString(), culture));
+        }
     }
 }

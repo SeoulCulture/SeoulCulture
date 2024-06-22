@@ -35,4 +35,9 @@
             <appender-ref ref="FILE-ERROR"/>
         </root>
 
+    <!--    문자 알림요청 로그-->
+        <include resource="file-subscribe-appender.xml" />
+        <root level="INFO">
+            <appender-ref ref="FILE-SUBSCRIBE"/>
+        </root>
 </configuration>

@@ -1,0 +1,12 @@
+<appender name="FILE-SUBSCRIBE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="seoul.culture.demo.subscribe.SubscribeLogFilter" />
+    <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>./log/subscribe/seoulCulture-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        <maxFileSize>50MB</maxFileSize>
+        <maxHistory>15</maxHistory>
+        <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+</appender>

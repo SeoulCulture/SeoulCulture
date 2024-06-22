@@ -38,7 +38,7 @@ public class DataLoader implements CommandLineRunner {
         // [문화장소]
         cultureService.registerCulturePlace();
 
-        // [문화행사]
+        // [문화행사]  참고: 키워드 추출 대상
         registerCultureEvent();   // (아래에 스케줄러도 있음)
 
         // [장소지정검색] 엑셀내용(장소정보) db에 반영 및 할당
