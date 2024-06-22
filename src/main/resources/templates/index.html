@@ -49,17 +49,11 @@
 </div>
 <div id="searchStatus" style="display: none;">검색 중입니다...</div>
 </div>
+<div th:replace="fragments/mainpage_pop"/>
 </body>
 </html>
 
 <script>
-    // $('a').click(function () {
-    //     $('html, body').animate({
-    //         scrollTop: $($.attr(this, 'href')).offset().top
-    //     }, 500);
-    //     return false;
-    // });
-
     function handleOnInput(el, maxlength) {
         if(el.value.length > maxlength)  {
             el.value

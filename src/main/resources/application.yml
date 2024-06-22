@@ -1,17 +1,8 @@
 spring:
+  profiles:
+    active: dev
   config:
     import: key.yml
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/mysql?useSSL=false&allowPublicKeyRetrieval=true
-    username: seoul-culture
-    password: seoul-culture
-  jpa:
-    properties:
-      dialect: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: create
-      format_sql: true
 
 #spring계층 안에 넣으면 안된다
 mybatis:
