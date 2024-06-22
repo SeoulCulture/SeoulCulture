@@ -1,0 +1,18 @@
+<!--문자알림 모달-->
+<div id="subs-modal" class="modal">
+  <div id="subs-modal-content">
+    <span class="close">&times;</span>
+    <h2 class="subs-head">문자알림 신청</h2>
+    <span class="subs-text">행사 오픈을 알림받고 싶다면, 휴대폰 번호를 남겨주세요!</span>
+    <form id="subs-form">
+      <label for="phone">휴대폰 번호:</label>
+      <input class="subs-input" type="text" id="phone" name="phone" required><br><br>
+      <label for="keyword">알림을 원하는 행사:</label>
+      <input class="subs-input" type="text" id="keyword" name="keyword" required><br><br>
+      <span class="subs-text">예시: 한강 축제욧! / 동작구에서 열리는 전시회 / 분당에서 갈만한 아이동반 축제</span>
+      <br>
+      <button class="subs-submit" type="button">알림 신청하기</button>
+    </form>
+  </div>
+</div>
+<script src="/js/input_phone_number.js"></script>
