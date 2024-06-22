@@ -1,4 +1,4 @@
-package seoul.culture.demo.개발중;
+package seoul.culture.demo.confusion;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

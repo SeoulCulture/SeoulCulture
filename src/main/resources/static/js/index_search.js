@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (navigator.geolocation) {
             // geolocation을 지원하면 위치를 요청
             console.log("위치 요청 시작");
-            LoadingWithMask();
+            // LoadingWithMask();
             navigator.geolocation.getCurrentPosition(success, error);
         } else {
             console.log("이 브라우저에서는 Geolocation이 지원되지 않습니다.");

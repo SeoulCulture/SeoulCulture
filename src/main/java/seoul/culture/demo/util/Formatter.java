@@ -13,12 +13,11 @@ public class Formatter {
     }
 
     public static String stringWithNoQuotes(String str) {
-        return str.trim().replaceAll("^\"|\"$", "").replace("\'", "＇").replace("\"", "\\\"");
+        return str.trim().replaceAll("^\"|\"$", "").replace("'", "＇").replace("\"", "\\\"");
     }
     public static String stringWithNoQuotesForJson(String str) {
         return str.trim().replaceAll("^\"|\"$", "").replace("^'|'$","");
     }
-
 
     public static String string(String str) {
         return str.trim();
@@ -56,5 +55,4 @@ public class Formatter {
                 mapAddress.get("sigungu") + " " +
                 mapAddress.get("doro");
     }
-
 }

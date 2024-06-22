@@ -1,4 +1,4 @@
-package seoul.culture.demo.개발중;
+package seoul.culture.demo.confusion;
 
 import org.springframework.stereotype.Service;
 
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.List;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

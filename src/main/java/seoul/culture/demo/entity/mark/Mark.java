@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @DiscriminatorColumn // 하위 테이블의 구분 컬럼 생성(default = DTYPE)
 public class Mark {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mark_id")
     private Long id;
 

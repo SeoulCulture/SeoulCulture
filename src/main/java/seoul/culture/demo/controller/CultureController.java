@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import seoul.culture.demo.dto.CultureSearchForm;
 import seoul.culture.demo.pathfinder.ReverseGeocoding;
-import seoul.culture.demo.service.MoodService;
 import seoul.culture.demo.service.SearchService;
 import seoul.culture.demo.util.Formatter;
 
@@ -19,7 +18,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CultureController {
     private final SearchService searchService;
-    private final MoodService moodService;
     private final ReverseGeocoding reverseGeocoding;
 
     @GetMapping("/")
@@ -27,7 +25,6 @@ public class CultureController {
         CultureSearchForm cultureSearchForm = new CultureSearchForm();
         model.addAttribute("cultureForm", cultureSearchForm);
         cultureSearchForm.setHowToGo("WALKING");
-        cultureSearchForm.setMoods(moodService.getMoods().getMood());
         return "index";
     }
 
@@ -43,7 +40,7 @@ public class CultureController {
         CultureSearchForm cultureSearchForm = new CultureSearchForm();
         cultureSearchForm.setHowToGo(formData.getHowToGo());
         cultureSearchForm.setPlace(
-                formData.getHowToGo() == "DRIVING" ? "DRIVING" : "WALKING"
+                formData.getHowToGo().equals("DRIVING") ? "DRIVING" : "WALKING"
         );
         model.addAttribute("cultureForm", cultureSearchForm);
         model.addAttribute("markerInfo", map.get("cultures"));

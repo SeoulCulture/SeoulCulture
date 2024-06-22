@@ -3,8 +3,8 @@ package seoul.culture.demo.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import seoul.culture.demo.개발중.ConfusionResponseDto;
-import seoul.culture.demo.개발중.ConfusionService;
+import seoul.culture.demo.confusion.ConfusionResponseDto;
+import seoul.culture.demo.confusion.ConfusionService;
 
 import java.io.IOException;
 import java.util.List;
