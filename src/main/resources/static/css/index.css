@@ -10,16 +10,6 @@
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
     }
-    #bentoBtn {
-        display: none;
-    }
-}
-
-/* bento btn */
-@media (max-width: 767px) {
-    #bentoBtn {
-        display: block;
-    }
 }
 
 
