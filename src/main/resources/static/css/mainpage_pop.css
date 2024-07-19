@@ -2,6 +2,29 @@
     display: none;
 }
 
+/* bento btn */
+@media (max-width: 700px) {
+    .box {
+      width: 20px;
+      height: 20px;
+      background-color: darkslateblue;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 45px;
+    }
+    .col {
+      display: flex;
+      height: 45px;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+}
+
+/* mmmmmmmmmmmmmmmmmmmmmmmmm */
+
 @media (min-width: 701px) {
     .popup {
         display: block;
@@ -34,7 +57,6 @@
     .popup-item:last-child {
         border-bottom: none;
     }
-
 }
 
 
