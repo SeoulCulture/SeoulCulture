@@ -6,17 +6,21 @@
 @media (max-width: 700px) {
     #bentoBtn {
         display: block;
+        float: right;
     }
     
     .box {
       width: 20px;
       height: 20px;
       background-color: darkslateblue;
+      border-radius: 2px;
+      box-shadow: 2px 2px midnightblue;
     }
     .container {
       display: flex;
       justify-content: space-between;
       width: 45px;
+      margin-top: 5px;
     }
     .col {
       display: flex;
