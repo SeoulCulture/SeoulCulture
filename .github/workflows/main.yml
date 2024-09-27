@@ -9,20 +9,14 @@ on:
 jobs:      
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DEPLOY_PATH: "/home/${{ secrets.DEPLOY_USER }}/SeoulCulture/build/libs/"
-      DEPLOY_HOST: ${{ secrets.DEPLOY_SERVER }}
-      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-      DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
-
     steps:
       - name: ssh command
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ env.DEPLOY_HOST }}
-          username: ${{ env.DEPLOY_USER }}
-          password: ${{ env.DEPLOY_PASSWORD }}
+          host: ${{ secrets.DEPLOY_SERVER }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
           port: 22
           script: |
-            cd /home/${{ env.DEPLOY_USRE }}/SeoulCulture/
+            cd /home/${{ secrets.DEPLOY_USER }}/SeoulCulture/
             sh deploy.sh
