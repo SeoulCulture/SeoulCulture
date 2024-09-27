@@ -34,16 +34,26 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
+    env:
+      DEPLOY_PATH: "/home/${{ secrets.DEPLOY_USER }}/SeoulCulture/build/libs/"
+      DEPLOY_HOST: ${{ secrets.DEPLOY_SERVER }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Deploy JAR to server
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ env.DEPLOY_HOST }}
+          username: ${{ env.DEPLOY_USER }}
+          password: ${{ env.DEPLOY_PASSWORD }}
+          port: 22 
+          source: "build/libs/*.jar" 
+          target:  ${env.DEPLOY_DIR}
+          
+      - name: Run
         run: |
-          JAR_FILE=$(find build/libs/ -name "*.jar" | head -n 1)
-          scp "$JAR_FILE" "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:/home/${{ secrets.DEPLOY_USER }}/SeoulCulture/"
-          ssh "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}" "java -jar /home/${{ secrets.DEPLOY_USER }}/SeoulCulture/$(basename "$JAR_FILE")"
-        env:
-          DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "java -jar  ${env.DEPLOY_DIR}*.jar
