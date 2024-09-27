@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-gradle
           
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew bootJar -x test
       
   deploy:
     runs-on: ubuntu-latest
@@ -41,8 +41,8 @@ jobs:
       - name: Deploy JAR to server
         run: |
           JAR_FILE=$(find build/libs/ -name "*.jar" | head -n 1)
-          scp $JAR_FILE user@${{ secrets.DEPLOY_SERVER }}:/path/to/deploy/
-          ssh user@${{ secrets.DEPLOY_SERVER }} "java -jar /path/to/deploy/$(basename $JAR_FILE)"
+          scp "$JAR_FILE" "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:/home/${{ secrets.DEPLOY_USER }}/SeoulCulture/"
+          ssh "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}" "java -jar /home/${{ secrets.DEPLOY_USER }}/SeoulCulture/$(basename "$JAR_FILE")"
         env:
           DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
