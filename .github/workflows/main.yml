@@ -45,7 +45,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy JAR to server
-        uses: appleboy/scp-action@v1.0.0
+        uses: appleboy/scp-action@v0.1.2
         with:
           host: ${{ env.DEPLOY_HOST }}
           username: ${{ env.DEPLOY_USER }}
