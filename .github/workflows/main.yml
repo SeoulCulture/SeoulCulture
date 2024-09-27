@@ -52,8 +52,8 @@ jobs:
           password: ${{ env.DEPLOY_PASSWORD }}
           port: 22 
           source: "build/libs/*.jar" 
-          target:  ${env.DEPLOY_DIR}
+          target:  ${env.DEPLOY_PATH}
           
       - name: Run
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "java -jar  ${env.DEPLOY_DIR}*.jar
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "java -jar  ${env.DEPLOY_PATH}*.jar
