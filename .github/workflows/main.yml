@@ -56,4 +56,4 @@ jobs:
           
       - name: Run
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "java -jar  ${{ env.DEPLOY_PATH }}*.jar
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "java -jar  ${{ env.DEPLOY_PATH }}*.jar"
